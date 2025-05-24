@@ -44,9 +44,12 @@
                 "Government departments like KSEB, Railways, PWD, LSGD",
                 "Electrical installation, safety inspection, and building electrification"
             ],
-            "license_eligibility": [
+            "License_Certification_Opportunities": [
                 "Wireman and Supervisor Licenses under Kerala State Electricity Licensing Board (KSELB)",
-                "Class B Supervisor License (with 1 years' experience under a licensed contractor)"
+                "Class B Supervisor License (with 1 years' experience under a licensed contractor)",
+                "Electrical Contractor License ( Available after acquiring required supervisory credentials)",
+              "Certifications in  Industrial Automation & PLC Programming ,Electrical CAD Tools, Solar PV System Design & Installation, Smart Grid Technology & Energy Management , Testing & Commissioning of Switchgear and Transformers ,  BMS (Building Management System) & Home Automation"
+              
             ],
             "higher_education_pathways": [
                 "Lateral Entry to B.Tech in Electrical & Electronics Engineering",
@@ -100,7 +103,8 @@
                 "Estimation and project planning",
                 "Irrigational Engineering Works"
             ],
-            "government_licensing_opportunities": {
+            "sp":"Supervisor License – Department of Urban Affairs, Kerala",
+            "License_Certification_Opportunities": {
                 "Supervisor-B": {
                     "eligibility": "Diploma in Civil Engineering + 2 years of experience",
                     "scope": "Prepare and certify plans for buildings up to 300 sq.m, 2 floors, and 7.5 meters in height"
@@ -171,7 +175,7 @@
                 "CNC operator",
                 "Welding Inspector"
             ],
-            "license_eligibility": [
+            "License_Certification_Opportunities": [
                 "Supervisor Licence issued by the Department of Urban Affairs, Kerala",
                 "Boiler Operation Engineer Certification (with relevant experience)",
                 "Opportunities in certified safety & technical supervisory roles"
@@ -228,7 +232,7 @@
                 "Real Estate and Urban Design Consultancies",
                 "Self-employed in Architectural Drafting or 3D Visualization"
             ],
-            "license_certification_opportunities": [
+            "License_Certification_Opportunities": [
                 "Eligible for Licensed Draftsman Registration under relevant local authorities",
                 "Can pursue certifications in AutoCAD, Revit, SketchUp, 3ds Max, BIM",
                 "Eligible for PSC, PWD, and Municipal technical posts"
@@ -286,7 +290,7 @@
                 "Quality Control Technician in Auto Industries",
                 "Entrepreneur in Auto Garage or Spare Parts Business"
             ],
-            "license_certification_opportunities": [
+            "License_Certification_Opportunities": [
                 "Can apply for Automobile Workshop Licenses",
                 "Certifications in BS6 Engine Diagnostics, EV Maintenance, CAD/CAE Tools, and Emission Testing"
             ],
@@ -344,7 +348,7 @@
                 "System Analyst / Tester",
                 "Entrepreneur in Tech Startups"
             ],
-            "license_certification_opportunities": [
+            "License_Certification_Opportunities": [
                 "Eligible for CSC (Common Service Center) operations and e-Governance projects",
                 "Can pursue certifications like CompTIA A+, CCNA, RHCE, AWS Cloud Practitioner",
                 "Eligible for Government exams for roles like Computer Assistant, Technical Assistant, and IT Technician"
@@ -399,9 +403,11 @@
                 "Government departments like KSEB, Railways, PWD, LSGD",
                 "Electrical installation, safety inspection, and building electrification"
             ],
-            "license_eligibility": [
+            "License_Certification_Opportunities": [
                 "Wireman and Supervisor Licenses under Kerala State Electricity Licensing Board (KSELB)",
-                "Class B Supervisor License (with 1 years' experience under a licensed contractor)"
+                "Class B Supervisor License (with 1 years' experience under a licensed contractor)",
+              "Electrical Contractor License ( Available after acquiring required supervisory credentials)",
+              "Certifications in  Industrial Automation & PLC Programming ,Electrical CAD Tools, Solar PV System Design & Installation, Smart Grid Technology & Energy Management , Testing & Commissioning of Switchgear and Transformers ,  BMS (Building Management System) & Home Automation"
             ],
             "higher_education_pathways": [
                 "Lateral Entry to B.Tech in Electrical & Electronics Engineering",

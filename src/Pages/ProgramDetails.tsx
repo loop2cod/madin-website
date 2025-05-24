@@ -1,58 +1,27 @@
-"use client"
-
 import type React from "react"
 import { useEffect, useState } from "react"
 import {
   GraduationCap,
-  Clock,
   Building,
-  Users,
   BookOpen,
   FlaskConical,
   Briefcase,
   Award,
   TrendingUp,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
-  Download,
   ArrowRight,
-  Target,
   Shield,
 } from "lucide-react"
 import { useParams } from "react-router-dom"
 import { diploma_programs } from "../data/program.json"
 import BlurIn from "@/components/ui/blur-in"
 
-interface ProgramDetailsProps {
-  id: string
-  program_name: string
-  duration: string
-  affiliation: string
-  approval: string
-  intake: number
-  mode: string
-  program_overview: string
-  curriculum_highlights: {
-    core_subjects: string[]
-    laboratory_practical_training: string[]
-    laboratories_and_workshops?: string[]
-    studio_practical_training?: string[]
-  }
-  career_opportunities: string[]
-  license_eligibility?: string[]
-  higher_education_pathways?: string[]
-  license_certification_opportunities?: string[]
-  department?: string
-}
 
 
 
 const ProgramDetails: React.FC = () => {
   const params = useParams()
   const id = params?.id as string
-  const [program, setProgram] = useState<ProgramDetailsProps | null>(null)
+  const [program, setProgram] = useState<any | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -159,144 +128,183 @@ const ProgramDetails: React.FC = () => {
 
 
       {/* Main Content Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Curriculum */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Core Subjects Box */}
-            <div className="bg-white border border-gray-300 shadow-lg">
-              <div className="bg-gray-900 p-6 text-white">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-gray-900" />
-                  </div>
-                  <h2 className="text-xl font-bold uppercase tracking-wider">Core Subjects</h2>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {program.curriculum_highlights.core_subjects.map((subject, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-50 p-4 border border-gray-200 hover:bg-gray-100 transition-colors"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-gray-900"></div>
-                        <span className="text-gray-800 font-medium">{subject}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      <div className="mx-auto mx-4 py-8">
+  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    {/* Main Content - 3 columns */}
+    <div className="lg:col-span-3 space-y-6">
+      {/* Core Subjects */}
+      <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
+        <div className="bg-secondary px-6 py-4 border-b border-gray-200">
+          <div className="flex items-center">
+            <div className="bg-secondary-foreground p-3 rounded-lg mr-4">
+              <BookOpen className="w-5 h-5" />
             </div>
-
-            {/* Laboratory Training Box */}
-            <div className="bg-white border border-gray-300 shadow-lg">
-              <div className="bg-blue-600 p-6 text-white">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white flex items-center justify-center">
-                    <FlaskConical className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <h2 className="text-xl font-bold uppercase tracking-wider">Laboratory Training</h2>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {program.curriculum_highlights?.laboratory_practical_training?.map((training, index) => (
-                    <div
-                      key={index}
-                      className="bg-blue-50 p-4 border border-blue-200 hover:bg-blue-100 transition-colors"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className="w-2 h-2 bg-blue-600"></div>
-                        <span className="text-gray-800 font-medium">{training}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Career Opportunities Box */}
-            <div className="bg-white border border-gray-300 shadow-lg">
-              <div className="bg-green-600 p-6 text-white">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-white flex items-center justify-center">
-                    <Briefcase className="w-6 h-6 text-green-600" />
-                  </div>
-                  <h2 className="text-xl font-bold uppercase tracking-wider">Career Opportunities</h2>
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {program.career_opportunities.map((opportunity, index) => (
-                    <div
-                      key={index}
-                      className="bg-green-50 p-4 border border-green-200 hover:bg-green-100 transition-colors"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <TrendingUp className="w-4 h-4 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-800 font-medium">{opportunity}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div>
+              <h2 className="text-xl font-bold text-white font-serif">Core Subjects</h2>
+              <p className="text-gray-300 text-sm">Foundation knowledge areas</p>
             </div>
           </div>
-
-          {/* Right Column - Additional Info */}
-          <div className="space-y-8">
-            {/* License Eligibility Box */}
-            {program.license_eligibility && (
-              <div className="bg-white border border-gray-300 shadow-lg">
-                <div className="bg-purple-600 p-6 text-white">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-white flex items-center justify-center">
-                      <Award className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <h3 className="text-lg font-bold uppercase tracking-wider">Certifications</h3>
-                  </div>
-                </div>
-                <div className="p-6 space-y-3">
-                  {program.license_eligibility.map((license, index) => (
-                    <div key={index} className="bg-purple-50 p-3 border border-purple-200">
-                      <div className="flex items-center space-x-2">
-                        <Shield className="w-4 h-4 text-purple-600" />
-                        <span className="text-gray-800 font-medium text-sm">{license}</span>
-                      </div>
-                    </div>
-                  ))}
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {program.curriculum_highlights.core_subjects.map((subject:any, index:any) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors">
+                <div className="flex items-start">
+                  <div className="bg-gray-200 w-1.5 h-1.5 rounded-full mt-1.5 mr-2"></div>
+                  <span className="text-gray-800 font-medium text-sm">{subject}</span>
                 </div>
               </div>
-            )}
-
-            {/* Higher Education Box */}
-            {program.higher_education_pathways && (
-              <div className="bg-white border border-gray-300 shadow-lg">
-                <div className="bg-orange-600 p-6 text-white">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-white flex items-center justify-center">
-                      <GraduationCap className="w-6 h-6 text-orange-600" />
-                    </div>
-                    <h3 className="text-lg font-bold uppercase tracking-wider">Higher Education</h3>
-                  </div>
-                </div>
-                <div className="p-6 space-y-3">
-                  {program.higher_education_pathways.map((pathway, index) => (
-                    <div key={index} className="bg-orange-50 p-3 border border-orange-200">
-                      <div className="flex items-center space-x-2">
-                        <ArrowRight className="w-4 h-4 text-orange-600" />
-                        <span className="text-gray-800 font-medium text-sm">{pathway}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Laboratory Training */}
+      {program.curriculum_highlights?.laboratory_practical_training && (
+        <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-secondary px-6 py-4 border-b border-secondary">
+            <div className="flex items-center">
+              <div className="bg-secondary-foreground p-3 rounded-lg mr-4">
+                <FlaskConical className="w-5 h-5" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white font-serif">Practical Training</h2>
+                <p className="text-blue-100 text-sm">Hands-on experience</p>
+              </div>
+            </div>
+          </div>
+          <div className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {program.curriculum_highlights.laboratory_practical_training.map((training:any, index:any) => (
+                <div key={index} className="bg-blue-50 p-4 rounded-md border border-blue-100 hover:bg-blue-100 transition-colors">
+                  <div className="flex items-start">
+                    <div className="bg-blue-400 w-1.5 h-1.5 rounded-full mt-1.5 mr-2"></div>
+                    <span className="text-gray-800 font-medium text-sm">{training}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* Sidebar - 1 column */}
+    <div className="space-y-6">
+      {/* License Eligibility */}
+      {program?.License_Certification_Opportunities && (
+        <div className="bg-white border border-secondary shadow-sm overflow-hidden">
+          <div className="px-6 py-4 border-b border-muted">
+            <div className="flex items-center">
+              <div className="bg-secondary p-3 rounded-lg mr-4">
+                <Award className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-secondary font-serif">License & Certification Opportunities</h3>
+              </div>
+            </div>
+          </div>
+
+          {program?.sp && (
+            <div className="px-2 pt-4">
+              <p className="text-xs text-gray-600 bg-gray-50 p-3 rounded-md">{program.sp}</p>
+            </div>
+          )}
+
+          <div className="p-3 space-y-4">
+            {Array.isArray(program.License_Certification_Opportunities)
+              ? program.License_Certification_Opportunities.map((license:any, index:any) => (
+                  <div key={index} className="bg-purple-50 p-4 rounded-md border border-purple-100 hover:bg-purple-100 transition-colors">
+                    <div className="flex items-center">
+                      <Shield className="w-4 h-4 text-purple-600 mr-2 flex-shrink-0" />
+                      <span className="text-gray-800 font-medium text-sm">{license}</span>
+                    </div>
+                  </div>
+                ))
+              : Object.entries(program.License_Certification_Opportunities).map(([key, value]:any, index) => (
+                  <div key={index} className="bg-muted p-2 rounded-md border border-purple-100 hover:bg-gray-100 transition-colors">
+                    <div className="space-y-3">
+                      <div className="flex items-center">
+                        <Shield className="w-4 h-4 text-secondary mr-2 flex-shrink-0" />
+                        <span className="text-gray-800 font-semibold text-sm">{key}</span>
+                      </div>
+                      <div className="pl-6 space-y-2">
+                        <div className="bg-white p-2 rounded">
+                          <p className="text-gray-700 text-xs">
+                            <span className="font-semibold">Eligibility:</span> {value.eligibility}
+                          </p>
+                        </div>
+                        <div className="bg-white p-2 rounded">
+                          <p className="text-gray-700 text-xs">
+                            <span className="font-semibold">Scope:</span> {value.scope}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+          </div>
+        </div>
+      )}
+
+      {/* Higher Education */}
+      {program.higher_education_pathways && (
+        <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
+          <div className="bg-secondary px-6 py-4 border-b border-secondary">
+            <div className="flex items-center">
+              <div className="bg-secondary-foreground p-3 rounded-lg mr-4">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">Higher Education</h3>
+                <p className="text-secondary-foreground text-sm">Advanced study options</p>
+              </div>
+            </div>
+          </div>
+          <div className="p-6 space-y-4">
+            {program.higher_education_pathways.map((pathway:any, index:any) => (
+              <div key={index} className="bg-muted p-4  border transition-colors">
+                <div className="flex items-center">
+                  <ArrowRight className="w-4 h-4 mr-2 flex-shrink-0" />
+                  <span className="text-gray-800 font-medium text-sm">{pathway}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+<div className="mx-auto mb-6">
+            <div className="mb-6">
+              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+                <BlurIn
+                    word="Career Opportunities"
+                    className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
+                  />
+              </h2>
+              <p className="mt-4 text-lg text-gray-600">
+                Discover exciting opportunities to grow and succeed in your professional journey
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {program.career_opportunities.map((opportunity:any, index:any) => (
+                  <div 
+                  key={index}
+                  className="relative group bg-white border overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-md"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-teal-600 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                  <div className="p-4 relative z-10">
+                    <div className="flex items-center">
+                        <TrendingUp className="w-5 h-5 text-secondary mr-2" />
+                      <h3 className="text-sm font-semibold text-gray-800">{opportunity}</h3>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
       {/* Footer CTA Section */}
       <div className="bg-secondary-foreground">
