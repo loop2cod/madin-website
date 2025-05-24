@@ -82,37 +82,49 @@ const About = () => {
                 <TabsTrigger value="postgraduate">Postgraduate Program</TabsTrigger>
               </TabsList>
               <TabsContent value="diploma" className="mt-6">
+                <h3 className="text-2xl font-bold tracking-tight mb-4">
+                  <BlurIn
+                    word="Regular Programs"
+                    className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
+                  />
+                </h3>
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {[
                     {
                       title: "Civil Engineering",
                       icon: Building,
                       description: "Learn structural design, construction management, and infrastructure development.",
+                      link: "/program/Civil-Engineering",
                     },
                     {
                       title: "Mechanical Engineering",
                       icon: GraduationCap,
                       description: "Study mechanics, thermodynamics, materials science, and manufacturing processes.",
+                      link: "/program/Mechanical-Engineering",
                     },
                     {
-                      title: "Electrical and Electronics",
+                      title: "Electrical and Electronics Engineering",
                       icon: GraduationCap,
                       description: "Focus on electrical systems, electronics, power generation, and distribution.",
+                      link: "/program/Electrical-and-Electronics-Engineering",
                     },
                     {
                       title: "Computer Engineering",
                       icon: GraduationCap,
                       description: "Study computer hardware, software development, and information technology.",
+                      link: "/program/Computer-Engineering",
                     },
                     {
                       title: "Automobile Engineering",
                       icon: GraduationCap,
                       description: "Learn about vehicle design, manufacturing, and maintenance technologies.",
+                      link: "/program/Automobile-Engineering",
                     },
                     {
                       title: "Architecture",
                       icon: Building,
                       description: "Approved by the Council of Architecture (CoA) with focus on design principles.",
+                      link: "/program/Architecture",
                     },
                   ].map((program, index) => (
                     <Card key={index} className="overflow-hidden transition-all hover:shadow-md rounded-none border-secondary/50">
@@ -124,19 +136,42 @@ const About = () => {
                       </CardHeader>
                       <CardContent>
                         <CardDescription>{program.description}</CardDescription>
-                        <Link to="#" className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-secondary">
+                        <Link to={program.link} className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-secondary">
                           Program details <ArrowRight className="h-3 w-3" />
                         </Link>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
-                <div className="mt-6 text-center text-sm">
-                  <p>Also offering Electrical and Electronics Engineering – Part Time program</p>
-                </div>
+                <h3 className="text-2xl font-bold tracking-tight my-4">
+                  <BlurIn
+                    word="Part-time Program"
+                    className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
+                  />
+                </h3>
+                <Card className="mt-6 rounded-none border-secondary/50">
+                  <CardHeader>
+                    <div className="mb-2 inline-flex h-10 w-10 items-center justify-center">
+                      <BookOpen className="h-5 w-5 text-primary" />
+                    </div>
+                    <CardTitle className="text-secondary font-sans">Electrical and Electronics Engineering (Part-time)</CardTitle>
+                    <CardDescription>
+                      A 3-year part-time program affiliated with the University of Calicut and approved by AICTE
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p>
+                      Our part-time EEE program is designed for working professionals and students who want to gain
+                      expertise in electrical and electronics engineering while continuing their career.
+                    </p>
+                    <Link to="/program/Electrical-and-Electronics-Engineering-Part-time" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
+                      Learn more about our part-time EEE program <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  </CardContent>
+                </Card>
               </TabsContent>
               <TabsContent value="postgraduate" className="mt-6">
-                <Card>
+                <Card className="rounded-none border-secondary/50">
                   <CardHeader>
                     <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
                       <BookOpen className="h-5 w-5 text-primary" />
@@ -202,7 +237,7 @@ const About = () => {
                 },
                 {
                   title: "Library",
-                  image: "/placeholder.svg?height=400&width=600",
+                  image: "/library1.jpg",
                   description: "Extensive collection of books, journals, and digital resources.",
                 },
                 {

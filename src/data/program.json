@@ -1,0 +1,413 @@
+{
+    "diploma_programs": [
+        {
+            "id": "Electrical-and-Electronics-Engineering",
+            "program_name": "Diploma in Electrical and Electronics Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Electrical and Electronics Engineering (EEE) at Madin College of Engineering and Management provides a solid foundation in the design, analysis, and maintenance of electrical systems and electronic devices. The 3-year full-time program is designed to prepare students for roles in the rapidly evolving fields of electrical power, automation, instrumentation, and control systems. With a balanced blend of theoretical knowledge and practical training, this program empowers students to meet the demands of modern industry and government sectors.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Electrical Machines",
+                    "Power Electronics",
+                    "Basic Electronics",
+                    "Circuit Theory",
+                    "Electrical Measurements and Instrumentation",
+                    "Control Systems",
+                    "Industrial Automation",
+                    "Power Systems",
+                    "Electrical Drawing & Wiring"
+                ],
+                "laboratory_practical_training": [
+                    "Electrical Machines Lab",
+                    "Power Electronics Lab",
+                    "Digital & Analog Electronics Lab",
+                    "Wiring & Installation Lab",
+                    "Microcontroller & PLC Lab",
+                    "Electrical Measurement Lab",
+                    "Domestic Appliances Repair & Maintenance Workshop",
+                    "Industrial Electrical Engineering Lab",
+                    "Cad & Drafting Lab",
+                    "Minor and Major Projects",
+                    "Internships (After Semester II & IV)"
+                ]
+            },
+            "career_opportunities": [
+                "Power generation and distribution companies",
+                "Electrical maintenance and control departments",
+                "Automation and robotics firms",
+                "Manufacturing and heavy industries",
+                "Renewable energy sector (solar, wind)",
+                "Government departments like KSEB, Railways, PWD, LSGD",
+                "Electrical installation, safety inspection, and building electrification"
+            ],
+            "license_eligibility": [
+                "Wireman and Supervisor Licenses under Kerala State Electricity Licensing Board (KSELB)",
+                "Class B Supervisor License (with 1 years' experience under a licensed contractor)"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Electrical & Electronics Engineering",
+                "Certifications in Automation, PLC/SCADA, Electrical CAD",
+                "Competitive exams for government technician, Sub Engineer and Junior Engineering roles"
+            ]
+        },
+        {
+            "id": "Civil-Engineering",
+            "program_name": "Diploma in Civil Engineering",
+            "department": "Department of Civil Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Civil Engineering program at Madin College of Engineering and Management is designed to build a strong foundation in the principles and practices of civil engineering. This course prepares students for professional roles in planning, design, construction, and maintenance of infrastructure projects such as buildings, roads, bridges, dams, and water supply systems. The program integrates theoretical knowledge with practical skills, fostering problem-solving abilities and innovation. It also promotes sustainable engineering practices to meet the needs of the modern world.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Engineering Mechanics",
+                    "Building Materials and Construction",
+                    "Surveying and Levelling",
+                    "Concrete Technology",
+                    "Structural Engineering",
+                    "Hydraulics and Irrigation Engineering",
+                    "Transportation Engineering",
+                    "Estimation and Costing",
+                    "Environmental Engineering",
+                    "CAD for Civil Engineering"
+                ],
+                "laboratory_practical_training": [
+                    "Engineering Mechanics Lab",
+                    "Material Testing Lab",
+                    "Survey Lab",
+                    "Concrete Lab",
+                    "Environmental Lab",
+                    "Geotechnical Lab",
+                    "Construction Engineering Lab",
+                    "Structural Analysis and Design Lab",
+                    "CAD & Drafting Lab",
+                    "Minor and Major Projects",
+                    "Internships (After Semester II & IV)"
+                ]
+            },
+            "career_opportunities": [
+                "Construction companies",
+                "Public works departments",
+                "Infrastructure and urban development projects",
+                "Consultancy firms",
+                "Surveying and structural design",
+                "Estimation and project planning",
+                "Irrigational Engineering Works"
+            ],
+            "government_licensing_opportunities": {
+                "Supervisor-B": {
+                    "eligibility": "Diploma in Civil Engineering + 2 years of experience",
+                    "scope": "Prepare and certify plans for buildings up to 300 sq.m, 2 floors, and 7.5 meters in height"
+                },
+                "Supervisor-A": {
+                    "eligibility": "Diploma + 4 years' experience as Supervisor-B",
+                    "scope": "Certify buildings up to 750 sq.m, 3 floors, 11 meters; layout plans up to 1 hectare"
+                }
+            },
+            "higher_education_pathways": [
+                "Lateral entry into B.Tech Civil Engineering programs",
+                "Certifications in specialized areas (AutoCAD, STAAD.Pro, Revit, etc.)",
+                "Government competitive exams (e.g., PSC, SSC, RRB)"
+            ]
+        },
+        {
+            "id": "Mechanical-Engineering",
+            "program_name": "Diploma in Mechanical Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Mechanical Engineering at Madin College of Engineering and Management is designed to provide students with a comprehensive understanding of mechanical systems, manufacturing processes, thermal and fluid sciences, and design engineering. This 3-year full-time program balances theoretical foundations with hands-on training, preparing students for dynamic careers in both the industrial and public sectors. The curriculum includes rigorous academic learning, practical workshops, internships, and project work aimed at equipping students with skills required in the fields of design, production, maintenance, quality control, and automation.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Engineering Mechanics",
+                    "Strength of Materials",
+                    "Thermal Engineering",
+                    "Fluid Mechanics & Hydraulic Machines",
+                    "Machine Drawing & CAD",
+                    "Automobile Engineering",
+                    "Manufacturing Technology",
+                    "Design of Machine Elements",
+                    "Industrial Engineering",
+                    "Material science and meteorology",
+                    "Machine tools",
+                    "Robotics",
+                    "Mechatronics",
+                    "CAD and CAM",
+                    "Renewable energy Technology",
+                    "Refrigeration and Air Conditioning"
+                ],
+                "laboratory_practical_training": [
+                    "Engineering Graphics & CAD Lab",
+                    "Mechanical Workshop Practices I–IV",
+                    "Fluid Mechanics & Thermal Engineering Labs",
+                    "Metallography & Material Testing Lab",
+                    "Machine Shop Practice",
+                    "Automotive Lab",
+                    "Production Software Lab",
+                    "Refrigeration & Air Conditioning Lab",
+                    "Advanced Machine Tools Lab",
+                    "Minor and Major Projects",
+                    "Internships (After Semester II & IV)"
+                ]
+            },
+            "career_opportunities": [
+                "Manufacturing and Production Industries",
+                "Automotive Industry",
+                "HVAC (Heating, Ventilation & Air Conditioning)",
+                "Maintenance & Quality Control Departments",
+                "Machine Tool and Equipment Design",
+                "Government sectors like KSEB, PWD, Irrigation, Railways, and Defense Services",
+                "Boiler operator and maintenance",
+                "Public and Private Engineering Workshops",
+                "Oil & gas refinery Petroleum Industries",
+                "CNC operator",
+                "Welding Inspector"
+            ],
+            "license_eligibility": [
+                "Supervisor Licence issued by the Department of Urban Affairs, Kerala",
+                "Boiler Operation Engineer Certification (with relevant experience)",
+                "Opportunities in certified safety & technical supervisory roles"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Mechanical Engineering",
+                "Certifications in CAD/CAM, HVAC, NDT, CNC, Industrial Safety, Boiler Operator, MEP, Fire and Safety, Welding Inspector",
+                "Preparation for Government Exams such as SSC JE, RRB JE, and Technical Assistant Posts"
+            ]
+        },
+        {
+            "id": "Architecture",
+            "program_name": "Diploma in Architecture",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE & COA",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Architectural at Madin College of Engineering and Management is a 3-year full-time course designed to equip students with the technical skills and creative thinking necessary for careers in the building design and construction industry. The program blends architectural theory with practical design application, computer-aided drafting (CAD), and sustainable construction practices. Students gain hands-on experience through studio work, design projects, and site visits that prepare them to contribute effectively to the built environment and collaborate with architects, civil engineers, and planners.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Architectural Drawing & Design",
+                    "Building Materials & Construction Techniques",
+                    "History of Architecture",
+                    "Structural Mechanics",
+                    "Building Services (Plumbing, HVAC, Electrical)",
+                    "Estimation, Costing & Specification Writing",
+                    "Town Planning & Urban Design",
+                    "Environmental Studies & Sustainable Architecture",
+                    "Building Bye-laws and Regulations",
+                    "Interior Design Fundamentals",
+                    "Working Drawing & Detailing",
+                    "3D Modeling and Visualization (AutoCAD, SketchUp, Revit)"
+                ],
+                "laboratory_practical_training": [
+                    "Architectural Design Studio (I–V)",
+                    "Building Construction Studio",
+                    "CAD Lab & Drafting Lab",
+                    "Model Making & Presentation Lab",
+                    "Surveying and Site Planning Exercises",
+                    "Mini & Major Design Projects",
+                    "Field Visits to Architectural Sites",
+                    "Internship after 2nd & 4th semesters"
+                ]
+            },
+            "career_opportunities": [
+                "Architectural Draftsman / CAD Technician",
+                "Junior Architect's Assistant",
+                "Building Planner or Estimator",
+                "Interior Design Assistant",
+                "Site Supervisor / Construction Coordinator",
+                "Municipal and Town Planning Departments",
+                "Infrastructure Development Projects",
+                "Real Estate and Urban Design Consultancies",
+                "Self-employed in Architectural Drafting or 3D Visualization"
+            ],
+            "license_certification_opportunities": [
+                "Eligible for Licensed Draftsman Registration under relevant local authorities",
+                "Can pursue certifications in AutoCAD, Revit, SketchUp, 3ds Max, BIM",
+                "Eligible for PSC, PWD, and Municipal technical posts"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Civil Engineering and Allied branches",
+                "Specialized training in Landscape Design, Interior Design, Urban Planning, BIM",
+                "Preparation for exams like NATA, PSC Draftsman, and Assistant Town Planner"
+            ]
+        },
+        {
+            "id": "Automobile-Engineering",
+            "program_name": "Diploma in Automobile Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Automobile Engineering at Madin College of Engineering and Management is a specialized 3-year program designed to build expertise in the design, development, testing, and maintenance of automobiles. This full-time diploma course equips students with both mechanical engineering fundamentals and cutting-edge knowledge in automotive systems. The curriculum emphasizes hands-on training with modern automobile labs, workshop practices, and real-world exposure to the fast-evolving automotive industry — including electric vehicles (EVs) and hybrid technologies.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Automobile Engineering Fundamentals",
+                    "Internal Combustion Engines",
+                    "Vehicle Dynamics & Chassis Design",
+                    "Automotive Electrical & Electronics",
+                    "Transmission and Powertrain Systems",
+                    "Engine Testing and Tuning",
+                    "Auto Workshop Technology",
+                    "Auto CAD & 3D Modelling",
+                    "Thermodynamics & Fluid Mechanics",
+                    "Automotive Materials and Manufacturing",
+                    "Emission Control and Pollution Management",
+                    "Basics of Electric & Hybrid Vehicles"
+                ],
+                "laboratory_practical_training": [
+                    "Engine Assembly & Overhauling Lab",
+                    "Automotive Electrical Lab",
+                    "Chassis & Transmission Lab",
+                    "Vehicle Maintenance and Service Lab",
+                    "Auto CAD & Drafting Lab",
+                    "Emission Testing and Control Lab",
+                    "Mini and Major Projects",
+                    "Industrial Training & Internships (After 2nd and 4th Semester)",
+                    "Field Visits to Service Centers and OEM Plants"
+                ]
+            },
+            "career_opportunities": [
+                "Automobile Service Engineer / Technician",
+                "Vehicle Inspection Officer / Motor Vehicle Inspector Assistant",
+                "Engine Testing Technician",
+                "Auto Workshop Supervisor",
+                "Spare Parts and Service Manager",
+                "Technical Sales Executive (Automotive Products)",
+                "Vehicle Diagnostics and Maintenance Expert",
+                "Quality Control Technician in Auto Industries",
+                "Entrepreneur in Auto Garage or Spare Parts Business"
+            ],
+            "license_certification_opportunities": [
+                "Can apply for Automobile Workshop Licenses",
+                "Certifications in BS6 Engine Diagnostics, EV Maintenance, CAD/CAE Tools, and Emission Testing"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Automobile or Mechanical Engineering",
+                "Certifications in Electric Vehicles, Auto Diagnostics, CAD/CAM, Mechatronics",
+                "Competitive exams for PSC, SSC JE, RRB Technician, and Automotive Inspector roles"
+            ]
+        },
+        {
+            "id": "Computer-Engineering",
+            "program_name": "Diploma in Computer Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The Diploma in Computer Engineering at Madin College of Engineering and Management is a comprehensive program focused on the principles and practices of computing and information technology. This 3-year full-time course offers a strong foundation in programming, networking, data handling, and emerging technologies such as AI, IoT, and cybersecurity. The curriculum is industry-aligned and project-based, fostering skills that prepare students for IT careers and entrepreneurship in the digital economy.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Programming in C, Java, and Python",
+                    "Data Structures",
+                    "Computer Communication and Networks",
+                    "Web Technologies (HTML, CSS, JavaScript, PHP)",
+                    "Database Management Systems (SQL, MySQL)",
+                    "Operating Systems",
+                    "Software Engineering",
+                    "Mobile Application Development",
+                    "Computer Hardware & Maintenance",
+                    "Cybersecurity Fundamentals",
+                    "Internet of Things (IoT)",
+                    "Artificial Intelligence & Machine Learning"
+                ],
+                "laboratory_practical_training": [
+                    "Programming Lab (C, Java, Python)",
+                    "Networking & Security Lab",
+                    "Database Lab",
+                    "Hardware & Troubleshooting Lab",
+                    "Web and Mobile App Development Lab",
+                    "IoT & Embedded Systems Lab",
+                    "Artificial Intelligence & Machine Learning Lab",
+                    "Mini Projects, Final Major Project",
+                    "Internship after 2nd & 4th semesters"
+                ]
+            },
+            "career_opportunities": [
+                "Software Developer / Programmer",
+                "Web Developer / Full Stack Developer",
+                "Network Administrator",
+                "Database Administrator",
+                "Hardware Technician / Support Engineer",
+                "Cybersecurity Assistant",
+                "Mobile App Developer",
+                "IT Support and Maintenance Technician",
+                "System Analyst / Tester",
+                "Entrepreneur in Tech Startups"
+            ],
+            "license_certification_opportunities": [
+                "Eligible for CSC (Common Service Center) operations and e-Governance projects",
+                "Can pursue certifications like CompTIA A+, CCNA, RHCE, AWS Cloud Practitioner",
+                "Eligible for Government exams for roles like Computer Assistant, Technical Assistant, and IT Technician"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Computer Science and Allied branches",
+                "Specialized Certifications in Web Development, Cloud Computing, Cybersecurity, Data Science, Artificial Intelligence & Machine Learning, etc.",
+                "Preparation for Competitive Exams like SSC JE (IT), RRB JE, PSC Technical Posts"
+            ]
+        },
+        {
+            "id": "Electrical-and-Electronics-Engineering-Part-time",
+            "program_name": "Diploma in Electrical and Electronics Engineering",
+            "duration": "3 Years",
+            "affiliation": "Directorate of Technical Education (DTE), Kerala",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Part-Time",
+            "program_overview": "The Diploma in Electrical and Electronics Engineering (EEE) at Madin College of Engineering and Management provides a solid foundation in the design, analysis, and maintenance of electrical systems and electronic devices. The 3-year full-time program is designed to prepare students for roles in the rapidly evolving fields of electrical power, automation, instrumentation, and control systems. With a balanced blend of theoretical knowledge and practical training, this program empowers students to meet the demands of modern industry and government sectors.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Electrical Machines",
+                    "Power Electronics",
+                    "Basic Electronics",
+                    "Circuit Theory",
+                    "Electrical Measurements and Instrumentation",
+                    "Control Systems",
+                    "Industrial Automation",
+                    "Power Systems",
+                    "Electrical Drawing & Wiring"
+                ],
+                "laboratory_practical_training": [
+                    "Electrical Machines Lab",
+                    "Power Electronics Lab",
+                    "Digital & Analog Electronics Lab",
+                    "Wiring & Installation Lab",
+                    "Microcontroller & PLC Lab",
+                    "Electrical Measurement Lab",
+                    "Domestic Appliances Repair & Maintenance Workshop",
+                    "Industrial Electrical Engineering Lab",
+                    "Cad & Drafting Lab",
+                    "Minor and Major Projects",
+                    "Internships (After Semester II & IV)"
+                ]
+            },
+            "career_opportunities": [
+                "Power generation and distribution companies",
+                "Electrical maintenance and control departments",
+                "Automation and robotics firms",
+                "Manufacturing and heavy industries",
+                "Renewable energy sector (solar, wind)",
+                "Government departments like KSEB, Railways, PWD, LSGD",
+                "Electrical installation, safety inspection, and building electrification"
+            ],
+            "license_eligibility": [
+                "Wireman and Supervisor Licenses under Kerala State Electricity Licensing Board (KSELB)",
+                "Class B Supervisor License (with 1 years' experience under a licensed contractor)"
+            ],
+            "higher_education_pathways": [
+                "Lateral Entry to B.Tech in Electrical & Electronics Engineering",
+                "Certifications in Automation, PLC/SCADA, Electrical CAD",
+                "Competitive exams for government technician, Sub Engineer and Junior Engineering roles"
+            ]
+        }
+    ]
+}
