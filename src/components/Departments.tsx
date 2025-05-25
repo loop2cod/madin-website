@@ -2,16 +2,19 @@ import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 import BlurIn from "./ui/blur-in"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 interface Department {
   id: number
   name: string
+  link:string
   category: "Engineering" | "Management"
   image: string
   description: string
 }
 
 export default function Departments() {
+  const navigate = useNavigate()
     useEffect(() => {
       window.scrollTo({ top: 0, behavior: "instant" })
     }, [])
@@ -19,6 +22,7 @@ export default function Departments() {
   const departments: Department[] = [
     {
       id: 1,
+      link:"/departments/Civil-Engineering",
       name: "Civil Engineering",
       category: "Engineering",
       image: "/departments/1.jpg",
@@ -27,6 +31,7 @@ export default function Departments() {
     {
       id: 2,
       name: "Mechanical Engineering",
+      link:"/departments/Mechanical-Engineering",
       category: "Engineering",
       image: "/departments/2.jpg",
       description: "Create innovative solutions through mechanical systems and energy.",
@@ -34,6 +39,7 @@ export default function Departments() {
     {
       id: 3,
       name: "Electrical & Electronics Engineering",
+      link:"/departments/Electrical-and-Electronics-Engineering",
       category: "Engineering",
       image: "/departments/3.jpg",
       description: "Power the future with cutting-edge electrical technologies.",
@@ -41,6 +47,7 @@ export default function Departments() {
     {
       id: 4,
       name: "Computer Engineering",
+      link:"/departments/Computer-Engineering",
       category: "Engineering",
       image: "/departments/4.jpg",
       description: "Build the digital foundations that drive modern innovation.",
@@ -48,6 +55,7 @@ export default function Departments() {
     {
       id: 5,
       name: "Automobile Engineering",
+      link:"/departments/Automobile-Engineering",
       category: "Engineering",
       image: "/departments/5.jpg",
       description: "Drive the evolution of transportation and mobility solutions.",
@@ -55,6 +63,7 @@ export default function Departments() {
     {
       id: 6,
       name: "Architecture",
+      link:"/departments/Architecture",
       category: "Engineering",
       image: "/departments/6.jpg",
       description: "Design spaces that inspire and transform how we live.",
@@ -62,6 +71,7 @@ export default function Departments() {
     {
       id: 7,
       name: "Master of Business Administration",
+      link:"/departments/Civil-Engineering",
       category: "Management",
       image: "/departments/7.jpg",
       description: "Develop leadership skills to excel in the business world.",
@@ -117,6 +127,9 @@ export default function Departments() {
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
+                          onClick={()=>{
+                            navigate(`${department?.link}`)
+                          }}
                           className="inline-flex items-center text-sm font-medium text-teal-600"
                         >
                           Learn more

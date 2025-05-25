@@ -19,7 +19,7 @@ const About = () => {
             <img
               src="/graduation.jpg"
               alt="Campus View"
-              className="object-cover brightness-[0.4] md:h-3/4 w-full"
+              className="object-cover brightness-[0.4] h-9/10 w-full"
             />
           </div>
           <div className="container relative z-10 py-24 md:py-36 lg:py-48 px-4 md:px-8">
@@ -66,7 +66,8 @@ const About = () => {
           </div>
         </section>
 
-        <section id="programs" className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div className="bg-primary/5">
+      <section id="programs" className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
           <div className="container">
             <div className="mx-auto mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">
@@ -189,14 +190,14 @@ const About = () => {
                       of management principles, strategic thinking, and ethical business practices.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline">Finance</Badge>
                       <Badge variant="outline">Marketing</Badge>
-                      <Badge variant="outline">Human Resources</Badge>
-                      <Badge variant="outline">Operations</Badge>
-                      <Badge variant="outline">International Business</Badge>
+                      <Badge variant="outline">Finance</Badge>
+                      <Badge variant="outline">Human Resource Management</Badge>
+                      <Badge variant="outline">Operations, Logistics and Supply Chain Management</Badge>
+                      <Badge variant="outline">Business Analytics</Badge>
                     </div>
-                    <Link to="#" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                      Learn more about our MBA program <ArrowRight className="h-3 w-3" />
+                    <Link to="/program/Master-of-Business-Administration" className="inline-flex items-center gap-1 text-sm font-medium text-secondary">
+                    Program details <ArrowRight className="h-3 w-3" />
                     </Link>
                   </CardContent>
                 </Card>
@@ -204,8 +205,9 @@ const About = () => {
             </Tabs>
           </div>
         </section>
+      </div>
 
-        <section id="campus" className="bg-gray-50">
+        <section id="campus">
           <div className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">

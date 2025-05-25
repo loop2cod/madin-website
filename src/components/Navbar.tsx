@@ -1,202 +1,333 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, Phone, Mail, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuRef = useRef<any>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
-  // Toggle the menu open/close
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Detect scroll to add backdrop blur effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    // Cleanup on unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close the menu when clicking outside of it
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  return (
- <>
-    <header className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 border-b ${isScrolled ? 'backdrop-blur-md bg-primary-foreground' : 'bg-primary-foreground'}`}>
-      <div className={`container mx-auto px-4 lg:px-8`}>
-        <div className="flex justify-between">
-          <Link className="hidden lg:flex items-center" to="/">
-            <img src="/logo.avif" alt="Logo" className="h-24 p-3" />
-          </Link>
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
 
-          <div>
-            <div
-              className="hidden lg:flex items-center justify-end w-full space-x-9 text-white bg-secondary ps-28 pe-5 py-1 rounded"
-              style={{
-                clipPath: "polygon(90% 0%, 100% 0, 100% 100%, 8.5% 100%, 6.5% 0%, 0 0)",
-              }}
-            >
-              <Link to="tel:+911234567890" className="flex items-center space-x-2">
-                <Phone className="w-6 h-6" />
-                <span>+91 1234567890</span>
-              </Link>
-              <Link to="mailto:info@madin.com" className="flex items-center space-x-2">
-                <Mail className="w-6 h-6" />
-                <span>info@madin.com</span>
-              </Link>
-              <Link target="_blank" to="https://www.google.com/maps/place/Bin+Shabib+Mall/@25.2805449,55.3799611,18.62z/data=!4m6!3m5!1s0x3e5f5c475ed7622b:0xd9e461a20a362c59!8m2!3d25.2806038!4d55.3806696!16s%2Fg%2F11c763yhrp?entry=ttu&g_ep=EgoyMDI0MTExOS4yIKXMDSoASAFQAw%3D%3D" className="flex items-center space-x-2">
-                <MapPin className="w-6 h-6" />
-                <span>Alaturpadi, Kerala</span>
-              </Link>
+  return (
+    <>
+      <header className={`fixed top-0 left-0 w-full z-30 transition-all duration-300 border-b ${isScrolled ? 'backdrop-blur-md bg-primary-foreground' : 'bg-primary-foreground'}`}>
+        <div className={`container mx-auto px-4 lg:px-8`}>
+          <div className="flex justify-between">
+            <Link className="hidden lg:flex items-center" to="/">
+              <img src="/logo.avif" alt="Logo" className="h-24 p-3" />
+            </Link>
+
+            <div>
+              <div
+                className="hidden lg:flex items-center space-x-9 text-white bg-secondary ps-28 pe-5 py-1 w-1/4 ms-auto cursor-pointer transition-colors duration-300 hover:bg-teal-600 font-bold font-sans"
+                style={{
+                  clipPath: "polygon(90% 0%, 100% 0, 100% 100%, 18.5% 100%, 6.5% 0%, 0 0)",
+                }}
+              >
+                APPLY NOW
+              </div>
+              <div className="hidden lg:flex justify-end items-center mt-4 font-bold tracking-wide">
+                <ul className="flex space-x-10 text-base">
+                  <li>
+                    <Link to="/" className="uppercase hover:text-secondary">
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/about" className="uppercase hover:text-secondary">
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admission" className="uppercase hover:text-secondary">
+                      Admission
+                    </Link>
+                  </li>
+                  <li>
+                  <DropdownMenu onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger className="uppercase hover:text-secondary flex items-center gap-1 outline-none">
+        Departments {isOpen ? <ChevronUp /> : <ChevronDown />}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-white ml-28 rounded-none z-50">
+        {[
+          "Civil Engineering",
+          "Mechanical Engineering",
+          "Electrical and Electronics Engineering",
+          "Computer Engineering",
+          "Automobile Engineering",
+          "Architecture",
+        ].map((dept) => (
+          <DropdownMenuItem key={dept} className="rounded-none" asChild>
+            <Link to={`/departments/${dept.replace(/\s+/g, "-")}`}>{dept}</Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+                  </li>
+                  <li>
+                    <Link to="/facilities" className="uppercase hover:text-secondary">
+                      Facilities
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/downloads" className="uppercase hover:text-secondary">
+                      Downloads
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/gallery" className="uppercase hover:text-secondary">
+                      Gallery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/contact" className="uppercase hover:text-secondary">
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div className="hidden lg:flex justify-end items-center mt-4 font-bold tracking-wide">
-              <ul className="flex space-x-10 text-base">
+          </div>
+
+          {/* Navigation Bar */}
+          <nav className="flex items-center justify-between">
+            {/* Mobile Brand */}
+            <Link className="flex lg:hidden items-center" to="/">
+              <img src="/logo.avif" alt="Logo" className="w-36 p-2" />
+            </Link>
+
+            {/* Toggle Button for Mobile */}
+            <button
+              className="lg:hidden text-primary"
+              onClick={toggleMenu}
+              aria-label="Toggle navigation"
+            >
+              {!isMenuOpen ? <Menu className="w-8 h-8" /> : <X className="w-8 h-8" />}
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-20 lg:hidden"
+              onClick={toggleMenu}
+            />
+            
+            {/* Sidebar */}
+            <motion.div
+              ref={menuRef}
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "tween", ease: "easeInOut" }}
+              className="lg:hidden fixed top-0 left-0 w-4/5 max-w-sm h-full bg-primary-foreground z-30 shadow-xl overflow-y-auto"
+            >
+              <div className="flex justify-between items-center p-4 border-b">
+                <Link to="/" onClick={toggleMenu}>
+                  <img src="/logo.avif" alt="Logo" className="w-32" />
+                </Link>
+                <button onClick={toggleMenu} className="p-2">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <ul className="flex flex-col py-4 px-6 space-y-3 font-bold">
                 <li>
-                  <Link to="/" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/about" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link to="/admission" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/admission" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Admission
                   </Link>
                 </li>
-                <li>
-                  <Link to="/departments" className="uppercase hover:text-secondary">
-                    Departments
-                  </Link>
+                <li className="relative">
+                  <details className="group">
+                    <summary className="flex justify-between items-center py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary cursor-pointer list-none">
+                      <span>Departments</span>
+                      <ChevronDown className="w-5 h-5 group-open:rotate-180 transition-transform" />
+                    </summary>
+                    <ul className="pl-6 mt-1 space-y-2">
+                      <li>
+                        <Link 
+                          to="/departments/Civil-Engineering" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Civil Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/departments/Mechanical-Engineering" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Mechanical Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/departments/Electrical-and-Electronics-Engineering" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Electrical & Electronics
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/departments/Computer-Engineering" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Computer Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/departments/Automobile-Engineering" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Automobile Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link 
+                          to="/departments/Architecture" 
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                          onClick={toggleMenu}
+                        >
+                          Architecture
+                        </Link>
+                      </li>
+                    </ul>
+                  </details>
                 </li>
                 <li>
-                  <Link to="/facilities" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/facilities" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Facilities
                   </Link>
                 </li>
                 <li>
-                  <Link to="/downloads" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/downloads" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Downloads
                   </Link>
                 </li>
                 <li>
-                  <Link to="/gallery" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/gallery" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Gallery
                   </Link>
                 </li>
                 <li>
-                  <Link to="/contact" className="uppercase hover:text-secondary">
+                  <Link 
+                    to="/contact" 
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                    onClick={toggleMenu}
+                  >
                     Contact
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
 
-        {/* Navigation Bar */}
-        <nav className="flex items-center justify-between">
-          {/* Mobile Brand */}
-          <Link className="flex lg:hidden items-center" to="/">
-            <img src="/logo.avif" alt="Logo" className="w-36 p-2" />
-          </Link>
-
-          {/* Toggle Button for Mobile */}
-          <button
-            className="lg:hidden text-primary"
-            onClick={toggleMenu}
-            aria-label="Toggle navigation"
-          >
-            {!isMenuOpen ? <Menu className="w-8 h-8" /> : <X className="w-8 h-8" />}
-          </button>
-        </nav>
-      </div>
-    </header>
-         <motion.div
-         ref={menuRef}
-         initial={{ x: "-100%" }}
-         animate={{ x: isMenuOpen ? 0 : "-100%" }}
-         transition={{ type: "tween", stiffness: 200 }}
-         className="lg:hidden fixed top-0 left-0 w-2/3 h-full bg-primary-foreground z-30 shadow-lg"
-       >
-         <div className="flex justify-between items-center p-4">
-           <Link to="/">
-             <img src="/logo.avif" alt="Logo" className="w-32" />
-           </Link>
-         </div>
- 
-         <ul className="flex flex-col items-start ps-10 space-y-4 font-bold">
-           <li>
-             <Link to ="/" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Home
-             </Link>
-           </li>
-           <li>
-             <Link to="/about" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               About
-             </Link>
-           </li>
-           <li>
-             <Link to="/admission" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Admission
-             </Link>
-           </li>
-           <li>
-             <Link to="/departments" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Departments
-             </Link>
-           </li>
-           <li>
-             <Link to="/facilities" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Facilities
-             </Link>
-           </li>
-           <li>
-             <Link to="/downloads" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Downloads
-             </Link>
-           </li>
-           <li>
-             <Link to="/gallery" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Gallery
-             </Link>
-           </li>
-           <li>
-             <Link to="/contact" className="uppercase hover:text-secondary" onClick={toggleMenu}>
-               Contact
-             </Link>
-           </li>
-         </ul>
-       </motion.div>
-       </>
+              {/* Apply Now Button for Mobile */}
+              <div className="px-6 py-4">
+                <Link
+                  to="/admission"
+                  className="block w-full bg-secondary text-white text-center py-3 px-4 rounded font-bold hover:bg-teal-600 transition-colors duration-300"
+                  onClick={toggleMenu}
+                >
+                  APPLY NOW
+                </Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

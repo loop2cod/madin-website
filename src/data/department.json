@@ -1,0 +1,222 @@
+{
+    "departments": [
+      {
+        "id": "Civil-Engineering",
+        "name": "Civil Engineering",
+        "overview": [
+            "The Department of civil Engineering established in the year 2011, offers a 3 years (6 Semesters) Diploma course .The department Aims to develop qualified and motivated diploma holders.",
+            "Civil engineering is a professional engineering discipline that deals with the design, construction, and maintenance of the physical and naturally built environment, including public works such as roads, bridges, canals, dams, airports, sewerage systems, pipelines, structural components of buildings, and railways. Diploma in Civil Engineering is a 3-year long course in engineering, specializing in the design, construction, and maintenance of physical and naturally-built environment, such as roads, bridges, canals, dams and buildings."
+        ],
+        "vision": "To create technically qualified Civil Engineering professionals with social commitment through career oriented course with globally interactive learning processes.",
+        "mission": [
+          "To be a core of excellence in technical education in the field of Civil engineering by making students capable of analyzing upgradation & advancement in Civil Engineering",
+          "To equip the students capable of planning designing and implementing safe, resilient infrastructure to the society by following Indian standards of practice"
+        ],
+        "peos": [
+          "Molding eminent professionals with creative minds to achieve the goals through the process of education, training & empowerment",
+          "To be an active agent of change by responding to the needs & challenges of times",
+          "To achieve the goals through the process of education, training & empowerment"
+        ],
+        "psos": [
+          "Support the society with solutions to various Civil Engineering Problems focusing on sustainable development.",
+          "Upholding the professional ethics graduate will competent to identify formulate & solve civil engineering problems.",
+          "Familiarize the students about various parameters of civil engineering available globally so as to meet the needs of the society."
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      },
+      {
+        "id": "Mechanical-Engineering",
+        "name": "Mechanical Engineering",
+        "overview": [
+            "Mechanical engineering is a discipline of engineering that applies the principles of physics and materials science for analysis, design, manufacturing, and maintenance of mechanical systems. The department of Mechanical Engineering was started in 2011 and it is backed by a team of faculty members have significant experience in the field of Teaching and support for Student development activities. The Department offers vibrant atmosphere to the student to nurture the spirit of scientific inquires.",
+            "The objective of the department is to carry out offers privileged education in Engineering and Technology relevant to the current and projected needs of the society. It fosters support between the academic and industrial neighborhoods by the fusion of Mechanical Engineering. The curriculum prepares a student for a wide variety of technical and professional areas having their roots in Mechanical Engineering."
+        ],
+        "vision": "To develop into a centre that imparts value-added education and technical skills of international standards in Mechanical Engineering.",
+        "mission": [
+          "To deliver high-quality education in the fields of Mechanical Engineering with the help of competent and dedicated faculty.",
+          "To offer various opportunities to students and faculty to expand their knowledge and professional skills through value-added education"
+        ],
+        "peos": [
+          "To enable students to successfully pursue higher studies in engineering as well as improve their quality of life.",
+          "To produce students with better communication and creativity who can deal effectively with social and technical challenges.",
+          "To create students who can perform in multi-disciplinary teams with professional ethics and social awareness."
+        ],
+        "psos": [
+          "Apply extensive engineering expertise in mechanics, thermal and design engineering to resolve real-life technical problems.",
+          "Develop and implement manufacturing practices and efficiently manage a production floor.",
+          "Acquire managerial skills to function effectively in a team and society while adhering to ethical and environmental practices."
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      },
+      {
+        "id": "Electrical-and-Electronics-Engineering",
+        "name": "Electrical and Electronics Engineering",
+        "overview": [
+            "The Department of Electrical and Electronics Engineering, established in the year 2011, offers a 3-year (6 Semesters) Diploma course with an intake capacity of 60 students. Since its inception, the department has evolved into a hub of technical excellence and hands-on learning in core electrical and electronics disciplines. The program focuses on foundational concepts such as circuit theory, electrical machines, power systems, industrial automation, and electronic devices, preparing students to work in both traditional and emerging electrical domains.",
+            "We offer advanced laboratory infrastructure including automation and electrical machines labs, supported by experienced faculty with industrial and academic expertise. The department promotes innovation, skill-based learning, and ethical professionalism. Students are actively encouraged to take part in workshops, industry visits, and seminars, ensuring they stay current with fast-evolving technologies . Graduates often pursue higher studies or secure roles in leading public and private sector companies, contributing to the department’s strong placement record and growing alumni network."
+        ],
+        "vision": "To develop globally competitive electrical and electronics engineers to serve industry and society also involved in innovative ideas and entrepreneurship with positive attitude and ethical values.",
+        "mission": [
+          "To prepare professionals with good technical skills, positive attitude and ethical values.",
+          "To provide them a platform for developing new products and systems that can help industry and society"
+        ],
+        "peos": [
+          "To create and sustain a community of learning in which students acquire knowledge and learn to apply it professionally with due consideration for ethical, ecological and economic issues.",
+          "To provide knowledge based services to satisfy the needs of society and the industry by providing hands on experience in various technologies in core field.",
+          "To equip the students with the knowledge on theory, practice and design of core areas of electrical and electronics engineering in order to develop & maintain modern electrical equipments and to actively take part in application based research and development."
+        ],
+        "psos": [
+          "Identify the problem in the electrical engineering field and solve by applying knowledge of basic science, mathematics, electrical and electronics engineering fundamentals",
+          "Demonstrate and research their knowledge in effective implementation during their practice of profession of electrical and electronics engineering and the effect of environmental and social concern",
+          "Apply theoretical concepts and practical skills in providing electrical and electronics engineering solutions"
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      },
+      {
+        "id": "Computer-Engineering",
+        "name": "Computer Engineering",
+        "overview": [
+            "The Department of Computer Engineering established in the year 2011, offers a 3 years (6 Semesters) Diploma course (with an intake of 60 students). Over the years, the department has developed to become a centre of excellence providing in-depth technical knowledge and opportunities for innovation and research. The programme emphasizes on basics of computer programming and networking. The main areas include algorithms, program design, programming languages, compiler design, microcontrollers etc.",
+            "We offer outstanding infrastructure facilities supported by high speed Ethernet and have the best faculty profile. The excellent teaching environment attracts students from all over India. Many students join for higher learning, while others gain some work experience and fly after their dreams. The department offers high placement record. Workshops and seminars are regularly organized to keep the faculty and students aware of the latest developments. The department impart high quality education to mould students to meet the needs of ever-demanding IT field."
+        ],
+        "image": "/computer.jpg",
+        "vision": "To become a Center of Excellence in the Computer Engineering Stream with an innovative environment to produce globally competent graduates with moral values committed to build a vibrant nation.",
+        "mission": [
+          "Impart high quality professional training to advance knowledge in the field of computer science and inculcate ethics and commitment to serve the society.",
+          "To produce computer science graduates to design and develop quality software solutions to cater to the real time requirements of the industry."
+        ],
+        "peos": [
+          "To produce qualified and motivated diploma graduate who will be able to adapt the evolving technical challenges and changing career opportunities.",
+          "Understand the ethical, social, technical and business context in which their engineering skills are utilized.",
+          "Learn to effectively communicate ideas in oral, written, or graphical form and to promote collaboration with other members of engineering teams."
+        ],
+        "psos": [
+          "Ability to apply and implement professional engineering solutions using mathematical methodologies for social empowerment.",
+          "To analyze, design and develop computational solutions for complex technical problems and mould expertise in designing computer system using programming concepts and platforms.",
+          "To enhance skills in lifelong learning in the broadest context of global requirements, and adept at administering network services, and security"
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      },
+      {
+        "id": "Automobile-Engineering",
+        "name": "Automobile Engineering",
+        "overview": [
+            "Department of Automobile Engineering was established in the year 2013.Automobile engineering is a branch of vehicle engineering, incorporating elements of mechanical, electrical, electronic, software, and safety engineering as applied to the design, manufacture and operation of motorcycles, automobiles, and trucks and their respective engineering subsystems. The study of automotive engineering is to design, develop, fabricate, and test vehicles or vehicle components from the concept stage to production stage. .Automobile engineering offers one of the most challenging careers today. Driven by the high demand for vehicles, automobile engineers have career opportunities across the world. The course gains significance for those who are passionate about automobiles."
+        ],
+        "image": "/Automobile.jpg",
+        "vision": "Create a younger generation to “Paddle their own canoe” for the future mobility revolution.",
+        "mission": [
+          "To ensure quality education and an environment for effective technical, managerial quality in individuals.",
+          "Maintain strategic links with organizations competing within the automotive sector for professional outreach"
+        ],
+        "peos": [
+          "Students will apply knowledge of automotive engineering & practices to pursue successful career in the field of automotive technology.",
+          "Students will contribute to the academics and research for socio-technological development.",
+          "Students will demonstrate lifelong learning skills by engaging in professional activities and up-gradation of knowledge quotient."
+        ],
+        "psos": [
+          "Design, Develop and implement advanced technologies in automotive engineering and transportation management system.",
+          "Enhance and apply effective managerial skills for the socio-economic wellness of the society, keeping ethical principles.",
+          "Make use of technological knowledge for the operation, diagnosis and maintenance of various automotive systems."
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      },
+      {
+        "id": "Architecture",
+        "name": "Architecture",
+        "overview": [
+            "The Department of Architecture established in the year 2014 and offers a 3 years Diploma course. Architecture is the art and science of designing buildings and other physical structures. Architecture often includes design or selection of furnishings and decorations, supervision of construction work, and the examination, restoration, or remodelling of existing buildings. Here, best faculty apply innovative teaching techniques and encourage young minds to explore the designs, creating knowledge that will equip them for the challenges of our collective future."
+        ],
+        "image": "/Architecture.jpg",
+        "vision": "To be the most preferred destination producing globally competent and socially responsible professional Architects",
+        "mission": [
+          "Provide creative and value rich ambience to transform our students with high ethical values and professional qualities",
+          "Capable to design future by considering the past"
+        ],
+        "peos": [
+          "Mould Students with strong foundation in Engineering, Science and Technology for a successful career in Architecture",
+          "Hone the students to develop an innovative solution which will have a long term impact on the well being of the society",
+          "Flourish the creative ideas of the students through continuous guidance and application of technologies"
+        ],
+        "psos": [
+          "Influence quality of architectural design with artistic skills enhancement",
+          "Reflect ideas through collaboration, communicative skills, numeracy, writing, drawing, modeling and evaluation to accomplish needs of society",
+          "Design solution for complex engineering problems and structural components with consideration on public health and safety"
+        ],
+        "pos": [
+          "Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.",
+          "Identify and analyse well-defined engineering problems using codified standard methods.",
+          "Design solutions for well-defined technical problems and assist with the design of systems components or processes to meet specified needs.",
+          "Apply modern engineering tools and appropriate technique to conduct standard tests and measurements.",
+          "Apply appropriate technology in context of society, sustainability, environment and ethical practices.",
+          "Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.",
+          "Ability to analyse individual needs and engage in updating in the context of technological changes."
+        ],
+        "HOD": "Asif C",
+        "contact": "+91 9847654321",
+        "email": "asifc@madin.ac.in",
+        "profile_pic": "https://github.com/shadcn.png"
+      }
+    ]
+  }
+  

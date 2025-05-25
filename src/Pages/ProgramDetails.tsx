@@ -13,8 +13,7 @@ import {
 import { useParams } from "react-router-dom"
 import { diploma_programs } from "../data/program.json"
 import BlurIn from "@/components/ui/blur-in"
-
-
+import { differenceInYears } from 'date-fns';
 
 
 const ProgramDetails: React.FC = () => {
@@ -25,7 +24,7 @@ const ProgramDetails: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-        const foundProgram:any = diploma_programs.find((p: any) => p.id === decodeURIComponent(id))
+        const foundProgram:any = diploma_programs.find((p:any) => p.id === decodeURIComponent(id))
         window.scrollTo({ top: 0, behavior: "instant" })
         setProgram(foundProgram || null)
         setIsLoading(false)
@@ -132,30 +131,62 @@ const ProgramDetails: React.FC = () => {
     <div className="lg:col-span-2 space-y-6">
       {/* Core Subjects */}
       <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
+  <div className="bg-secondary px-6 py-4 border-b border-gray-200">
+    <div className="flex items-center">
+      <div className="bg-secondary-foreground p-3 rounded-lg mr-4">
+        <BookOpen className="w-5 h-5" />
+      </div>
+      <div>
+        <h2 className="text-xl font-bold text-white font-serif">Core Subjects</h2>
+        <p className="text-gray-300 text-sm">Foundation knowledge areas</p>
+      </div>
+    </div>
+  </div>
+  <div className="p-6">
+    {/* Core Subjects */}
+    {program?.curriculum_highlights?.core_subjects && (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        {program.curriculum_highlights.core_subjects.map((subject: any, index: any) => (
+          <div key={index} className="bg-gray-50 p-4 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors">
+            <div className="flex items-start">
+              <div className="bg-gray-200 w-1.5 h-1.5 rounded-full mt-1.5 mr-2"></div>
+              <span className="text-gray-800 font-medium text-sm">{subject}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+    </div>
+
+    {/* Elective Specializations */}
+    {program?.curriculum_highlights?.elective_specializations && (
+      <>
         <div className="bg-secondary px-6 py-4 border-b border-gray-200">
           <div className="flex items-center">
             <div className="bg-secondary-foreground p-3 rounded-lg mr-4">
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-white font-serif">Core Subjects</h2>
-              <p className="text-gray-300 text-sm">Foundation knowledge areas</p>
+              <h2 className="text-xl font-bold text-white font-serif">Elective Specializations</h2>
+              <p className="text-gray-300 text-sm">Specialized focus areas</p>
             </div>
           </div>
         </div>
         <div className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {program.curriculum_highlights.core_subjects.map((subject:any, index:any) => (
-              <div key={index} className="bg-gray-50 p-4 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors">
-                <div className="flex items-start">
-                  <div className="bg-gray-200 w-1.5 h-1.5 rounded-full mt-1.5 mr-2"></div>
-                  <span className="text-gray-800 font-medium text-sm">{subject}</span>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          {program.curriculum_highlights.elective_specializations.map((subject: any, index: any) => (
+            <div key={index} className="bg-gray-50 p-4 rounded-md border border-gray-200 hover:bg-gray-100 transition-colors">
+              <div className="flex items-start">
+                <div className="bg-gray-200 w-1.5 h-1.5 rounded-full mt-1.5 mr-2"></div>
+                <span className="text-gray-800 font-medium text-sm">{subject}</span>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </div>
+        </div>
+      </>
+    )}
+</div>
 
       {/* Laboratory Training */}
       {program.curriculum_highlights?.laboratory_practical_training && (
@@ -205,7 +236,7 @@ const ProgramDetails: React.FC = () => {
 
           {program?.sp && (
             <div className="px-2 pt-4">
-              <p className="text-xs text-gray-600 bg-gray-50 p-3 rounded-md">{program.sp}</p>
+              <p className="text-xs text-gray-600 bg-gray-50 p-3 rounded-md text-justify">{program.sp}</p>
             </div>
           )}
 
@@ -215,7 +246,7 @@ const ProgramDetails: React.FC = () => {
                   <div key={index} className="bg-secondary/5 p-4 rounded-md border border-secondary hover:bg-primary/5 transition-colors">
                     <div className="flex items-center">
                       <Shield className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span className="text-gray-800 font-medium text-sm">{license}</span>
+                      <span className="text-gray-800 font-medium text-sm text-justify">{license}</span>
                     </div>
                   </div>
                 ))
@@ -229,12 +260,12 @@ const ProgramDetails: React.FC = () => {
                       <div className="pl-6 space-y-2">
                         <div className="bg-white p-2 rounded">
                           <p className="text-gray-700 text-xs">
-                            <span className="font-semibold">Eligibility:</span> {value.eligibility}
+                            <span className="font-semibold text-justify">Eligibility:</span> {value.eligibility}
                           </p>
                         </div>
                         <div className="bg-white p-2 rounded">
                           <p className="text-gray-700 text-xs">
-                            <span className="font-semibold">Scope:</span> {value.scope}
+                            <span className="font-semibold text-justify">Scope:</span> {value.scope}
                           </p>
                         </div>
                       </div>
@@ -296,7 +327,7 @@ const ProgramDetails: React.FC = () => {
                   <div className="p-4 relative z-10">
                     <div className="flex items-center">
                         <TrendingUp className="w-5 h-5 text-secondary mr-2" />
-                      <h3 className="text-sm font-semibold text-gray-800">{opportunity}</h3>
+                      <h3 className="text-sm font-semibold text-gray-800 text-justify">{opportunity}</h3>
                     </div>
                   </div>
                 </div>
@@ -322,11 +353,13 @@ const ProgramDetails: React.FC = () => {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-secondary/10 p-6 text-center">
-                <div className="text-3xl font-bold mb-2">14+</div>
+              <div className="text-3xl font-bold mb-2">
+  {program.year ? `${differenceInYears(new Date(), new Date(program.year))}+` : '0+'}
+</div>
                 <div className="text-sm uppercase tracking-wider">Years Excellence</div>
               </div>
               <div className="bg-secondary/10 p-6 text-center">
-                <div className="text-3xl font-bold mb-2">98%</div>
+                <div className="text-3xl font-bold mb-2">{program?.success_rate}</div>
                 <div className="text-sm uppercase tracking-wider">Success Rate</div>
               </div>
             </div>

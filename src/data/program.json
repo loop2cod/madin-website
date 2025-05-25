@@ -55,7 +55,9 @@
                 "Lateral Entry to B.Tech in Electrical & Electronics Engineering",
                 "Certifications in Automation, PLC/SCADA, Electrical CAD",
                 "Competitive exams for government technician, Sub Engineer and Junior Engineering roles"
-            ]
+            ],
+            "success_rate": "93%",
+            "year": "2011"
         },
         {
             "id": "Civil-Engineering",
@@ -118,7 +120,9 @@
                 "Lateral entry into B.Tech Civil Engineering programs",
                 "Certifications in specialized areas (AutoCAD, STAAD.Pro, Revit, etc.)",
                 "Government competitive exams (e.g., PSC, SSC, RRB)"
-            ]
+            ],
+            "success_rate": "90%",
+            "year": "2011"
         },
         {
             "id": "Mechanical-Engineering",
@@ -184,7 +188,9 @@
                 "Lateral Entry to B.Tech in Mechanical Engineering",
                 "Certifications in CAD/CAM, HVAC, NDT, CNC, Industrial Safety, Boiler Operator, MEP, Fire and Safety, Welding Inspector",
                 "Preparation for Government Exams such as SSC JE, RRB JE, and Technical Assistant Posts"
-            ]
+            ],
+              "success_rate": "87%",
+            "year": "2011"
         },
         {
             "id": "Architecture",
@@ -241,7 +247,9 @@
                 "Lateral Entry to B.Tech in Civil Engineering and Allied branches",
                 "Specialized training in Landscape Design, Interior Design, Urban Planning, BIM",
                 "Preparation for exams like NATA, PSC Draftsman, and Assistant Town Planner"
-            ]
+            ],
+            "success_rate": "92%",
+            "year": "2014"
         },
         {
             "id": "Automobile-Engineering",
@@ -298,7 +306,9 @@
                 "Lateral Entry to B.Tech in Automobile or Mechanical Engineering",
                 "Certifications in Electric Vehicles, Auto Diagnostics, CAD/CAM, Mechatronics",
                 "Competitive exams for PSC, SSC JE, RRB Technician, and Automotive Inspector roles"
-            ]
+            ],
+            "success_rate": "83%",
+            "year": "2013"
         },
         {
             "id": "Computer-Engineering",
@@ -357,7 +367,9 @@
                 "Lateral Entry to B.Tech in Computer Science and Allied branches",
                 "Specialized Certifications in Web Development, Cloud Computing, Cybersecurity, Data Science, Artificial Intelligence & Machine Learning, etc.",
                 "Preparation for Competitive Exams like SSC JE (IT), RRB JE, PSC Technical Posts"
-            ]
+            ],
+            "success_rate": "90%",
+            "year": "2011"
         },
         {
             "id": "Electrical-and-Electronics-Engineering-Part-time",
@@ -413,7 +425,73 @@
                 "Lateral Entry to B.Tech in Electrical & Electronics Engineering",
                 "Certifications in Automation, PLC/SCADA, Electrical CAD",
                 "Competitive exams for government technician, Sub Engineer and Junior Engineering roles"
-            ]
+            ],
+            "success_rate": "90%",
+            "year": "2011"
+        },
+        {
+            "id": "Master-of-Business-Administration",
+            "program_name": "Master of Business Administration (MBA)",
+            "duration": "2 Years (4 Semesters)",
+            "affiliation": "University of Calicut",
+            "approval": "AICTE",
+            "intake": 60,
+            "mode": "Full-Time",
+            "program_overview": "The MBA Program at Madin College of Management Studies is a transformative two-year, fulltime postgraduate course designed to build future-ready business leaders and entrepreneurs. The program blends core management education with real-world exposure, strategic thinking, and leadership development. Specializations offered include Finance, Marketing, Human Resource Management, Logistics & Supply Chain Management, and Entrepreneurship, empowering students to align their studies with career aspirations.",
+            "curriculum_highlights": {
+                "core_subjects": [
+                    "Principles of Management",
+                    "Financial Accounting & Management",
+                    "Organizational Behavior",
+                    "Business Economics",
+                    "Marketing Management",
+                    "Operations & Supply Chain Management",
+                    "Business Law & Corporate Governance",
+                    "Business Analytics",
+                    "Strategic Management",
+                    "Human Resource Management",
+                    "Research Methodology",
+                    "Entrepreneurship Development"
+                ],
+                "elective_specializations": [
+                    "Marketing",
+                    "Finance",
+                    "Human Resource Management",
+                    "Operations, Logistics and Supply Chain Management",
+                    "Business Analytics"
+                ],
+                "laboratory_practical_training": [
+                    "Live projects",
+                    "Internships",
+                    "Case study methodology"
+                ]
+            },
+            "career_opportunities": [
+                "Banking & Financial Services",
+                "FMCG & Retail",
+                "Consulting Firms",
+                "Logistics & E-Commerce",
+                "Manufacturing & Operations",
+                "Human Resource Development",
+                "IT & Business Process Management",
+                "Government & Public Sector Enterprises",
+                "Entrepreneurship and Startups"
+            ],
+            "License_Certification_Opportunities": [
+                "Certifications in Digital Marketing, SAP, Six Sigma, Tally, Business Analytics (Power BI, Tableau)",
+                "Foreign Trade Certification (DGFT/EXIM)",
+                "HR Certifications (NIPM, SHRM)",
+                "Logistics Certifications (IATA, CILT, APICS)",
+                "Eligible for UGC-NET, CAT, UPSC, PSC & other government competitive exams"
+            ],
+            "higher_education_pathways": [
+                "Ph.D. or M.Phil. in Management or Allied Fields",
+                "Post Graduate Diplomas in Fields like Data Analytics, Retail Management, etc.",
+                "Executive MBA / International MBA Opportunities",
+                "Pathway to International Certifications (CFA, CPA, CIMA, PMP)"
+            ],
+            "success_rate": "95%",
+            "year": "2023"
         }
     ]
 }
