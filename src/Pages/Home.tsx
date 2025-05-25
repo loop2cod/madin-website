@@ -5,6 +5,8 @@ import Achievements from '@/components/Achievements'
 import WhyChooseUs from '@/components/WhyChooseUs'
 
 const Home = () => {
+
+  
   return (
     <div className='min-h-[72vh] mt-10'>
         <Hero/>

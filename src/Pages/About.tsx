@@ -4,8 +4,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Link } from "react-router-dom"
 import BlurIn from "@/components/ui/blur-in"
+import { useEffect } from "react"
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }, [])
+  
   return (
     <div className="mx-auto">
       <main className="flex-1">
@@ -14,7 +19,7 @@ const About = () => {
             <img
               src="/graduation.jpg"
               alt="Campus View"
-              className="object-cover brightness-[0.4] h-[50vh] w-full"
+              className="object-cover brightness-[0.4] md:h-3/4 w-full"
             />
           </div>
           <div className="container relative z-10 py-24 md:py-36 lg:py-48 px-4 md:px-8">
@@ -39,13 +44,13 @@ const About = () => {
                     word="About"
                     className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                   /></h2>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-lg text-muted-foreground mb-6 text-justify">
                   Madin College of Engineering and Management is a prominent technical institution located in Melmuri,
                   Malappuram, Kerala. Established in 2011 under the Madin Academy, the college is affiliated with the
                   Directorate of Technical Education (DTE), Kerala, and approved by the All India Council for Technical
                   Education (AICTE).
                 </p>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-lg text-muted-foreground mb-6  text-justify">
                   The college maintains high academic standards and a student-focused approach, integrating education
                   with moral and ethical teachings in line with the Madin Academy's broader educational vision.
                 </p>
@@ -155,17 +160,14 @@ const About = () => {
                       <BookOpen className="h-5 w-5 text-primary" />
                     </div>
                     <CardTitle className="text-secondary font-sans">Electrical and Electronics Engineering (Part-time)</CardTitle>
-                    <CardDescription>
-                      A 3-year part-time program affiliated with the University of Calicut and approved by AICTE
-                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p>
                       Our part-time EEE program is designed for working professionals and students who want to gain
                       expertise in electrical and electronics engineering while continuing their career.
                     </p>
-                    <Link to="/program/Electrical-and-Electronics-Engineering-Part-time" className="inline-flex items-center gap-1 text-sm font-medium text-primary">
-                      Learn more about our part-time EEE program <ArrowRight className="h-3 w-3" />
+                    <Link to="/program/Electrical-and-Electronics-Engineering-Part-time" className="inline-flex items-center gap-1 text-sm font-medium text-secondary">
+                    Program details <ArrowRight className="h-3 w-3" />
                     </Link>
                   </CardContent>
                 </Card>
@@ -280,7 +282,7 @@ const About = () => {
                         word="Vision"
                         className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                       /></h3>
-                    <p className="text-lg">
+                    <p className="text-lg text-justify">
                       To be a centre of excellence in engineering education for providing valuable resources to industry
                       and society with creative mind and practical skills.
                     </p>
@@ -291,7 +293,7 @@ const About = () => {
                         word="Mission"
                         className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                       /></h3>
-                    <ol className="space-y-4 text-lg">
+                    <ol className="space-y-4 text-lg text-justify">
                       <li className="flex gap-4 items-start">
                         <span className="mt-1.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200 text-secondary">
                           1
@@ -327,14 +329,14 @@ const About = () => {
 
         <section className="bg-gray-50">
           <div className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="mb-12">
               <h2 className="text-3xl font-bold tracking-tight mb-4">
                 <BlurIn
                   word="Community and Values"
                   className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                 />
               </h2>
-              <p className="text-lg opacity-90">
+              <p className="text-lg opacity-90 text-justify">
                 The college promotes values of discipline, respect, and inclusivity, integrating education with moral
                 and ethical teachings in line with the Madin Academy's broader educational vision.
               </p>

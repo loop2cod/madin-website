@@ -53,7 +53,7 @@ const WhyChooseUs = () => {
   ]
 
   return (
-    <section className='bg-primary/5'>
+    <section className=''>
       <div className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="pr-4 lg:pr-16">

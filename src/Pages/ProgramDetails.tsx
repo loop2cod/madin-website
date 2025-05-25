@@ -5,7 +5,6 @@ import {
   Building,
   BookOpen,
   FlaskConical,
-  Briefcase,
   Award,
   TrendingUp,
   ArrowRight,
@@ -26,11 +25,10 @@ const ProgramDetails: React.FC = () => {
 
   useEffect(() => {
     if (id) {
-      setTimeout(() => {
         const foundProgram:any = diploma_programs.find((p: any) => p.id === decodeURIComponent(id))
+        window.scrollTo({ top: 0, behavior: "instant" })
         setProgram(foundProgram || null)
         setIsLoading(false)
-      }, 500)
     }
   }, [id])
 
@@ -69,8 +67,8 @@ const ProgramDetails: React.FC = () => {
         <div className="mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Info Box */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-secondary p-8 text-white">
+            <div className="lg:col-span-2 space-y-6 bg-secondary">
+              <div className="p-8 text-white">
                 <div className="flex items-center space-x-3 mb-4">
                   <div className="w-8 h-8 bg-white flex items-center justify-center">
                     <BookOpen className="w-5 h-5 text-gray-900" />
@@ -78,19 +76,19 @@ const ProgramDetails: React.FC = () => {
                   <span className="text-sm font-medium uppercase tracking-wider">{program.department}</span>
                 </div>
                 <h1 className="md:text-4xl text-lg font-bold mb-4 leading-tight font-serif">{program.program_name}</h1>
-                <p className="text-lg text-gray-300 leading-relaxed">{program.program_overview}</p>
+                <p className="text-lg text-gray-300 leading-relaxed text-justify">{program.program_overview}</p>
               </div>
             </div>
 
             {/* Quick Stats Box */}
-            <div className="space-y-4">
-              <div className="bg-white border-2 border-secondary p-6">
-                <h3 className="text-lg font-bold mb-4 uppercase tracking-wider font-serif">
+            <div className="space-y-2">
+              <div className="bg-white border-2 border-secondary p-4">
+                <h3 className="text-lg font-bold mb-2 uppercase tracking-wider font-serif">
                 <BlurIn
                     word="Program Details"
                     className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                   /></h3>
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <div className="flex justify-between items-center py-2 border-b border-gray-200">
                     <span className="text-secondary font-medium font-serif">Duration</span>
                     <span className="text-gray-900 text-sm">{program.duration}</span>
@@ -113,7 +111,7 @@ const ProgramDetails: React.FC = () => {
               <div className="p-6 border-2 border-secondary">
                 <h4 className="font-bold mb-3">
                 <BlurIn
-                    word="Affiliation"
+                    word="Affiliated to"
                     className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text pr-5 font-serif"
                   /></h4>
                 <div className="flex items-center space-x-2">
@@ -129,9 +127,9 @@ const ProgramDetails: React.FC = () => {
 
       {/* Main Content Grid */}
       <div className="mx-auto mx-4 py-8">
-  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
     {/* Main Content - 3 columns */}
-    <div className="lg:col-span-3 space-y-6">
+    <div className="lg:col-span-2 space-y-6">
       {/* Core Subjects */}
       <div className="bg-white border border-gray-200 shadow-sm overflow-hidden">
         <div className="bg-secondary px-6 py-4 border-b border-gray-200">
@@ -214,9 +212,9 @@ const ProgramDetails: React.FC = () => {
           <div className="p-3 space-y-4">
             {Array.isArray(program.License_Certification_Opportunities)
               ? program.License_Certification_Opportunities.map((license:any, index:any) => (
-                  <div key={index} className="bg-purple-50 p-4 rounded-md border border-purple-100 hover:bg-purple-100 transition-colors">
+                  <div key={index} className="bg-secondary/5 p-4 rounded-md border border-secondary hover:bg-primary/5 transition-colors">
                     <div className="flex items-center">
-                      <Shield className="w-4 h-4 text-purple-600 mr-2 flex-shrink-0" />
+                      <Shield className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-gray-800 font-medium text-sm">{license}</span>
                     </div>
                   </div>
@@ -324,7 +322,7 @@ const ProgramDetails: React.FC = () => {
             </div>
             <div className="grid grid-cols-2 gap-6">
               <div className="bg-secondary/10 p-6 text-center">
-                <div className="text-3xl font-bold mb-2">15+</div>
+                <div className="text-3xl font-bold mb-2">14+</div>
                 <div className="text-sm uppercase tracking-wider">Years Excellence</div>
               </div>
               <div className="bg-secondary/10 p-6 text-center">

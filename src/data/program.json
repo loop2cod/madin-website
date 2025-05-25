@@ -2,7 +2,7 @@
     "diploma_programs": [
         {
             "id": "Electrical-and-Electronics-Engineering",
-            "program_name": "Diploma in Electrical and Electronics Engineering",
+            "program_name": "Diploma in Electrical & Electronics Engineering",
             "duration": "3 Years",
             "affiliation": "Directorate of Technical Education (DTE), Kerala",
             "approval": "AICTE",
@@ -361,7 +361,7 @@
         },
         {
             "id": "Electrical-and-Electronics-Engineering-Part-time",
-            "program_name": "Diploma in Electrical and Electronics Engineering",
+            "program_name": "Diploma in Electrical & Electronics Engineering",
             "duration": "3 Years",
             "affiliation": "Directorate of Technical Education (DTE), Kerala",
             "approval": "AICTE",

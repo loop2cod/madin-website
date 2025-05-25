@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { ChevronRight } from "lucide-react"
 import BlurIn from "./ui/blur-in"
+import { useEffect } from "react"
 
 interface Department {
   id: number
@@ -11,6 +12,9 @@ interface Department {
 }
 
 export default function Departments() {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "instant" })
+    }, [])
 
   const departments: Department[] = [
     {
@@ -65,7 +69,8 @@ export default function Departments() {
   ]
 
   return (
-    <div className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
+  <div className="bg-primary/5">
+      <div className="md:max-w-[90vw] mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <div className="mb-16 font-serif">
         <h2 className="text-4xl font-bold tracking-tight">
           <BlurIn word="Explore Our Departments" className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text font-serif" />
@@ -126,5 +131,6 @@ export default function Departments() {
         ))}
       </div>
     </div>
+  </div>
   )
 }
