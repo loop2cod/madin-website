@@ -1,0 +1,81 @@
+{
+    "contact_section": {
+      "office_numbers": ["9142112927", "9846330296"],
+      "admission_number": "9142031036",
+      "email": "principal.mptc@madin.edu.in",
+      "address": {
+        "line1": "Melmuri Post",
+        "line2": "Malappuram - 676517",
+        "state_country": "Kerala - India"
+      },
+      "important_contacts": [
+        {
+          "name": "Abdul Hameed C. P.",
+          "designation": "Principal",
+          "phone_numbers": ["9142112927"]
+        },
+        {
+          "name": "Siddeeque K.",
+          "designation": "Students' Dean",
+          "phone_numbers": ["9142905604"]
+        },
+        {
+          "name": "Chinju K.",
+          "designation": "HOS-Civil Engg.",
+          "phone_numbers": [
+            "9142170331 (Official)",
+            "9037415675 (Personal)"
+          ]
+        },
+        {
+          "name": "Vipin V. P.",
+          "designation": "HOS-Mechanical Engg.",
+          "phone_numbers": [
+            "9061414555 (Official)",
+            "9539431525 (Personal)"
+          ]
+        },
+        {
+          "name": "Muhammad Asif K.",
+          "designation": "HOS-Electrical & Electronics Engg.",
+          "phone_numbers": [
+            "9142030959 (Official)",
+            "9895310937 (Personal)"
+          ]
+        },
+        {
+          "name": "Anjali C.",
+          "designation": "HOS-Computer Engg.",
+          "phone_numbers": [
+            "9142054124 (Official)",
+            "8129219525 (Personal)"
+          ]
+        },
+        {
+          "name": "Mujeeb Rahman A.",
+          "designation": "HOS-Automobile Engg.",
+          "phone_numbers": [
+            "9142062197 (Official)",
+            "9947822038 (Personal)"
+          ]
+        },
+        {
+          "name": "Neethu Parameshwaran M.",
+          "designation": "HOS-Architecture",
+          "phone_numbers": [
+            "9526927444 (Official)",
+            "9846369688 (Personal)"
+          ]
+        },
+        {
+          "name": "Anisha N.",
+          "designation": "HOS-General/Science",
+          "phone_numbers": [
+            "9207424555 (Official)",
+            "8891819143 (Personal)"
+          ]
+        }
+      ]
+    }
+  }
+  
