@@ -46,7 +46,7 @@ const Navbar = () => {
     } else {
       document.body.style.overflow = '';
     }
-    
+
     return () => {
       document.body.style.overflow = '';
     };
@@ -88,25 +88,25 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                  <DropdownMenu onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger className="uppercase hover:text-secondary flex items-center gap-1 outline-none">
-        Departments {isOpen ? <ChevronUp /> : <ChevronDown />}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="bg-white ml-28 rounded-none z-50">
-        {[
-          "Civil Engineering",
-          "Mechanical Engineering",
-          "Electrical and Electronics Engineering",
-          "Computer Engineering",
-          "Automobile Engineering",
-          "Architecture",
-        ].map((dept) => (
-          <DropdownMenuItem key={dept} className="rounded-none" asChild>
-            <Link to={`/departments/${dept.replace(/\s+/g, "-")}`}>{dept}</Link>
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+                    <DropdownMenu onOpenChange={setIsOpen}>
+                      <DropdownMenuTrigger className="uppercase hover:text-secondary flex items-center gap-1 outline-none cursor-pointer">
+                        Departments {isOpen ? <ChevronUp /> : <ChevronDown />}
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="bg-white ml-28 rounded-none z-50">
+                        {[
+                          "Civil Engineering",
+                          "Mechanical Engineering",
+                          "Electrical and Electronics Engineering",
+                          "Computer Engineering",
+                          "Automobile Engineering",
+                          "Architecture",
+                        ].map((dept) => (
+                          <DropdownMenuItem key={dept} className="rounded-none" asChild>
+                            <Link to={`/departments/${dept.replace(/\s+/g, "-")}`}>{dept}</Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </li>
                   <li>
                     <Link to="/facilities" className="uppercase hover:text-secondary">
@@ -114,8 +114,8 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/downloads" className="uppercase hover:text-secondary">
-                      Downloads
+                    <Link to="/student-corner" className="uppercase hover:text-secondary">
+                      Student Corner
                     </Link>
                   </li>
                   <li>
@@ -164,7 +164,7 @@ const Navbar = () => {
               className="fixed inset-0 bg-black z-20 lg:hidden"
               onClick={toggleMenu}
             />
-            
+
             {/* Sidebar */}
             <motion.div
               ref={menuRef}
@@ -185,27 +185,27 @@ const Navbar = () => {
 
               <ul className="flex flex-col py-4 px-6 space-y-3 font-bold">
                 <li>
-                  <Link 
-                    to="/" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/about" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/about"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/admission" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/admission"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Admission
@@ -219,54 +219,54 @@ const Navbar = () => {
                     </summary>
                     <ul className="pl-6 mt-1 space-y-2">
                       <li>
-                        <Link 
-                          to="/departments/Civil-Engineering" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Civil-Engineering"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Civil Engineering
                         </Link>
                       </li>
                       <li>
-                        <Link 
-                          to="/departments/Mechanical-Engineering" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Mechanical-Engineering"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Mechanical Engineering
                         </Link>
                       </li>
                       <li>
-                        <Link 
-                          to="/departments/Electrical-and-Electronics-Engineering" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Electrical-and-Electronics-Engineering"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Electrical & Electronics
                         </Link>
                       </li>
                       <li>
-                        <Link 
-                          to="/departments/Computer-Engineering" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Computer-Engineering"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Computer Engineering
                         </Link>
                       </li>
                       <li>
-                        <Link 
-                          to="/departments/Automobile-Engineering" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Automobile-Engineering"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Automobile Engineering
                         </Link>
                       </li>
                       <li>
-                        <Link 
-                          to="/departments/Architecture" 
-                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm" 
+                        <Link
+                          to="/departments/Architecture"
+                          className="block py-2 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary text-sm"
                           onClick={toggleMenu}
                         >
                           Architecture
@@ -276,36 +276,36 @@ const Navbar = () => {
                   </details>
                 </li>
                 <li>
-                  <Link 
-                    to="/facilities" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/facilities"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Facilities
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/downloads" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/downloads"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Downloads
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/gallery" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/gallery"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Gallery
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    to="/contact" 
-                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary" 
+                  <Link
+                    to="/contact"
+                    className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
                     Contact

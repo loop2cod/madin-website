@@ -353,7 +353,7 @@ const About = () => {
                   <CardTitle className="font-serif">Discipline</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <CardDescription className="text-justify">
                     We foster a culture of discipline and responsibility, preparing students to excel in their
                     professional lives with dedication and commitment.
                   </CardDescription>
@@ -367,7 +367,7 @@ const About = () => {
                   <CardTitle className="font-serif">Respect</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <CardDescription className="text-justify">
                     Our community values mutual respect, creating an environment where diverse perspectives are
                     appreciated and everyone feels valued.
                   </CardDescription>
@@ -381,7 +381,7 @@ const About = () => {
                   <CardTitle className="font-serif">Inclusivity</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription>
+                  <CardDescription className="text-justify">
                     We embrace diversity and promote an inclusive learning environment that prepares students to thrive
                     in a global society.
                   </CardDescription>
