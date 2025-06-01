@@ -5,7 +5,6 @@ import BlurIn from '@/components/ui/blur-in'
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
 import Syllabus from '@/components/studentcorner/Syllabus'
 import { get } from "../../utilities/AxiosInterceptor"
 import { useEffect } from 'react'
@@ -195,7 +194,7 @@ const StudentCorner = () => {
         </CardHeader>
         <CardContent className="p-4 md:p-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="">
               <TabsTrigger value="previous" className="text-sm sm:text-base">Previous</TabsTrigger>
               <TabsTrigger value="solved" className="text-sm sm:text-base">Solved</TabsTrigger>
             </TabsList>

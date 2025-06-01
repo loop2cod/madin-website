@@ -54,6 +54,7 @@ const DepartmentDetails = () => {
             <AvatarImage
               src={department?.profile_pic || "/placeholder.svg"}
               alt={department?.HOD}
+              className="object-cover w-auto"
             />
             <AvatarFallback className="text-2xl md:text-4xl font-bold">
               {department?.HOD?.split(" ")
@@ -110,7 +111,7 @@ const DepartmentDetails = () => {
         <div className="relative group h-full">
           <div className="relative overflow-hidden h-full">
             <img
-              src={department?.image || "/placeholder.svg"}
+              src={department?.image || "/collage.jpg"}
               alt="Automobile Engineering Department"
               className="w-auto h-full object-cover"
             />
