@@ -113,11 +113,37 @@ const Navbar = () => {
                       Facilities
                     </Link>
                   </li>
-                  <li>
-                    <Link to="/student-corner" className="uppercase hover:text-secondary">
-                      Student Corner
-                    </Link>
-                  </li>
+                  <li className="group relative">
+  <Link to="/student-corner/0" className="uppercase hover:text-secondary">
+    Student Corner
+  </Link>
+  <ul className="absolute hidden group-hover:block bg-white text-black min-w-[200px] shadow-md z-10 pt-2">
+  <li>
+      <Link 
+        to="/student-corner/syllabus" 
+        className="block px-2 py-1.5 hover:bg-gray-100 hover:text-secondary font-normal text-sm"
+      >
+        Syllabus
+      </Link>
+    </li>
+    <li>
+      <Link 
+        to="/student-corner/question-papers" 
+        className="block px-2 py-1.5 hover:bg-gray-100 hover:text-secondary font-normal text-sm"
+      >
+        Question Papers
+      </Link>
+    </li>
+    <li>
+      <Link 
+        to="/student-corner/lab-manual" 
+        className="block px-2 py-1.5 hover:bg-gray-100 hover:text-secondary font-normal text-sm"
+      >
+        Lab Manual
+      </Link>
+    </li>
+  </ul>
+</li>
                   <li>
                     <Link to="/gallery" className="uppercase hover:text-secondary">
                       Gallery

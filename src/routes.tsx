@@ -16,7 +16,7 @@ const publicRoutes = [
   { path: "/program/:id", component: <ProgramDetails /> },
   { path: "/departments/:id", component: <DepartmentDetails/>},
   { path: "/facilities", component: <Facilities />},
-  { path: "/student-corner", component: <StudentCorner />},
+  { path: "/student-corner/:tab", component: <StudentCorner />},
   { path: "/contact", component: <Contact /> },
   { path: "/404", component: <div>404</div> },
 ];

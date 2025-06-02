@@ -203,7 +203,7 @@ const Facilities = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-0">
-                <div className="md:space-y-6">
+                <div className="md:space-y-4">
                   {[
                     { branch: "Civil Engineering", count: 810 },
                     { branch: "Mechanical Engineering", count: 820 },
