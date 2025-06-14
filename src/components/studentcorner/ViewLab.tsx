@@ -29,67 +29,66 @@ interface LabManual {
 }
 
 const ViewLab = () => {
-        const [selectedDepartment, setSelectedDepartment] = useState("")
-        const [selectedSemester, setSelectedSemester] = useState("")
-        const [revisionYear, setRevisionYear] = useState("")
-        const [filteredLabManuals, setFilteredLabManuals] = useState<LabManual[]>([])
-        const [filters, setFilters] = useState<any>([])
-        const [loading, setLoading] = useState(true)
+    const [selectedDepartment, setSelectedDepartment] = useState("")
+    const [selectedSemester, setSelectedSemester] = useState("")
+    const [revisionYear, setRevisionYear] = useState("")
+    const [filteredLabManuals, setFilteredLabManuals] = useState<LabManual[]>([])
+    const [filters, setFilters] = useState<any>([])
+    const [loading, setLoading] = useState(true)
 
-           const getFilters = async () => {
-                try {
-                    const response = await get<ResponseFormat>(`/api/v1/lab/get-filters-lab-manual`)
-                    if (response.success) {
-                        setFilters(response.data)
-                        setSelectedDepartment(response?.data?.departments?.[0])
-                        setSelectedSemester(response?.data?.semesters?.[0])
-                        setRevisionYear(response?.data?.revisionYears?.[0])
-                    }
-                } catch (error) {
-                    console.log(error)
-                }
+    const getFilters = async () => {
+        try {
+            const response = await get<ResponseFormat>(`/api/v1/lab/get-filters-lab-manual`)
+            if (response.success) {
+                setFilters(response.data)
+                setSelectedDepartment(response?.data?.departments?.[0])
+                setSelectedSemester(response?.data?.semesters?.[0])
+                setRevisionYear(response?.data?.revisionYears?.[0])
             }
-        
-            const getLabManuals = useCallback(async () => {
-                setLoading(true)
-                try {
-                    const response = await get<ResponseFormat>(`/api/v1/lab/get-lab-manuals`, {
-                        params: {
-                            department: selectedDepartment,
-                            semester: selectedSemester,
-                            revisionYear: revisionYear,
-                        }
-                    })
-                    if (response.success) {
-                        setFilteredLabManuals(response.data)
-                    }
-                } catch (error) {
-                    console.log(error)
-                } finally {
-                    setLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getLabManuals = useCallback(async () => {
+        setLoading(true)
+        try {
+            const response = await get<ResponseFormat>(`/api/v1/lab/get-lab-manuals`, {
+                params: {
+                    department: selectedDepartment,
+                    semester: selectedSemester,
+                    revisionYear: revisionYear,
                 }
-            }, [selectedDepartment, selectedSemester, revisionYear, setFilteredLabManuals, setLoading])
-            
-                useEffect(() => {
-                    getLabManuals()
-                }, [selectedDepartment, selectedSemester, revisionYear, getLabManuals])
-            
-                useEffect(() => {
-                    getFilters()
-                }, [])
+            })
+            if (response.success) {
+                setFilteredLabManuals(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }, [selectedDepartment, selectedSemester, revisionYear, setFilteredLabManuals, setLoading])
+
+    useEffect(() => {
+        getLabManuals()
+    }, [selectedDepartment, selectedSemester, revisionYear, getLabManuals])
+
+    useEffect(() => {
+        getFilters()
+    }, [])
 
 
-  return (
-      <div className="py-10 md:py-20">
-
+    return (
+        <div className="py-10 md:py-20">
             <div id="lab-manual" className="mb-6 md:mb-8">
-      <h1 className="mb-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
-        <BlurIn word="Lab Manual" className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text font-serif text-left" />
-      </h1>
-      <p className="text-base sm:text-lg text-gray-600">
-        Access lab manual for all programmes
-      </p>
-    </div>
+                <h1 className="mb-3 text-3xl sm:text-4xl lg:text-5xl font-bold">
+                    <BlurIn word="Lab Manual" className="inline-block bg-gradient-to-r from-secondary to-teal-600 text-transparent bg-clip-text font-serif text-left" />
+                </h1>
+                <p className="text-base sm:text-lg text-gray-600">
+                    Access lab manual for all programmes
+                </p>
+            </div>
             <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
                 <Select
                     value={selectedDepartment}
@@ -169,74 +168,74 @@ const ViewLab = () => {
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="p-4 md:p-6">
-                {loading ? (
-                                <div className="flex justify-center items-center py-12">
-                                    <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                                </div>
-                            ) : filteredLabManuals?.length > 0 ? (
-                                <>
-                                    <div className="space-y-3 sm:space-y-4">
-                                        {filteredLabManuals?.map((paper) => (
-                                            <div
-                                                key={paper._id}
-                                                className="flex flex-col sm:flex-row sm:items-center justify-between border p-3 sm:p-4 hover:bg-gray-50 transition-colors gap-3 sm:gap-4 rounded-lg"
-                                            >
-                                                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                                                    <div className={`p-2 rounded bg-blue-100`}>
-                                                        <FileText className={`h-5 w-5 text-blue-600`} />
-                                                    </div>
-                                                    <div className="flex-1 min-w-0">
-                                                        <h4 className="font-medium text-sm sm:text-base truncate">{paper.subjectCode}-{paper.subject}</h4>
-                                                        <p className="text-xs sm:text-sm text-gray-600 truncate">
-                                                       {paper.revisionYear} • {`Semester ${paper.semester}`}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div className="flex items-center justify-end sm:justify-normal gap-2 sm:gap-3">
-                                                    {(
-                                                        <>
-                                                            <Badge variant="secondary" className="rounded-none text-xs hidden sm:inline-flex">Lab Manual</Badge>
-                                                            {paper.size && <span className="text-xs sm:text-sm text-gray-500 hidden sm:inline">{paper.size}</span>}
-                                                        </>
-                                                    )}
-                                                    <Button
-                                                        className="rounded text-xs sm:text-sm h-8 sm:h-9"
-                                                        onClick={() => {
-                                                            window.open(paper.labManual, '_blank');
-                                                        }}
-                                                        size="sm"
-                                                        variant="outline"
-                                                    >
-                                                        <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
-                                                        <span className="hidden sm:inline">Download</span>
-                                                    </Button>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="text-center py-12">
-                                    <p className="text-gray-500 text-sm sm:text-base">
-                                        No lab manuals found matching your criteria
-                                    </p>
-                                    <Button
-                                        variant="link"
-                                        className="text-xs sm:text-sm mt-2"
-                                        onClick={() => {
-                                            setSelectedDepartment("")
-                                            setSelectedSemester("")
-                                            setRevisionYear("")
-                                        }}
+                    {loading ? (
+                        <div className="flex justify-center items-center py-12">
+                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                        </div>
+                    ) : filteredLabManuals?.length > 0 ? (
+                        <>
+                            <div className="space-y-3 sm:space-y-4">
+                                {filteredLabManuals?.map((paper) => (
+                                    <div
+                                        key={paper._id}
+                                        className="flex flex-col sm:flex-row sm:items-center justify-between border p-3 sm:p-4 hover:bg-gray-50 transition-colors gap-3 sm:gap-4 rounded-lg"
                                     >
-                                        Clear filters
-                                    </Button>
-                                </div>
-                            )}
+                                        <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                                            <div className={`p-2 rounded bg-blue-100`}>
+                                                <FileText className={`h-5 w-5 text-blue-600`} />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="font-medium text-sm sm:text-base truncate">{paper.subjectCode}-{paper.subject}</h4>
+                                                <p className="text-xs sm:text-sm text-gray-600 truncate">
+                                                    {paper.revisionYear} • {`Semester ${paper.semester}`}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center justify-end sm:justify-normal gap-2 sm:gap-3">
+                                            {(
+                                                <>
+                                                    <Badge variant="secondary" className="rounded-none text-xs hidden sm:inline-flex">Lab Manual</Badge>
+                                                    {paper.size && <span className="text-xs sm:text-sm text-gray-500 hidden sm:inline">{paper.size}</span>}
+                                                </>
+                                            )}
+                                            <Button
+                                                className="rounded text-xs sm:text-sm h-8 sm:h-9"
+                                                onClick={() => {
+                                                    window.open(paper.labManual, '_blank');
+                                                }}
+                                                size="sm"
+                                                variant="outline"
+                                            >
+                                                <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                                                <span className="hidden sm:inline">Download</span>
+                                            </Button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="text-center py-12">
+                            <p className="text-gray-500 text-sm sm:text-base">
+                                No lab manuals found matching your criteria
+                            </p>
+                            <Button
+                                variant="link"
+                                className="text-xs sm:text-sm mt-2"
+                                onClick={() => {
+                                    setSelectedDepartment("")
+                                    setSelectedSemester("")
+                                    setRevisionYear("")
+                                }}
+                            >
+                                Clear filters
+                            </Button>
+                        </div>
+                    )}
                 </CardContent>
             </Card>
         </div>
-  )
+    )
 }
 
 export default ViewLab

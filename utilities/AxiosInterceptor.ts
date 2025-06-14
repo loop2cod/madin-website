@@ -3,6 +3,7 @@ import type { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 
 const API_URL =  "https://madin-server.onrender.com";
+// const API_URL =  "http://localhost:8000";
 
 const axiosApi = axios.create({
   baseURL: API_URL,

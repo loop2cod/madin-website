@@ -100,7 +100,7 @@ function SelectItem({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+}: React.ComponentProps<any>) {
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
