@@ -1,4 +1,5 @@
 import About from "./Pages/About";
+import AdmissionPage from "./Pages/AdmissionPage";
 import Contact from "./Pages/Contact";
 import DepartmentDetails from "./Pages/DepartmentDetails";
 import Facilities from "./Pages/Facilities";
@@ -13,6 +14,7 @@ const authProtectedRoutes = [
 const publicRoutes = [
   { path: "/", component: <Home /> },
   { path: "/about", component: <About /> },
+  { path: "/admission", component: <AdmissionPage /> },
   { path: "/program/:id", component: <ProgramDetails /> },
   { path: "/departments/:id", component: <DepartmentDetails/>},
   { path: "/facilities", component: <Facilities />},
