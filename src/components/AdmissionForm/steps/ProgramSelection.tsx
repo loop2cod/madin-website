@@ -30,6 +30,9 @@ const BRANCHES = {
     "Automobile Engineering",
     "Architecture"
   ],
+    PART_TIME: [
+    "Electrical and Electronics Engineering",
+  ],
   LET: [
     "Civil Engineering",
     "Mechanical Engineering",
@@ -428,11 +431,69 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
                         </RadioGroup>
 
                         {/* Branch selection for Regular/Part-time Diploma */}
-                        {(selectedMode === 'Regular' || selectedMode === 'Part-time') && (
+                        {(selectedMode === 'Regular') && (
                           <div className="space-y-3 mt-4">
                             <h4 className="text-sm font-medium">Select Branch Preferences:</h4>
                             <div className="grid grid-cols-1 gap-2">
                               {BRANCHES.REGULAR.map(branch => (
+                                <div key={branch} className="flex items-center space-x-2">
+                                  <Checkbox
+                                    id={`branch-${branch}`}
+                                    checked={selectedBranches.includes(branch)}
+                                    onCheckedChange={() => handleBranchToggle(branch)}
+                                  />
+                                  <Label htmlFor={`branch-${branch}`}>{branch}</Label>
+                                </div>
+                              ))}
+                            </div>
+                            <p className="text-xs text-gray-500">Select your preferred branches in order of priority</p>
+                            
+                            {/* Selection overview for Regular/Part-time */}
+                            {selectedBranches.length > 0 && (
+                              <div className="mt-4 p-3 bg-gray-50 border border-gray-200 rounded">
+                                <h5 className="text-sm font-medium mb-2">Your Branch Preferences:</h5>
+                                <div className="space-y-2">
+                                  {selectedBranches.map((branch, index) => (
+                                    <div key={branch} className="flex items-center justify-between">
+                                      <div className="flex items-center">
+                                        <span className="w-6 text-center font-medium">{index + 1}.</span>
+                                        <span className="text-sm">{branch}</span>
+                                      </div>
+                                      <div className="flex space-x-1">
+                                        <Button 
+                                          type="button" 
+                                          variant="ghost" 
+                                          size="sm" 
+                                          className="h-7 w-7 p-0"
+                                          onClick={() => moveBranchUp(index)}
+                                          disabled={index === 0}
+                                        >
+                                          <ChevronUp className="h-4 w-4" />
+                                        </Button>
+                                        <Button 
+                                          type="button" 
+                                          variant="ghost" 
+                                          size="sm" 
+                                          className="h-7 w-7 p-0"
+                                          onClick={() => moveBranchDown(index)}
+                                          disabled={index === selectedBranches.length - 1}
+                                        >
+                                          <ChevronDown className="h-4 w-4" />
+                                        </Button>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                             {(selectedMode === 'Part-time') && (
+                          <div className="space-y-3 mt-4">
+                            <h4 className="text-sm font-medium">Select Branch Preferences:</h4>
+                            <div className="grid grid-cols-1 gap-2">
+                              {BRANCHES.PART_TIME.map(branch => (
                                 <div key={branch} className="flex items-center space-x-2">
                                   <Checkbox
                                     id={`branch-${branch}`}

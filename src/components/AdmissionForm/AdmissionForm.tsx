@@ -9,6 +9,7 @@ import { toast } from '@/Hooks/use-toast';
 import axios from 'axios';
 import { Button } from '../ui/button';
 import ProgramSelection from './steps/ProgramSelection';
+import EducationDetails from './steps/EducationDetails';
 
 
 interface ResponseFormat {
@@ -23,7 +24,8 @@ const steps = [
   { id: 3, name: 'Address & Family' },
   { id: 4, name: 'Application Fee' },
   { id: 5, name: 'Program Selection' },
-  { id: 6, name: 'Confirmation' }
+  { id: 6, name: 'Education Details' },
+  { id: 7, name: 'Confirmation & Submition' }
 ];
 
 export const AdmissionForm = () => {
@@ -212,8 +214,9 @@ export const AdmissionForm = () => {
                 'address_family_details': 3,
                 'application_fee_payment': 4,
                 'program_selection': 5,
-                'declaration': 6,
-                'submitted': 6
+                'education_details': 6,
+                'declaration': 7,
+                'submitted': 7
               };
               
               const nextStep = stageToStep[currentStage as keyof typeof stageToStep] || 2;
@@ -269,8 +272,9 @@ export const AdmissionForm = () => {
       'address_family_details': 3,
       'application_fee_payment': 4,
       'program_selection': 5,
-      'declaration': 6,
-      'submitted': 6
+      'education_details': 6,
+      'declaration': 7,
+      'submitted': 7
     };
     
     const nextStep = stageToStep[currentStage] || 2;
@@ -348,6 +352,13 @@ export const AdmissionForm = () => {
         );
       case 6:
         return (
+          <EducationDetails
+            handleStep={handleStep}
+            applicationId={applicationId}
+          />
+        );
+      case 7:
+        return (
           <div className="p-6">
             <h2 className="text-xl font-semibold mb-4">Confirmation</h2>
             <p className="mb-4 text-gray-700">
@@ -355,7 +366,7 @@ export const AdmissionForm = () => {
             </p>
             <Button
               variant="outline"
-              onClick={() => handleStep(5)}
+              onClick={() => handleStep(6)}
               disabled={isSubmitting}
               className="rounded-none border-secondary text-secondary"
             >
