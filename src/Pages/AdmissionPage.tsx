@@ -12,7 +12,7 @@ const AdmissionPage = () => {
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary to-teal-700 brightness-[0.8]" />
-        <div className="relative z-10 px-4 py-16 sm:px-6 lg:px-8">
+        <div className="relative z-10 px-4 pt-22 pb-10 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl text-center">
             <BlurIn
               word="Admission Form"
