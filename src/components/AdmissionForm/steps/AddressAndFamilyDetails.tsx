@@ -418,11 +418,11 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="guardianName" className="text-sm font-medium">
-                    Guardian's Name
+                   Name
                   </Label>
                   <Input
                     id="guardianName"
-                    placeholder="Enter guardian's name"
+                    placeholder="Enter name"
                     value={formData.guardianName}
                     onChange={(e) => handleInputChange("guardianName", e.target.value)}
                     className="rounded-none"
@@ -431,11 +431,11 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="guardianPlace" className="text-sm font-medium">
-                    Guardian's Place
+                   Place
                   </Label>
                   <Input
                     id="guardianPlace"
-                    placeholder="Enter guardian's place"
+                    placeholder="Enter place"
                     value={formData.guardianPlace}
                     onChange={(e) => handleInputChange("guardianPlace", e.target.value)}
                     className="rounded-none"
@@ -446,11 +446,11 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
 
               <div className="space-y-2">
                 <Label htmlFor="guardianContact" className="text-sm font-medium">
-                  Guardian's Contact Number
+                 Contact Number
                 </Label>
                 <Input
                   id="guardianContact"
-                  placeholder="Enter guardian's contact"
+                  placeholder="Enter contact"
                   value={formData.guardianContact}
                   onChange={(e) => {
                     // Only allow numbers
