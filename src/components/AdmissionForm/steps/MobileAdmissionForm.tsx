@@ -12,7 +12,7 @@ import { useEffect } from 'react'
 const MAX_ATTEMPTS = 3
 
 const MobileAdmissionForm = ({
-  handleStep,
+  setStep,
   mobile,
   setMobile,
   otp,
@@ -26,8 +26,8 @@ const MobileAdmissionForm = ({
   isOtpVerified,
   handleContinueToNextStep,
   clearLocalStorage
-}:any) => {
-  
+}: any) => {
+
   const handleOtpChange = (value: string) => {
     setOtp(value)
   }
@@ -40,11 +40,11 @@ const MobileAdmissionForm = ({
         handleContinueToNextStep()
         clearLocalStorage()
       }, 1500)
-      
+
       return () => clearTimeout(timer)
     }
   }, [isOtpVerified, step, isSubmitting])
-  
+
   if (step === 'mobile') {
     return (
       <div className="p-2">
@@ -82,7 +82,7 @@ const MobileAdmissionForm = ({
             <p className="text-xs text-muted-foreground leading-relaxed">
               * By continuing, you agree to our Terms of Service and Privacy Policy
             </p>
-            <Button 
+            <Button
               className="w-fit bg-secondary hover:bg-gray-800 text-white rounded-none"
               onClick={handleMobileSubmit}
               disabled={mobile.length !== 10 || isSubmitting}
@@ -108,7 +108,12 @@ const MobileAdmissionForm = ({
       {/* Mobile Number Display */}
       <div className="space-y-2">
         <p className="text-sm text-gray-700">We've sent a verification code to</p>
-        <p className="text-sm font-medium text-gray-900">+91 {mobile}</p>
+        <div className='flex items-center'>
+          <p className="text-sm font-medium text-gray-900">+91 {mobile}</p>
+          <div
+            onClick={() => setStep('mobile')}
+            className='text-sm font-medium text-secondary underline cursor-pointer ml-3'>Edit</div>
+        </div>
       </div>
 
       {/* OTP Input */}
@@ -137,7 +142,7 @@ const MobileAdmissionForm = ({
             Maximum attempts reached. Please try again later.
           </p>
         )}
-        
+
         {isOtpVerified && (
           <p className="text-sm text-green-500">
             OTP verified successfully! Proceeding to next step...
@@ -161,7 +166,7 @@ const MobileAdmissionForm = ({
             <Button
               className="bg-secondary hover:bg-secondary/80 text-white text-sm rounded-none"
               onClick={handleOtpSubmit}
-              disabled={otp.length !== 6 || isSubmitting || attempts >= MAX_ATTEMPTS}
+              disabled={otp?.length !== 6 || isSubmitting || attempts >= MAX_ATTEMPTS}
             >
               Verify OTP
             </Button>
@@ -172,8 +177,8 @@ const MobileAdmissionForm = ({
       {/* Continue Button - Only enabled after OTP verification */}
       <div className="pt-6 space-y-4">
         <div className="flex flex-col space-y-3">
-          <Button 
-            className="w-fit bg-secondary hover:bg-secondary/80 text-white text-sm rounded-none" 
+          <Button
+            className="w-fit bg-secondary hover:bg-secondary/80 text-white text-sm rounded-none"
             disabled={!isOtpVerified || isSubmitting}
             onClick={handleContinueToNextStep}
           >

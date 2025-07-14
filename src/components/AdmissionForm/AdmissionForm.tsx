@@ -360,6 +360,7 @@ export const AdmissionForm = () => {
             setOtp={setOtp}
             handleStep={handleStep}
             step={step}
+            setStep={setStep}
             attempts={attempts}
             isSubmitting={isSubmitting || isCheckingExisting}
             handleMobileSubmit={handleMobileSubmit}
