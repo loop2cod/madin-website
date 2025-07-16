@@ -62,8 +62,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4 text-gray-600" />,
-        IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4 text-gray-600" />,
+        IconLeft: () => <ChevronLeftIcon className="h-4 w-4 text-gray-600" />,
+        IconRight: () => <ChevronRightIcon className="h-4 w-4 text-gray-600" />,
       }}
       disabled={disabledDays} // Disable future dates if dob is true
       {...props}

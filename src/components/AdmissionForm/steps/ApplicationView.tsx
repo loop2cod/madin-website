@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { toast } from '@/Hooks/use-toast'
 import axios from 'axios'
 import { format } from 'date-fns'
-import { ArrowLeft, Calendar, MapPin, User, Phone, Mail, GraduationCap, CreditCard, FileText } from 'lucide-react'
+import { ArrowLeft, MapPin, User, GraduationCap, CreditCard, FileText } from 'lucide-react'
 
 interface ApplicationViewProps {
   applicationId: string
@@ -393,7 +393,7 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {applicationData.programSelections.map((program, index) => (
+          {applicationData.programSelections.map((program) => (
             <div key={program._id} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -416,7 +416,7 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
               <div>
                 <Label className="text-sm font-medium text-gray-700">Branch Preferences</Label>
                 <div className="mt-2 space-y-1">
-                  {program.branchPreferences.map((branch, branchIndex) => (
+                  {program.branchPreferences.map((branch) => (
                     <div key={branch._id} className="flex items-center space-x-2">
                       <Badge variant="outline" className="text-xs">
                         Priority {branch.priority}
@@ -469,7 +469,7 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
           <div>
             <h3 className="font-medium text-gray-900 mb-3">Education History</h3>
             <div className="space-y-4">
-              {applicationData.educationDetails.educationData.map((education, index) => (
+              {applicationData.educationDetails.educationData.map((education) => (
                 <div key={education._id} className="border rounded-lg p-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>

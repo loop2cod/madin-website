@@ -13,13 +13,6 @@ interface ProgramSelectionProps {
   applicationId: string;
 }
 
-interface Program {
-  id: string;
-  name: string;
-  type: 'diploma' | 'mba';
-  description: string;
-  modes?: ('Regular' | 'Part-time' | 'LET')[]; // Only for diploma programs
-}
 
 const BRANCHES = {
   REGULAR: [
@@ -60,7 +53,7 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
   });
   // This is a computed value based on the selected mode
   const selectedBranches = selectedMode ? branchSelections[selectedMode] : [];
-  const [programs, setPrograms] = useState<Program[]>([
+  const programs = [
     {
       id: 'diploma-eng',
       name: 'Diploma in Engineering',
@@ -74,7 +67,7 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
       type: 'mba',
       description: '2-year master of business administration'
     }
-  ]);
+  ];
 
   useEffect(() => {
     const fetchApplicationData = async () => {
