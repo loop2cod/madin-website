@@ -15,6 +15,7 @@ export default defineConfig({
     open: false,
   },
   preview: {
+    allowedHosts: ['mcem.site','localhost','www.mcem.site'],
     port: 3000
   }
 })
