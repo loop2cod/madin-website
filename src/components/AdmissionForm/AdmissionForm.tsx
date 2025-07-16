@@ -7,19 +7,13 @@ import ApplicationFeePayment from './steps/ApplicationFeePayment';
 import ApplicationList from './steps/ApplicationList';
 import { toast } from '@/Hooks/use-toast';
 import axios from 'axios';
-import { Button } from '../ui/button';
 import ProgramSelection from './steps/ProgramSelection';
 import EducationDetails from './steps/EducationDetails';
-import { Sub } from '@radix-ui/react-dropdown-menu';
 import SubmitConfirmation from './steps/SubmitConfirmation';
 import ApplicationView from './steps/ApplicationView';
 
 
-interface ResponseFormat {
-  success: boolean;
-  message: string;
-  data: any;
-}
+
 
 const steps = [
   { id: 1, name: 'Mobile Verification' },

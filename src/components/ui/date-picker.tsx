@@ -44,7 +44,6 @@ export function DatePicker({
 
   // Disable future months and years if dob is true
   const currentYear = getYear(new Date());
-  const currentMonth = getMonth(new Date());
 
   const filteredMonths = months;
 
