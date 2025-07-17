@@ -237,6 +237,7 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
             <div className="flex items-start space-x-2 pt-2">
               <Checkbox
                 id="terms"
+                checked={formData.agreeToTerms}
                 defaultChecked={formData.agreeToTerms}
                 onCheckedChange={(checked) =>
                   handleInputChange("agreeToTerms", checked === true)

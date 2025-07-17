@@ -24,8 +24,7 @@ const MobileAdmissionForm = ({
   handleResendOtp,
   handleOtpSubmit,
   isOtpVerified,
-  handleContinueToNextStep,
-  clearLocalStorage
+  handleContinueToNextStep
 }: any) => {
 
   const handleOtpChange = (value: string) => {
@@ -38,7 +37,6 @@ const MobileAdmissionForm = ({
       // Auto-proceed to next step if OTP is verified and not currently checking for existing applications
       const timer = setTimeout(() => {
         handleContinueToNextStep()
-        clearLocalStorage()
       }, 1500)
 
       return () => clearTimeout(timer)

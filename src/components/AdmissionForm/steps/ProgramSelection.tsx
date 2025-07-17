@@ -144,7 +144,7 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
     };
     
     fetchApplicationData();
-  }, [applicationId, programs]);
+  }, [applicationId]);
 
   const handleSubmit = async () => {
     if (!selectedProgram) {

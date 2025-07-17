@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { ProgressIndicator } from './ProgressIndicator';
 import MobileAdmissionForm from './steps/MobileAdmissionForm';
 import PersonalDetails from './steps/PersonalDetails';
@@ -35,34 +35,6 @@ export const AdmissionForm = () => {
   const [isOtpVerified, setIsOtpVerified] = useState(false)
   const [applicationId, setApplicationId] = useState('')
 
-  // Load data from localStorage on component mount
-  useEffect(() => {
-    const savedData = localStorage.getItem('admissionFormData');
-    if (savedData) {
-      const parsedData = JSON.parse(savedData);
-      setMobile(parsedData.mobile || '');
-      setStep(parsedData.step || 'mobile');
-      setIsOtpVerified(parsedData.isOtpVerified || false);
-      setApplicationId(parsedData.applicationId || '');
-
-      // If OTP was verified and we're still on step 1, move to step 2
-      if (parsedData.isOtpVerified && parsedData.currentStep > 1) {
-        setCurrentStep(parsedData.currentStep);
-      }
-    }
-  }, []);
-
-  // Save data to localStorage whenever relevant state changes
-  useEffect(() => {
-    const dataToSave = {
-      mobile,
-      step,
-      isOtpVerified,
-      currentStep,
-      applicationId
-    };
-    localStorage.setItem('admissionFormData', JSON.stringify(dataToSave));
-  }, [mobile, step, isOtpVerified, currentStep, applicationId]);
 
   const handleMobileSubmit = async () => {
     try {
@@ -248,9 +220,6 @@ export const AdmissionForm = () => {
     }
   };
 
-  const clearLocalStorage = () => {
-    localStorage.removeItem('admissionFormData');
-  };
 
   const handleViewApplication = (applicationId: string) => {
     setViewApplicationId(applicationId);
@@ -362,7 +331,6 @@ export const AdmissionForm = () => {
             handleOtpSubmit={handleOtpSubmit}
             isOtpVerified={isOtpVerified}
             handleContinueToNextStep={handleContinueToNextStep}
-            clearLocalStorage={clearLocalStorage}
           />
         );
       case 2:
