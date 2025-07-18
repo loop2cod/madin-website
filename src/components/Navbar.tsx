@@ -312,11 +312,11 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/downloads"
+                    to="/student-corner/0"
                     className="block py-3 px-4 rounded hover:bg-gray-100 uppercase hover:text-secondary"
                     onClick={toggleMenu}
                   >
-                    Downloads
+                Student Corner
                   </Link>
                 </li>
                 <li>

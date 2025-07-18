@@ -108,12 +108,12 @@ const DepartmentDetails = () => {
     <div className="md:max-w-[90vw] mx-auto px-4 sm:px-6 lg:px-8 md:py-14 space-y-10">
       {/* Department Image & Overview */}
       <div className="grid lg:grid-cols-2 gap-16 items-center">
-        <div className="relative group h-full">
-          <div className="relative overflow-hidden h-full">
+        <div className="relative group">
+          <div className="relative overflow-hidden">
             <img
               src={department?.image || "/collage.jpg"}
               alt="Automobile Engineering Department"
-              className="w-auto h-full object-cover"
+              className="w-auto object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
           </div>
