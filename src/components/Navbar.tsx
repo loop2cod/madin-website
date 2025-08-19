@@ -134,14 +134,14 @@ const Navbar = () => {
         Question Papers
       </Link>
     </li>
-    <li>
+    {/* <li>
       <Link 
         to="/student-corner/lab-manual" 
         className="block px-2 py-1.5 hover:bg-gray-100 hover:text-secondary font-normal text-sm"
       >
         Lab Manual
       </Link>
-    </li>
+    </li> */}
   </ul>
 </li>
                   <li>

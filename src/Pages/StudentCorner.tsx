@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Syllabus from '@/components/studentcorner/Syllabus';
 import QuestionPapers from "@/components/QuestionPapers";
-import ViewLab from '@/components/studentcorner/ViewLab';
 import { useParams } from 'react-router-dom';
 import { useRef } from 'react';
 
@@ -27,9 +26,9 @@ const StudentCorner = () => {
       <div className="mt-4 md:mt-8 lg:mt-10" ref={questionPapersRef}>
         <QuestionPapers />
       </div>
-      <div className="mt-4 md:mt-8 lg:mt-10" ref={labManualRef}>
+      {/* <div className="mt-4 md:mt-8 lg:mt-10" ref={labManualRef}>
         <ViewLab />
-      </div>
+      </div> */}
     </div>
   );
 };
