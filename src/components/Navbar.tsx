@@ -7,9 +7,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -63,6 +64,9 @@ const Navbar = () => {
 
             <div>
               <div
+              onClick={()=>{
+                navigate('/admission')
+              }}
                 className="hidden lg:flex items-center space-x-9 text-white bg-secondary ps-28 pe-5 py-1 w-1/4 ms-auto cursor-pointer transition-colors duration-300 hover:bg-teal-600 font-bold font-sans"
                 style={{
                   clipPath: "polygon(90% 0%, 100% 0, 100% 100%, 18.5% 100%, 6.5% 0%, 0 0)",

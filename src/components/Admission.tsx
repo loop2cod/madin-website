@@ -3,7 +3,13 @@ import { cn } from '@/lib/utils'
 import BlurIn from './ui/blur-in'
 import DotPattern from './ui/dot-pattern'
 import { PulsatingButton } from './ui/PulsatingButton'
+import { useNavigate } from 'react-router-dom'
+
+
 const Admission = () => {
+  const navigate = useNavigate()
+
+
   return (
     <section className="relative md:max-w-[90vw] mx-auto px-4 text-right pb-8 md:-mt-76">
       <div className="mb-2">
@@ -44,7 +50,9 @@ const Admission = () => {
           "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
         )}
       />
-      <PulsatingButton className='!justify-end !ms-auto my-4 mr-2'>Apply Now</PulsatingButton>
+      <PulsatingButton onClick={()=>{
+        navigate('/admission')
+      }} className='!justify-end !ms-auto my-4 mr-2'>Apply Now</PulsatingButton>
     </section>
   )
 }
