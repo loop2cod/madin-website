@@ -58,14 +58,12 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
       id: 'diploma-eng',
       name: 'Diploma in Engineering',
       type: 'diploma',
-      description: '3-year technical diploma program',
       modes: ['Regular', 'Part-time', 'LET']
     },
     {
       id: 'mba-regular',
       name: 'MBA (Regular)',
-      type: 'mba',
-      description: '2-year master of business administration'
+      type: 'mba'
     }
   ];
 
@@ -395,14 +393,11 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
                 .map(program => (
                   <div key={program.id} className="flex flex-col space-y-2 border px-2 py-3 rounded-none mb-4">
                     <div className="flex items-start space-x-2">
-                      <RadioGroupItem value={program.id} id={`program-${program.id}`} className="mt-1" />
+                      <RadioGroupItem value={program.id} id={`program-${program.id}`} />
                       <div className="grid gap-1.5">
                         <Label htmlFor={`program-${program.id}`} className="font-medium">
                           {program.name}
                         </Label>
-                        <p className="text-sm text-gray-500">
-                          {program.description}
-                        </p>
                       </div>
                     </div>
 
@@ -428,16 +423,27 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
                           <div className="space-y-3 mt-4">
                             <h4 className="text-sm font-medium">Select Branch Preferences:</h4>
                             <div className="grid grid-cols-1 gap-2">
-                              {BRANCHES.REGULAR.map(branch => (
-                                <div key={branch} className="flex items-center space-x-2">
-                                  <Checkbox
-                                    id={`branch-${branch}`}
-                                    checked={selectedBranches.includes(branch)}
-                                    onCheckedChange={() => handleBranchToggle(branch)}
-                                  />
-                                  <Label htmlFor={`branch-${branch}`}>{branch}</Label>
-                                </div>
-                              ))}
+                              {BRANCHES.REGULAR.map(branch => {
+                                const priorityIndex = selectedBranches.indexOf(branch);
+                                const priority = priorityIndex !== -1 ? priorityIndex + 1 : null;
+                                return (
+                                  <div key={branch} className="flex items-center space-x-2">
+                                    <Checkbox
+                                      id={`branch-${branch}`}
+                                      checked={selectedBranches.includes(branch)}
+                                      onCheckedChange={() => handleBranchToggle(branch)}
+                                    />
+                                    <div className="flex items-center space-x-2 flex-1">
+                                      {priority && (
+                                        <span className="w-6 h-6 bg-secondary text-white text-xs rounded-full flex items-center justify-center font-medium">
+                                          {priority}
+                                        </span>
+                                      )}
+                                      <Label htmlFor={`branch-${branch}`} className="flex-1">{branch}</Label>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
                             <p className="text-xs text-gray-500">Select your preferred branches in order of priority</p>
                             
@@ -486,16 +492,27 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
                           <div className="space-y-3 mt-4">
                             <h4 className="text-sm font-medium">Select Branch Preferences:</h4>
                             <div className="grid grid-cols-1 gap-2">
-                              {BRANCHES.PART_TIME.map(branch => (
-                                <div key={branch} className="flex items-center space-x-2">
-                                  <Checkbox
-                                    id={`branch-${branch}`}
-                                    checked={selectedBranches.includes(branch)}
-                                    onCheckedChange={() => handleBranchToggle(branch)}
-                                  />
-                                  <Label htmlFor={`branch-${branch}`}>{branch}</Label>
-                                </div>
-                              ))}
+                              {BRANCHES.PART_TIME.map(branch => {
+                                const priorityIndex = selectedBranches.indexOf(branch);
+                                const priority = priorityIndex !== -1 ? priorityIndex + 1 : null;
+                                return (
+                                  <div key={branch} className="flex items-center space-x-2">
+                                    <Checkbox
+                                      id={`branch-${branch}`}
+                                      checked={selectedBranches.includes(branch)}
+                                      onCheckedChange={() => handleBranchToggle(branch)}
+                                    />
+                                    <div className="flex items-center space-x-2 flex-1">
+                                      {priority && (
+                                        <span className="w-6 h-6 bg-secondary text-white text-xs rounded-full flex items-center justify-center font-medium">
+                                          {priority}
+                                        </span>
+                                      )}
+                                      <Label htmlFor={`branch-${branch}`} className="flex-1">{branch}</Label>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
                             <p className="text-xs text-gray-500">Select your preferred branches in order of priority</p>
                             
@@ -545,16 +562,27 @@ const ProgramSelection = ({ handleStep, applicationId }: ProgramSelectionProps) 
                           <div className="space-y-3 mt-4">
                             <h4 className="text-sm font-medium">Select Branch Preferences:</h4>
                             <div className="grid grid-cols-1 gap-2">
-                              {BRANCHES.LET.map(branch => (
-                                <div key={branch} className="flex items-center space-x-2">
-                                  <Checkbox
-                                    id={`branch-let-${branch}`}
-                                    checked={selectedBranches.includes(branch)}
-                                    onCheckedChange={() => handleBranchToggle(branch)}
-                                  />
-                                  <Label htmlFor={`branch-let-${branch}`}>{branch}</Label>
-                                </div>
-                              ))}
+                              {BRANCHES.LET.map(branch => {
+                                const priorityIndex = selectedBranches.indexOf(branch);
+                                const priority = priorityIndex !== -1 ? priorityIndex + 1 : null;
+                                return (
+                                  <div key={branch} className="flex items-center space-x-2">
+                                    <Checkbox
+                                      id={`branch-let-${branch}`}
+                                      checked={selectedBranches.includes(branch)}
+                                      onCheckedChange={() => handleBranchToggle(branch)}
+                                    />
+                                    <div className="flex items-center space-x-2 flex-1">
+                                      {priority && (
+                                        <span className="w-6 h-6 bg-secondary text-white text-xs rounded-full flex items-center justify-center font-medium">
+                                          {priority}
+                                        </span>
+                                      )}
+                                      <Label htmlFor={`branch-let-${branch}`} className="flex-1">{branch}</Label>
+                                    </div>
+                                  </div>
+                                );
+                              })}
                             </div>
                             <p className="text-xs text-gray-500">Select your preferred branches in order of priority</p>
                             

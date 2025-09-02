@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { toast } from '@/Hooks/use-toast'
 import axios from 'axios'
 
@@ -34,6 +35,7 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [sameAsFather, setSameAsFather] = useState(false)
 
   useEffect(() => {
     const fetchExistingData = async () => {
@@ -96,6 +98,25 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
       ...prev,
       [field]: value
     }))
+  }
+
+  const handleSameAsFatherChange = (checked: boolean) => {
+    setSameAsFather(checked)
+    if (checked) {
+      setFormData(prev => ({
+        ...prev,
+        guardianName: prev.fatherName,
+        guardianContact: prev.fatherMobile,
+        guardianPlace: "" // You can set this to a default value if needed
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        guardianName: "",
+        guardianContact: "",
+        guardianPlace: ""
+      }))
+    }
   }
 
   // Function to fetch address details from PIN code
@@ -415,6 +436,21 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
               <CardTitle className="text-lg">Guardian Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 px-2 py-4">
+              {/* Checkbox to copy father's information */}
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="sameAsFather"
+                  checked={sameAsFather}
+                  onCheckedChange={handleSameAsFatherChange}
+                  disabled={isSubmitting || !formData.fatherName || !formData.fatherMobile}
+                />
+                <Label
+                  htmlFor="sameAsFather"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Same as Father's Information
+                </Label>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="guardianName" className="text-sm font-medium">

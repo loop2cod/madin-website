@@ -76,6 +76,24 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
     }))
   }
 
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      // Validate minimum age (15 years)
+      const today = new Date();
+      const fifteenYearsAgo = new Date(today.getFullYear() - 15, today.getMonth(), today.getDate());
+      
+      if (date > fifteenYearsAgo) {
+        toast({
+          title: "Invalid Date of Birth",
+          description: "You must be at least 15 years old to apply",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    setDob(date);
+  }
+
   const handleContinue = async () => {
     if (!dob) return;
 
@@ -171,7 +189,7 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
               <Label className="text-sm font-medium text-gray-700">Date of Birth*</Label>
               <DatePicker
                 date={dob}
-                setDate={setDob}
+                setDate={handleDateChange}
                 placeholder="Select your date of birth"
                 className="w-full rounded-none h-10"
                 disabled={isSubmitting}
