@@ -100,6 +100,32 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
     }))
   }
 
+  // Validate Indian mobile number
+  const validateIndianMobile = (mobile: string) => {
+    // Indian mobile numbers: 10 digits starting with 6, 7, 8, or 9
+    const indianMobileRegex = /^[6-9]\d{9}$/;
+    return indianMobileRegex.test(mobile);
+  }
+
+  const handleMobileChange = (field: string, value: string) => {
+    // Only allow numbers
+    const numericValue = value.replace(/\D/g, '');
+    
+    // Limit to 10 digits
+    if (numericValue.length <= 10) {
+      handleInputChange(field, numericValue);
+      
+      // Validate if exactly 10 digits
+      if (numericValue.length === 10 && !validateIndianMobile(numericValue)) {
+        toast({
+          title: "Invalid Mobile Number",
+          description: "Please enter a valid Indian mobile number starting with 6, 7, 8, or 9",
+          variant: "destructive",
+        });
+      }
+    }
+  }
+
   const handleSameAsFatherChange = (checked: boolean) => {
     setSameAsFather(checked)
     if (checked) {
@@ -162,6 +188,37 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
   }, [formData.pinCode]);
 
   const handleContinue = async () => {
+    // Validate mobile numbers before submission
+    const mobileFields = [
+      { field: 'fatherMobile', name: "Father's mobile number" },
+      { field: 'motherMobile', name: "Mother's mobile number" }
+    ];
+
+    // Add guardian contact if it's filled
+    if (formData.guardianContact) {
+      mobileFields.push({ field: 'guardianContact', name: "Guardian's contact number" });
+    }
+
+    for (const { field, name } of mobileFields) {
+      const mobile = formData[field];
+      if (mobile && mobile.length === 10 && !validateIndianMobile(mobile)) {
+        toast({
+          title: "Invalid Mobile Number",
+          description: `${name} must be a valid Indian mobile number starting with 6, 7, 8, or 9`,
+          variant: "destructive",
+        });
+        return;
+      }
+      if (mobile && mobile.length > 0 && mobile.length !== 10) {
+        toast({
+          title: "Invalid Mobile Number",
+          description: `${name} must be exactly 10 digits`,
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+
     setIsSubmitting(true);
     try {
       // Structure the payload according to the schema
@@ -380,14 +437,10 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
                   </Label>
                   <Input
                     id="fatherMobile"
-                    placeholder="Enter father's mobile"
+                    placeholder="Enter father's mobile (10 digits)"
                     value={formData.fatherMobile}
-                    onChange={(e) => {
-                      // Only allow numbers
-                      const value = e.target.value.replace(/\D/g, '');
-                      handleInputChange("fatherMobile", value);
-                    }}
-                    className="rounded-none"
+                    onChange={(e) => handleMobileChange("fatherMobile", e.target.value)}
+                    className={`rounded-none ${formData.fatherMobile && formData.fatherMobile.length === 10 && !validateIndianMobile(formData.fatherMobile) ? 'border-red-500 focus:border-red-500' : ''}`}
                     maxLength={10}
                     disabled={isSubmitting}
                   />
@@ -414,14 +467,10 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
                   </Label>
                   <Input
                     id="motherMobile"
-                    placeholder="Enter mother's mobile"
+                    placeholder="Enter mother's mobile (10 digits)"
                     value={formData.motherMobile}
-                    onChange={(e) => {
-                      // Only allow numbers
-                      const value = e.target.value.replace(/\D/g, '');
-                      handleInputChange("motherMobile", value);
-                    }}
-                    className="rounded-none"
+                    onChange={(e) => handleMobileChange("motherMobile", e.target.value)}
+                    className={`rounded-none ${formData.motherMobile && formData.motherMobile.length === 10 && !validateIndianMobile(formData.motherMobile) ? 'border-red-500 focus:border-red-500' : ''}`}
                     maxLength={10}
                     disabled={isSubmitting}
                   />
@@ -486,14 +535,10 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
                 </Label>
                 <Input
                   id="guardianContact"
-                  placeholder="Enter contact"
+                  placeholder="Enter contact (10 digits)"
                   value={formData.guardianContact}
-                  onChange={(e) => {
-                    // Only allow numbers
-                    const value = e.target.value.replace(/\D/g, '');
-                    handleInputChange("guardianContact", value);
-                  }}
-                  className="rounded-none"
+                  onChange={(e) => handleMobileChange("guardianContact", e.target.value)}
+                  className={`rounded-none ${formData.guardianContact && formData.guardianContact.length === 10 && !validateIndianMobile(formData.guardianContact) ? 'border-red-500 focus:border-red-500' : ''}`}
                   maxLength={10}
                   disabled={isSubmitting}
                 />

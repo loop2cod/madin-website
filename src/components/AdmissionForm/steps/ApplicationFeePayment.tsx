@@ -37,7 +37,7 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
           setApplicationData(response.data.data);
           
           // Check if payment is already done
-          if (response.data.data.paymentDetails && response.data.data.paymentDetails?.application_fee?.status === 'captured') {
+          if (response.data.data.paymentDetails && response.data.data.paymentDetails?.application_fee?.status === 'completed') {
             setPaymentStatus('success');
           }else{
             setPaymentStatus(response?.data?.data?.paymentDetails?.application_fee?.status || 'pending');
