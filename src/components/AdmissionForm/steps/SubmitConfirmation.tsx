@@ -344,20 +344,6 @@ const SubmitConfirmation = ({ handleStep, applicationId }: SubmitConfirmationPro
               <p className="mt-2">I hereby fully endorse the undertaking made by my child / ward.</p>
             </div>
           </div>
-          <div className="flex items-start space-x-2">
-            <Checkbox
-              id="anti-ragging"
-              checked={antiRaggingAccepted}
-              onCheckedChange={(checked) => setAntiRaggingAccepted(checked === true)}
-              disabled={isSubmitting}
-            />
-            <Label
-              htmlFor="anti-ragging"
-              className="text-xs md:text-sm font-medium leading-none text-gray-700 cursor-pointer"
-            >
-              I have read and accept the anti-ragging undertaking*
-            </Label>
-          </div>
         </CardContent>
       </Card>
 
@@ -392,19 +378,30 @@ const SubmitConfirmation = ({ handleStep, applicationId }: SubmitConfirmationPro
               <p className="mt-2">I hereby fully endorse the undertaking made by my child / ward.</p>
             </div>
           </div>
-          <div className="flex items-start space-x-2">
-            <Checkbox
-              id="anti-drug"
-              checked={antiDrugAccepted}
-              onCheckedChange={(checked) => setAntiDrugAccepted(checked === true)}
-              disabled={isSubmitting}
-            />
-            <Label
-              htmlFor="anti-drug"
-              className="text-xs  md:text-sm font-medium leading-none text-gray-700 cursor-pointer"
-            >
-              I have read and accept the anti-drug declaration*
-            </Label>
+        </CardContent>
+      </Card>
+
+      {/* Combined Acceptance */}
+      <Card className='gap-2 py-3 rounded-none border-none shadow-none'>
+        <CardContent className='px-3'>
+          <div className="space-y-4">
+            <div className="flex items-start space-x-2">
+              <Checkbox
+                id="combined-declarations"
+                checked={antiRaggingAccepted && antiDrugAccepted}
+                onCheckedChange={(checked) => {
+                  setAntiRaggingAccepted(checked === true)
+                  setAntiDrugAccepted(checked === true)
+                }}
+                disabled={isSubmitting}
+              />
+              <Label
+                htmlFor="combined-declarations"
+                className="text-xs md:text-sm font-medium leading-none text-gray-700 cursor-pointer"
+              >
+                I have read and accept both the anti-ragging undertaking and anti-drug declaration*
+              </Label>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -440,7 +437,7 @@ const SubmitConfirmation = ({ handleStep, applicationId }: SubmitConfirmationPro
       <div className="flex justify-between">
         <Button
           variant="outline"
-          onClick={() => handleStep(5)}
+          onClick={() => handleStep(6)}
           disabled={isSubmitting}
           className="rounded-none px-6"
         >

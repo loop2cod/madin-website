@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from '@/Hooks/use-toast'
 import axios from 'axios'
 
@@ -36,6 +37,9 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [sameAsFather, setSameAsFather] = useState(false)
+  const [sameAsMother, setSameAsMother] = useState(false)
+  const [postOffices, setPostOffices] = useState([])
+  const [isLoadingPincode, setIsLoadingPincode] = useState(false)
 
   useEffect(() => {
     const fetchExistingData = async () => {
@@ -129,6 +133,7 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
   const handleSameAsFatherChange = (checked: boolean) => {
     setSameAsFather(checked)
     if (checked) {
+      setSameAsMother(false) // Uncheck mother option
       setFormData(prev => ({
         ...prev,
         guardianName: prev.fatherName,
@@ -145,38 +150,89 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
     }
   }
 
+  const handleSameAsMotherChange = (checked: boolean) => {
+    setSameAsMother(checked)
+    if (checked) {
+      setSameAsFather(false) // Uncheck father option
+      setFormData(prev => ({
+        ...prev,
+        guardianName: prev.motherName,
+        guardianContact: prev.motherMobile,
+        guardianPlace: "" // You can set this to a default value if needed
+      }))
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        guardianName: "",
+        guardianContact: "",
+        guardianPlace: ""
+      }))
+    }
+  }
+
   // Function to fetch address details from PIN code
   const fetchAddressFromPincode = async (pincode: string) => {
     if (pincode.length !== 6) return;
     
+    setIsLoadingPincode(true);
     try {
       const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
       const data = await response.json();
       
       if (data[0].Status === 'Success') {
-        const postOffice = data[0].PostOffice[0];
+        const postOfficeList = data[0].PostOffice;
         
-        setFormData(prev => ({
-          ...prev,
-          district: postOffice.District || '',
-          state: postOffice.State || '',
-          postOffice: postOffice.Name || ''
-        }));
+        // Filter out non-delivery post offices for better UX
+        const deliveryOffices = postOfficeList.filter((office: any) => office.DeliveryStatus === 'Delivery');
+        const availableOffices = deliveryOffices.length > 0 ? deliveryOffices : postOfficeList;
+        
+        setPostOffices(availableOffices);
+        
+        // Auto-fill with first post office if only one exists
+        if (availableOffices.length === 1) {
+          const postOffice = availableOffices[0];
+          setFormData(prev => ({
+            ...prev,
+            district: postOffice.District || '',
+            state: postOffice.State || '',
+            postOffice: postOffice.Name || ''
+          }));
+        } else {
+          // Clear post office selection if multiple options exist
+          // But still fill district and state from first entry
+          const firstOffice = availableOffices[0];
+          setFormData(prev => ({
+            ...prev,
+            district: firstOffice.District || '',
+            state: firstOffice.State || '',
+            postOffice: '' // Clear to let user select
+          }));
+        }
+        
+        if (availableOffices.length > 1) {
+          toast({
+            title: "Multiple Post Offices Found",
+            description: `Found ${availableOffices.length} post offices. Please select your preferred one.`,
+          });
+        }
       } else {
-        console.error('Invalid PIN code. Please check and try again.');
+        setPostOffices([]);
         toast({
-          title: "Error",
+          title: "Invalid PIN Code",
           description: "Invalid PIN code. Please check and try again.",
           variant: "destructive",
         });
       }
     } catch (error) {
       console.error('Error fetching address details:', error);
+      setPostOffices([]);
       toast({
         title: "Error",
         description: "Failed to fetch address details. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoadingPincode(false);
     }
   };
 
@@ -200,7 +256,7 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
     }
 
     for (const { field, name } of mobileFields) {
-      const mobile = formData[field];
+      const mobile = formData[field as keyof typeof formData];
       if (mobile && mobile.length === 10 && !validateIndianMobile(mobile)) {
         toast({
           title: "Invalid Mobile Number",
@@ -335,37 +391,66 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
                   <Label htmlFor="pinCode" className="text-sm font-medium">
                     PIN Code*
                   </Label>
-                  <Input
-                    id="pinCode"
-                    placeholder="Enter PIN code"
-                    value={formData.pinCode}
-                    onChange={(e) => {
-                      // Only allow numbers
-                      const value = e.target.value.replace(/\D/g, '');
-                      handleInputChange("pinCode", value);
-                    }}
-                    className="rounded-none"
-                    maxLength={6}
-                    onBlur={(e) => {
-                      if (e.target.value.length === 6) {
-                        fetchAddressFromPincode(e.target.value);
-                      }
-                    }}
-                    disabled={isSubmitting}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="pinCode"
+                      placeholder="Enter PIN code"
+                      value={formData.pinCode}
+                      onChange={(e) => {
+                        // Only allow numbers
+                        const value = e.target.value.replace(/\D/g, '');
+                        handleInputChange("pinCode", value);
+                      }}
+                      className="rounded-none"
+                      maxLength={6}
+                      onBlur={(e) => {
+                        if (e.target.value.length === 6) {
+                          fetchAddressFromPincode(e.target.value);
+                        }
+                      }}
+                      disabled={isSubmitting || isLoadingPincode}
+                    />
+                    {isLoadingPincode && (
+                      <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                        <div className="animate-spin h-4 w-4 border-2 border-gray-300 border-t-secondary rounded-full"></div>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="postOffice" className="text-sm font-medium">
                     Post Office*
+                    {isLoadingPincode && (
+                      <span className="ml-2 text-xs text-gray-500">(Loading...)</span>
+                    )}
                   </Label>
-                  <Input
-                    id="postOffice"
-                    placeholder="Enter post office"
-                    value={formData.postOffice}
-                    onChange={(e) => handleInputChange("postOffice", e.target.value)}
-                    className="rounded-none"
-                    disabled={isSubmitting}
-                  />
+                  {postOffices.length > 1 ? (
+                    <Select
+                      value={formData.postOffice}
+                      onValueChange={(value) => handleInputChange("postOffice", value)}
+                      disabled={isSubmitting || isLoadingPincode}
+                    >
+                      <SelectTrigger className="w-full rounded-none">
+                        <SelectValue placeholder="Select post office" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {postOffices.map((office: any) => (
+                          <SelectItem key={`${office.Name}-${office.BranchType}`} value={office.Name}>
+                            {office.Name} ({office.BranchType})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <Input
+                      id="postOffice"
+                      placeholder="Enter post office or PIN code to auto-fill"
+                      value={formData.postOffice}
+                      onChange={(e) => handleInputChange("postOffice", e.target.value)}
+                      className="rounded-none"
+                      disabled={isSubmitting || isLoadingPincode}
+                    />
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="district" className="text-sm font-medium">
@@ -485,20 +570,36 @@ const AddressAndFamilyDetails = ({ handleStep, applicationId }: AddressAndFamily
               <CardTitle className="text-lg">Guardian Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 px-2 py-4">
-              {/* Checkbox to copy father's information */}
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="sameAsFather"
-                  checked={sameAsFather}
-                  onCheckedChange={handleSameAsFatherChange}
-                  disabled={isSubmitting || !formData.fatherName || !formData.fatherMobile}
-                />
-                <Label
-                  htmlFor="sameAsFather"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  Same as Father's Information
-                </Label>
+              {/* Checkboxes to copy parent information */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="sameAsFather"
+                    checked={sameAsFather}
+                    onCheckedChange={handleSameAsFatherChange}
+                    disabled={isSubmitting || !formData.fatherName || !formData.fatherMobile}
+                  />
+                  <Label
+                    htmlFor="sameAsFather"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Same as Father's Information
+                  </Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="sameAsMother"
+                    checked={sameAsMother}
+                    onCheckedChange={handleSameAsMotherChange}
+                    disabled={isSubmitting || !formData.motherName || !formData.motherMobile}
+                  />
+                  <Label
+                    htmlFor="sameAsMother"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Same as Mother's Information
+                  </Label>
+                </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">

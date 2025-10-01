@@ -1,6 +1,11 @@
 import { useEffect } from "react"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Badge } from "@/components/ui/badge"
+import { Plus, X } from "lucide-react"
 
 
 const DiplomaLETEducationForm = ({ formData, setFormData , selectedProgram }:any) => {
@@ -9,54 +14,70 @@ const DiplomaLETEducationForm = ({ formData, setFormData , selectedProgram }:any
     if (!formData.educationData) {
       setFormData({
         ...formData,
-        programDetails:selectedProgram,
+        programDetails: selectedProgram,
         educationData: [
           {
             examination: "SSLC/THSLC/CBSE",
-            passedFailed: "",
+            passedFailed: "Passed", // SSLC is compulsory and assumed passed
             groupTrade: "",
-            period: "",
             yearOfPass: "",
             percentageMarks: "",
-            noOfChances: "",
-            english: "",
-            physics: "",
-            chemistry: "",
-            maths: "",
-          },
-          {
-            examination: "+2/VHSE",
-            passedFailed: "",
-            groupTrade: "",
-            period: "",
-            yearOfPass: "",
-            percentageMarks: "",
-            noOfChances: "",
-            english: "",
-            physics: "",
-            chemistry: "",
-            maths: "",
-          },
-          {
-            examination: "ITI",
-            passedFailed: "",
-            groupTrade: "",
-            period: "",
-            yearOfPass: "",
-            percentageMarks: "",
-            noOfChances: "",
-            english: "",
-            physics: "",
-            chemistry: "",
-            maths: "",
-          },
-        ],
-        subjectScores: [
-          { examination: "+2/VHSE", physics: "", chemistry: "", maths: "", total: "", remarks: "" },
+            registrationNumber: "",
+            isCompulsory: true
+          }
         ]
       });
     }
   }, [formData, setFormData]);
+
+  // Available additional examinations
+  const availableExaminations = [
+    { value: "+2/VHSE", label: "+2/VHSE" },
+    { value: "ITI", label: "ITI" },
+    { value: "KGCE", label: "KGCE" },
+    { value: "Diploma", label: "Diploma" },
+    { value: "Degree", label: "Degree" }
+  ];
+
+  // Add new examination
+  const addExamination = (examinationType: string) => {
+    const newExamination = {
+      examination: examinationType,
+      passedFailed: "",
+      groupTrade: "",
+      yearOfPass: "",
+      percentageMarks: "",
+      registrationNumber: "",
+      isCompulsory: false
+    };
+
+    setFormData({
+      ...formData,
+      educationData: [...(formData.educationData || []), newExamination]
+    });
+  };
+
+  // Remove examination
+  const removeExamination = (index: number) => {
+    const updatedEducationData = [...(formData.educationData || [])];
+    updatedEducationData.splice(index, 1);
+    
+    setFormData({
+      ...formData,
+      educationData: updatedEducationData
+    });
+  };
+
+  // Get examinations that are already added
+  const getAddedExaminations = () => {
+    return (formData.educationData || []).map((exam: any) => exam.examination);
+  };
+
+  // Get available examinations that haven't been added yet
+  const getAvailableToAdd = () => {
+    const addedExams = getAddedExaminations();
+    return availableExaminations.filter(exam => !addedExams.includes(exam.value));
+  };
   // Handle input changes for education data
   const handleEducationDataChange = (index: number, field: string, value: string) => {
     const updatedEducationData = [...(formData.educationData || [])];
@@ -71,230 +92,230 @@ const DiplomaLETEducationForm = ({ formData, setFormData , selectedProgram }:any
     });
   };
 
-  // Handle input changes for subject scores
-  const handleSubjectScoreChange = (index: number, field: string, value: string) => {
-    const updatedSubjectScores = [...(formData.subjectScores || [])];
-    updatedSubjectScores[index] = {
-      ...updatedSubjectScores[index],
-      [field]: value
-    };
-    
-    // Calculate total if physics, chemistry, and maths are all filled
-    if (field === 'physics' || field === 'chemistry' || field === 'maths') {
-      const physics = parseFloat(updatedSubjectScores[index].physics) || 0;
-      const chemistry = parseFloat(updatedSubjectScores[index].chemistry) || 0;
-      const maths = parseFloat(updatedSubjectScores[index].maths) || 0;
-      
-      if (physics && chemistry && maths) {
-        updatedSubjectScores[index].total = ((physics + chemistry + maths) / 3).toFixed(2);
-      }
-    }
-    
-    setFormData({
-      ...formData,
-      subjectScores: updatedSubjectScores
-    });
-  };
 
   return (
-    <div className="space-y-4">
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-secondary/10">
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Examination</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Passed/Failed</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Group/Trade</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Period</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium min-w-26">Year of Pass</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium min-w-24">% of Marks</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">No. of Chances</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">English</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Physics</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Chemistry</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Maths</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(formData.educationData || []).map((row:any, index:any) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300 p-2">
-                  <span className="font-normal text-sm">
-                    {row.examination}
-                  </span>
-                </td>
-                <td className="border border-gray-300">
-                  <Select
-                    value={row.passedFailed}
-                    onValueChange={(value) => handleEducationDataChange(index, 'passedFailed', value)}
-                  >
-                    <SelectTrigger className="border-0  w-full">
-                      <SelectValue placeholder="Select" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="passed">Passed</SelectItem>
-                      <SelectItem value="failed">Failed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.groupTrade}
-                    onChange={(e) => handleEducationDataChange(index, 'groupTrade', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Group/Trade"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.period}
-                    onChange={(e) => handleEducationDataChange(index, 'period', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Period"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.yearOfPass}
-                    onChange={(e) => handleEducationDataChange(index, 'yearOfPass', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Year"
-                    type="number"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.percentageMarks}
-                    onChange={(e) => handleEducationDataChange(index, 'percentageMarks', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="%"
-                    type="number"
-                    max="100"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.noOfChances}
-                    onChange={(e) => handleEducationDataChange(index, 'noOfChances', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="No."
-                    type="number"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.english}
-                    onChange={(e) => handleEducationDataChange(index, 'english', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Grade"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.physics}
-                    onChange={(e) => handleEducationDataChange(index, 'physics', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Grade"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.chemistry}
-                    onChange={(e) => handleEducationDataChange(index, 'chemistry', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Grade"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.maths}
-                    onChange={(e) => handleEducationDataChange(index, 'maths', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Grade"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <div className="space-y-6">
+      {/* Header Info */}
+      <div className="bg-gradient-to-r from-secondary/10 to-secondary/5 p-4 border">
+        <h3 className="text-sm md:text-base font-semibold text-gray-800 mb-2">Education Qualifications (LET)</h3>
+        <p className="text-xs md:text-sm text-gray-600">
+          Please provide details of your academic qualifications for LET admission. 
+          <span className="text-red-600 font-medium"> SSLC/THSLC/CBSE is mandatory</span> for all applicants.
+        </p>
       </div>
 
-      {/* Section 14 - Subject-wise Scores */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-secondary/10">
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Examination</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium min-w-24">Physics (%)</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium min-w-30">Chemistry (%)</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium min-w-24">Maths (%)</th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">
-                Total
-              </th>
-              <th className="border border-gray-300 p-2 text-left text-sm font-medium">Remarks</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(formData.subjectScores || []).map((row:any, index:any) => (
-              <tr key={index} className="hover:bg-gray-50">
-                <td className="border border-gray-300">
+      {/* Education Cards */}
+      <div className="space-y-2">
+        {(formData.educationData || []).map((row: any, index: number) => (
+          <Card key={index} className={`transition-all duration-200 hover:shadow-md ${
+            row.isCompulsory ? 'ring-2 ring-red-100 border-red-200 bg-red-50/30' : 'border-gray-200'
+          }`}>
+            <CardHeader>
+              <div className="flex justify-between sm:flex-row sm:items-center sm:justify-between gap-2">
+                <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                  <span className="bg-secondary/10 text-secondary px-2 py-1.5 rounded-full text-xs font-medium">
+                    {index + 1}
+                  </span>
+                  {row.examination}
+                  {row.isCompulsory && (
+                    <Badge variant="destructive" className="text-xs">
+                      Required
+                    </Badge>
+                  )}
+                  {!row.isCompulsory && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => removeExamination(index)}
+                      className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <X className="h-3 w-3" />
+                    </Button>
+                  )}
+                </CardTitle>
+                
+                {/* Status Badge - Mobile First */}
+                <div className="flex justify-start sm:justify-end">
+                  {row.isCompulsory ? (
+                    <Badge variant="default" className="bg-green-100 text-green-800 hover:bg-green-100">
+                      ✓ Passed
+                    </Badge>
+                  ) : (
+                    <div className="w-full sm:w-auto sm:min-w-[120px]">
+                      <Select
+                        value={row.passedFailed}
+                        onValueChange={(value) => handleEducationDataChange(index, 'passedFailed', value)}
+                      >
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select Status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Passed">✓ Passed</SelectItem>
+                          <SelectItem value="Failed">✗ Failed</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </CardHeader>
+
+            <CardContent className="space-y-2">
+              {/* Form Grid - Responsive */}
+              <div className={`grid gap-4 ${
+                row.isCompulsory 
+                  ? 'grid-cols-1 sm:grid-cols-3' 
+                  : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
+              }`}>
+                
+                {/* Group/Trade - Only for non-compulsory exams */}
+                {!row.isCompulsory && (
+                  <div className="space-y-2">
+                    <Label htmlFor={`groupTrade-${index}`} className="text-sm font-medium text-gray-700">
+                      Group/Trade
+                    </Label>
+                    <Input
+                      id={`groupTrade-${index}`}
+                      value={row.groupTrade}
+                      onChange={(e) => handleEducationDataChange(index, 'groupTrade', e.target.value)}
+                      className="w-full"
+                      placeholder="e.g., Electronics, IT"
+                    />
+                  </div>
+                )}
+
+                {/* Year of Pass */}
+                <div className="space-y-2">
+                  <Label htmlFor={`yearOfPass-${index}`} className="text-sm font-medium text-gray-700">
+                    Year of Passing
+                    {row.isCompulsory && <span className="text-red-500 ml-1">*</span>}
+                  </Label>
                   <Input
-                    value={row.examination}
-                    onChange={(e) => handleSubjectScoreChange(index, 'examination', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Examination"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.physics}
-                    onChange={(e) => handleSubjectScoreChange(index, 'physics', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="%"
+                    id={`yearOfPass-${index}`}
+                    value={row.yearOfPass}
+                    onChange={(e) => handleEducationDataChange(index, 'yearOfPass', e.target.value)}
+                    className="w-full"
+                    placeholder="e.g., 2020"
                     type="number"
-                    max="100"
+                    min="1950"
+                    max={new Date().getFullYear()}
                   />
-                </td>
-                <td className="border border-gray-300">
+                </div>
+
+                {/* Percentage */}
+                <div className="space-y-2">
+                  <Label htmlFor={`percentageMarks-${index}`} className="text-sm font-medium text-gray-700">
+                    Percentage (%)
+                    {row.isCompulsory && <span className="text-red-500 ml-1">*</span>}
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id={`percentageMarks-${index}`}
+                      value={row.percentageMarks}
+                      onChange={(e) => handleEducationDataChange(index, 'percentageMarks', e.target.value)}
+                      className="w-full pr-8"
+                      placeholder="85.5"
+                      type="number"
+                      min="0"
+                      max="100"
+                      step="0.1"
+                    />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                      %
+                    </span>
+                  </div>
+                </div>
+
+                {/* Registration Number */}
+                <div className="space-y-2">
+                  <Label htmlFor={`registrationNumber-${index}`} className="text-sm font-medium text-gray-700">
+                    Registration Number
+                    {row.isCompulsory && <span className="text-red-500 ml-1">*</span>}
+                  </Label>
                   <Input
-                    value={row.chemistry}
-                    onChange={(e) => handleSubjectScoreChange(index, 'chemistry', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="%"
-                    type="number"
-                    max="100"
+                    id={`registrationNumber-${index}`}
+                    value={row.registrationNumber}
+                    onChange={(e) => handleEducationDataChange(index, 'registrationNumber', e.target.value)}
+                    className="w-full"
+                    placeholder="Registration number"
                   />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.maths}
-                    onChange={(e) => handleSubjectScoreChange(index, 'maths', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="%"
-                    type="number"
-                    max="100"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.total}
-                    readOnly
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Auto-calculated"
-                  />
-                </td>
-                <td className="border border-gray-300">
-                  <Input
-                    value={row.remarks}
-                    onChange={(e) => handleSubjectScoreChange(index, 'remarks', e.target.value)}
-                    className="border-0 rounded-none focus:!ring-0 w-full text-sm shadow-none"
-                    placeholder="Remarks"
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </div>
+              </div>
+
+              {/* Progress Indicator */}
+              <div className="pt-2">
+                <div className="flex items-center justify-between text-xs text-gray-500">
+                  <span>Completion Status:</span>
+                  <div className="flex items-center gap-2">
+                    {[
+                      { field: 'yearOfPass', label: 'Year' },
+                      { field: 'percentageMarks', label: 'Percentage' },
+                      { field: 'registrationNumber', label: 'Reg. No.' }
+                    ].map(({ field, label }) => (
+                      <div key={field} className="flex items-center gap-1">
+                        <div className={`w-2 h-2 rounded-full ${
+                          row[field] ? 'bg-green-500' : 'bg-gray-300'
+                        }`} />
+                        <span className={row[field] ? 'text-green-600' : 'text-gray-400'}>
+                          {label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Add Examination Section */}
+      {getAvailableToAdd().length > 0 && (
+        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 bg-gray-50/50">
+          <div className="text-center space-y-4">
+            <div>
+              <h4 className="text-sm font-medium text-gray-700 mb-2">
+                Add Additional Qualification
+              </h4>
+              <p className="text-xs text-gray-500">
+                Add other educational qualifications if applicable
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-2">
+              {getAvailableToAdd().map((exam) => (
+                <Button
+                  key={exam.value}
+                  variant="outline"
+                  size="sm"
+                  onClick={() => addExamination(exam.value)}
+                  className="h-8 text-xs border-secondary text-secondary hover:bg-secondary hover:text-white"
+                >
+                  <Plus className="h-3 w-3 mr-1" />
+                  Add {exam.label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* Footer Info */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
+        <div className="flex items-start gap-2">
+          <div className="w-5 h-5 rounded-full bg-blue-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <span className="text-blue-600 text-xs">i</span>
+          </div>
+          <div>
+            <p className="font-medium mb-1">Important Notes:</p>
+            <ul className="space-y-1 text-xs">
+              <li>• SSLC/THSLC/CBSE qualification is mandatory for all diploma programs</li>
+              <li>• Fill in details for additional qualifications if applicable</li>
+              <li>• Ensure all information matches your certificates</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   )

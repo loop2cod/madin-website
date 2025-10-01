@@ -246,6 +246,7 @@ export const AdmissionForm = () => {
 
     // Set application ID in state
     setApplicationId(applicationId);
+    setShowApplicationList(false);
 
     // Navigate to the appropriate step
     handleStep(nextStep);

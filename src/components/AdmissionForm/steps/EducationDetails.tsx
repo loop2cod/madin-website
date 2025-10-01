@@ -40,26 +40,41 @@ const EducationDetails = ({ handleStep, applicationId }: EducationDetailsProps) 
       
       try {
         setLoading(true);
-        const response = await axios.get(
+        
+        // Fetch general application data first for program selections
+        const appResponse = await axios.get(
           `${import.meta.env.VITE_ADMISSION_API_URL}/api/v1/admission/application/${applicationId}`
         );
         
-        if (response.data.success && response.data.data) {
-          const { programSelections, educationDetails } = response.data.data;
+        if (appResponse.data.success && appResponse.data.data) {
+          const { programSelections } = appResponse.data.data;
           
           if (programSelections && programSelections.length > 0) {
             setProgramSelections(programSelections);
           }
+        }
+        
+        // Try to fetch existing education details
+        try {
+          const educationResponse = await axios.get(
+            `${import.meta.env.VITE_ADMISSION_API_URL}/api/v1/admission/education-details/${applicationId}`
+          );
           
-          if (educationDetails) {
-            setFormData(educationDetails);
+          if (educationResponse.data.success && educationResponse.data.data) {
+            setFormData(educationResponse.data.data);
+          }
+        } catch (educationError: any) {
+          // If education details don't exist yet, that's okay - user will fill them
+          if (educationError.response?.status !== 404) {
+            console.error('Error fetching existing education details:', educationError);
           }
         }
+        
       } catch (error: any) {
-        console.error('Error fetching education details:', error);
+        console.error('Error fetching application data:', error);
         toast({
           title: "Error",
-          description: "Failed to fetch education details. Please try again.",
+          description: "Failed to load application data. Please try again.",
           variant: "destructive",
         });
       } finally {
@@ -87,11 +102,70 @@ const EducationDetails = ({ handleStep, applicationId }: EducationDetailsProps) 
         return;
       }
 
+      // Get the selected program to determine validation requirements
+      const selectedProgram = programSelections.find(p => p.selected);
+      
+      if (selectedProgram && selectedProgram.programLevel === 'mba') {
+        // For MBA, validate that SSLC, +2/VHSE, and Degree are all present
+        const requiredExaminations = ['SSLC/THSLC/CBSE', '+2/VHSE', 'Degree'];
+        const presentExaminations = formData.educationData.map((entry: any) => entry.examination);
+        const missingExaminations = requiredExaminations.filter(exam => !presentExaminations.includes(exam));
+        
+        if (missingExaminations.length > 0) {
+          toast({
+            title: "Validation Error",
+            description: `MBA programs require SSLC/THSLC/CBSE, +2/VHSE, and Degree qualifications. Missing: ${missingExaminations.join(', ')}`,
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Validate required fields for each mandatory examination
+        for (const exam of requiredExaminations) {
+          const examEntry = formData.educationData.find((entry: any) => entry.examination === exam);
+          if (examEntry) {
+            const requiredFields = exam === 'SSLC/THSLC/CBSE' 
+              ? ['yearOfPass', 'percentageMarks', 'registrationNumber']
+              : ['groupSubject', 'yearOfPass', 'percentageMarks', 'registrationNumber'];
+            
+            const missingFields = requiredFields.filter(field => !examEntry[field] || !examEntry[field].trim());
+            
+            if (missingFields.length > 0) {
+              toast({
+                title: "Validation Error",
+                description: `${exam} details are incomplete. Please fill in: ${missingFields.join(', ')}`,
+                variant: "destructive",
+              });
+              return;
+            }
+          }
+        }
+      } else {
+        // For non-MBA programs, validate SSLC/THSLC/CBSE only
+        const sslcEntry = formData.educationData.find((entry: any) => 
+          entry.examination === "SSLC/THSLC/CBSE" || entry.isCompulsory
+        );
+        
+        if (sslcEntry) {
+          const requiredFields = ['yearOfPass', 'percentageMarks', 'registrationNumber'];
+          const missingFields = requiredFields.filter(field => !sslcEntry[field]);
+          
+          if (missingFields.length > 0) {
+            toast({
+              title: "Validation Error",
+              description: "SSLC/THSLC/CBSE details are mandatory. Please fill in Year of Pass, Percentage, and Registration Number.",
+              variant: "destructive",
+            });
+            return;
+          }
+        }
+      }
+
       const response = await axios.post(
         `${import.meta.env.VITE_ADMISSION_API_URL}/api/v1/admission/education-details/${applicationId}`,
         { educationDetails: formData }
       );
-          setSubmitting(false);
+
       if (response.data.success) {
         toast({
           title: "Success",
@@ -99,15 +173,27 @@ const EducationDetails = ({ handleStep, applicationId }: EducationDetailsProps) 
         });
         handleStep(7); // Move to next step
       } else {
-        throw new Error("Failed to save education details");
+        throw new Error(response.data.message || "Failed to save education details");
       }
     } catch (error: any) {
       console.error('Error saving education details:', error);
+      
+      let errorMessage = "Failed to save education details. Please try again.";
+      
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.response?.data?.errors) {
+        errorMessage = error.response.data.errors.join(", ");
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
       toast({
         title: "Error",
-        description: "Failed to save education details. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
+    } finally {
       setSubmitting(false);
     }
   };
@@ -154,9 +240,10 @@ const EducationDetails = ({ handleStep, applicationId }: EducationDetailsProps) 
     if (selectedProgram.programLevel === 'mba') {
       return <MBAEducationForm formData={formData} setFormData={setFormData} selectedProgram={selectedProgram} />;
     } else if (selectedProgram.programLevel === 'diploma') {
-      if (selectedProgram.mode === 'LET') {
+      if (selectedProgram.mode === 'let' || selectedProgram.mode === 'LET') {
         return <DiplomaLETEducationForm formData={formData} setFormData={setFormData} selectedProgram={selectedProgram}  />;
-      } else if (selectedProgram.mode === 'Regular' || selectedProgram.mode === 'Part-time') {
+      } else if (selectedProgram.mode === 'regular' || selectedProgram.mode === 'Regular' || 
+                 selectedProgram.mode === 'part-time' || selectedProgram.mode === 'Part-time') {
         return <DiplomaRegularForm formData={formData} setFormData={setFormData} selectedProgram={selectedProgram} />;
       }
     }

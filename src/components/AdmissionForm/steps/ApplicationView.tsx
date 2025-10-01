@@ -48,8 +48,9 @@ interface ApplicationData {
   programSelections: Array<{
     programLevel: string
     programName: string
-    mode: string
-    branchPreferences: Array<{
+    mode?: string
+    specialization?: string
+    branchPreferences?: Array<{
       branch: string
       priority: number
       _id: string
@@ -84,6 +85,7 @@ interface ApplicationData {
       period: string
       yearOfPass: string
       percentageMarks: string
+      registrationNumber: string
       noOfChances: string
       english: string
       physics: string
@@ -213,171 +215,185 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex  justify-between">
-        <div className="flex flex-col space-x-4">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Application Details</h1>
-            <p className="text-gray-600 text-sm">Application ID: {applicationData._id}</p>
+      <div className="space-y-4">
+        {/* Title and ID Row */}
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900 break-words">Application Details</h1>
+            <p className="text-gray-600 text-xs sm:text-sm mt-1 break-all">
+              <span className="font-medium">Application ID:</span> {applicationData._id}
+            </p>
           </div>
-              <Button onClick={onBack} size="sm" className='rounded-none w-fit bg-secondary hover:bg-secondary/80 text-white mt-2'>
+          
+          {/* Status Badges - Mobile: Stack, Desktop: Side by side */}
+          <div className="flex flex-wrap items-center gap-2 sm:items-start sm:justify-end">
+            <Badge className={`text-xs ${getStatusColor(applicationData.status)}`}>
+              {applicationData.status.toUpperCase()}
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              {getCurrentStageDisplay(applicationData.currentStage)}
+            </Badge>
+          </div>
+        </div>
+        
+        {/* Back Button Row */}
+        <div className="flex justify-start">
+          <Button onClick={onBack} size="sm" className='rounded-none w-fit bg-secondary hover:bg-secondary/80 text-white'>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
         </div>
-        <div className="flex items-start space-x-2">
-          <Badge className={getStatusColor(applicationData.status)}>
-            {applicationData.status.toUpperCase()}
-          </Badge>
-          <Badge variant="outline">
-            {getCurrentStageDisplay(applicationData.currentStage)}
-          </Badge>
-        </div>
       </div>
 
       {/* Application Summary */}
-      <Card className="rounded-none border-none shadow-none gap-2 py-3">
-        <CardHeader className='px-3'>
-          <CardTitle className="flex items-center text-lg">
-            <FileText className="w-5 h-5 mr-2" />
+      <Card className="rounded-none border-none shadow-none">
+        <CardHeader className='px-3 sm:px-4 py-3'>
+          <CardTitle className="flex items-center text-base sm:text-lg">
+            <FileText className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Application Summary
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 px-3">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Created Date</Label>
-              <p className="text-sm text-gray-900">{formatDate(applicationData.createdAt)}</p>
+        <CardContent className="px-3 sm:px-4 pb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Created</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1">{formatDate(applicationData.createdAt)}</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Last Updated</Label>
-              <p className="text-sm text-gray-900">{formatDate(applicationData.updatedAt)}</p>
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Updated</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1">{formatDate(applicationData.updatedAt)}</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Mobile Number</Label>
-              <p className="text-sm text-gray-900">{applicationData.mobile}</p>
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Mobile</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1 break-all">{applicationData.mobile}</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Application Type</Label>
-              <p className="text-sm text-gray-900">
-                {applicationData.isExistingApplication ? 'Existing' : 'New'}
-              </p>
+            <div className="bg-gray-50 p-3 rounded-lg">
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Type</Label>
+              <div className="flex items-center gap-2 mt-1">
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                  applicationData.isExistingApplication ? 'bg-blue-500' : 'bg-green-500'
+                }`} />
+                <p className="text-sm font-semibold text-gray-900">
+                  {applicationData.isExistingApplication ? 'Existing' : 'New'}
+                </p>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Personal Details */}
-      <Card className="rounded-none border-secondary/20 gap-2 py-3">
-        <CardHeader className='px-3'>
-          <CardTitle className="flex items-center text-lg">
-            <User className="w-5 h-5 mr-2" />
+      <Card className="rounded-none border-secondary/20">
+        <CardHeader className='px-3 sm:px-4 py-3'>
+          <CardTitle className="flex items-center text-base sm:text-lg">
+            <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Personal Details
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 px-3">
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-            <div className='col-span-2 md:col-span-1'>
-              <Label className="text-sm font-medium text-gray-700">Full Name</Label>
-              <p className="text-sm text-gray-900">{applicationData.personalDetails.fullName}</p>
+        <CardContent className="px-3 sm:px-4 pb-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className='col-span-2 lg:col-span-1 bg-gray-50 p-3 rounded-lg'>
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Full Name</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1 break-words">{applicationData.personalDetails.fullName}</p>
             </div>
-            <div className='col-span-2 md:col-span-1'>
-              <Label className="text-sm font-medium text-gray-700">Date of Birth</Label>
-              <p className="text-sm text-gray-900">{formatDate(applicationData.personalDetails.dob)}</p>
+            <div className='bg-gray-50 p-3 rounded-lg'>
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">DOB</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1">{formatDate(applicationData.personalDetails.dob)}</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Gender</Label>
-              <p className="text-sm text-gray-900 capitalize">{applicationData.personalDetails.gender}</p>
+            <div className='bg-gray-50 p-3 rounded-lg'>
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Gender</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1 capitalize">{applicationData.personalDetails.gender}</p>
             </div>
-            <div>
-              <Label className="text-sm font-medium text-gray-700">Religion</Label>
-              <p className="text-sm text-gray-900 capitalize">{applicationData.personalDetails.religion}</p>
+            <div className='bg-gray-50 p-3 rounded-lg'>
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Religion</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1 capitalize">{applicationData.personalDetails.religion}</p>
             </div>
-            <div className='col-span-2 md:col-span-1'>
-              <Label className="text-sm font-medium text-gray-700">Email</Label>
-              <p className="text-sm text-gray-900">{applicationData.personalDetails.email}</p>
+            <div className='col-span-2 lg:col-span-2 bg-gray-50 p-3 rounded-lg'>
+              <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Email</Label>
+              <p className="text-sm font-semibold text-gray-900 mt-1 break-all">{applicationData.personalDetails.email}</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
       {/* Address & Family Details */}
-      <Card className="rounded-none border-secondary/20 gap-2 py-3">
-        <CardHeader className='px-3'>
-          <CardTitle className="flex items-center text-lg">
-            <MapPin className="w-5 h-5 mr-2" />
+      <Card className="rounded-none border-secondary/20">
+        <CardHeader className='px-3 sm:px-4 py-3'>
+          <CardTitle className="flex items-center text-base sm:text-lg">
+            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Address & Family Details
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6  px-3">
+        <CardContent className="space-y-4 px-3 sm:px-4 pb-4">
           {/* Address */}
           <div>
-            <h3 className="font-medium text-gray-900 mb-3">Address</h3>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
-              <div className='col-span-2 md:col-span-1'>
-                <Label className="text-sm font-medium text-gray-700">House Number</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.houseNumber}</p>
+            <h3 className="text-sm font-semibold text-gray-800 mb-3 uppercase tracking-wide">Address</h3>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">House No.</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.address.houseNumber}</p>
               </div>
-              <div className='col-span-2 md:col-span-1'>
-                <Label className="text-sm font-medium text-gray-700">Street</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.street}</p>
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">Street</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1 break-words">{applicationData.addressFamilyDetails.address.street}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Post Office</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.postOffice}</p>
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">Post Office</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.address.postOffice}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Pin Code</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.pinCode}</p>
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">Pin Code</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.address.pinCode}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">District</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.district}</p>
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">District</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.address.district}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">State</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.address.state}</p>
+              <div className='bg-blue-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-blue-700 uppercase tracking-wide">State</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.address.state}</p>
               </div>
             </div>
           </div>
 
           {/* Parents */}
           <div>
-            <h3 className="font-medium text-gray-900 mb-3">Parents</h3>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-2">
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Father's Name</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.parents.fatherName}</p>
+            <h3 className="text-sm font-semibold text-gray-800 mb-3 uppercase tracking-wide">Parents</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className='bg-green-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-green-700 uppercase tracking-wide">Father's Name</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1 break-words">{applicationData.addressFamilyDetails.parents.fatherName}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Father's Mobile</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.parents.fatherMobile}</p>
+              <div className='bg-green-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-green-700 uppercase tracking-wide">Father's Mobile</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.parents.fatherMobile}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Mother's Name</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.parents.motherName}</p>
+              <div className='bg-green-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-green-700 uppercase tracking-wide">Mother's Name</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1 break-words">{applicationData.addressFamilyDetails.parents.motherName}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Mother's Mobile</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.parents.motherMobile}</p>
+              <div className='bg-green-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-green-700 uppercase tracking-wide">Mother's Mobile</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.parents.motherMobile}</p>
               </div>
             </div>
           </div>
 
           {/* Guardian */}
           <div>
-            <h3 className="font-medium text-gray-900 mb-3">Guardian</h3>
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-2">
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Name</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.guardian.guardianName}</p>
+            <h3 className="text-sm font-semibold text-gray-800 mb-3 uppercase tracking-wide">Guardian</h3>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className='bg-purple-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-purple-700 uppercase tracking-wide">Name</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1 break-words">{applicationData.addressFamilyDetails.guardian.guardianName}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Place</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.guardian.guardianPlace}</p>
+              <div className='bg-purple-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-purple-700 uppercase tracking-wide">Place</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.guardian.guardianPlace}</p>
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Contact</Label>
-                <p className="text-sm text-gray-900">{applicationData.addressFamilyDetails.guardian.guardianContact}</p>
+              <div className='bg-purple-50 p-3 rounded-lg'>
+                <Label className="text-xs font-medium text-purple-700 uppercase tracking-wide">Contact</Label>
+                <p className="text-sm font-semibold text-gray-900 mt-1">{applicationData.addressFamilyDetails.guardian.guardianContact}</p>
               </div>
             </div>
           </div>
@@ -404,28 +420,34 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
                   <Label className="text-sm font-medium text-gray-700">Program Name</Label>
                   <p className="text-sm text-gray-900">{program.programName}</p>
                 </div>
-                <div>
-                  <Label className="text-sm font-medium text-gray-700">Mode</Label>
-                  <p className="text-sm text-gray-900">{program.mode}</p>
-                </div>
-                <div>
-                  <Label className="text-sm font-medium text-gray-700">Priority</Label>
-                  <p className="text-sm text-gray-900">{program.priority}</p>
-                </div>
+                {program.programLevel === 'diploma' && (
+                  <div>
+                    <Label className="text-sm font-medium text-gray-700">Mode</Label>
+                    <p className="text-sm text-gray-900">{program.mode}</p>
+                  </div>
+                )}
+                {program.programLevel === 'mba' && program.specialization && (
+                  <div>
+                    <Label className="text-sm font-medium text-gray-700">Specialization</Label>
+                    <p className="text-sm text-gray-900">{program.specialization}</p>
+                  </div>
+                )}
               </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">Branch Preferences</Label>
-                <div className="mt-2 space-y-1">
-                  {program.branchPreferences.map((branch) => (
-                    <div key={branch._id} className="flex items-center space-x-2">
-                      <Badge variant="outline" className="text-xs">
-                        Priority {branch.priority}
-                      </Badge>
-                      <span className="text-sm text-gray-900">{branch.branch}</span>
-                    </div>
-                  ))}
+              {program.programLevel === 'diploma' && program.branchPreferences && program.branchPreferences.length > 0 && (
+                <div>
+                  <Label className="text-sm font-medium text-gray-700">Branch Preferences</Label>
+                  <div className="mt-2 space-y-1">
+                    {program.branchPreferences.map((branch) => (
+                      <div key={branch._id} className="flex items-center space-x-2">
+                        <Badge variant="outline" className="text-xs">
+                          Priority {branch.priority}
+                        </Badge>
+                        <span className="text-sm text-gray-900">{branch.branch}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </CardContent>
@@ -433,70 +455,228 @@ const ApplicationView = ({ applicationId, onBack }: ApplicationViewProps) => {
 
       {/* Education Details */}
       <Card className="rounded-none border-secondary/20">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center text-lg">
-            <GraduationCap className="w-5 h-5 mr-2" />
-            Education Details
+        <CardHeader className="px-3 sm:px-4 py-3">
+          <CardTitle className="flex items-center text-base sm:text-lg">
+            <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+            Education Details ({applicationData.educationDetails?.programDetails?.programLevel?.toUpperCase() || 'N/A'})
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          {/* Entrance Exams */}
-          <div>
-            <h3 className="font-medium text-gray-900 mb-3">Entrance Exams</h3>
-            <div className="grid grid-cols-3 gap-4">
-              <div>
-                <Label className="text-sm font-medium text-gray-700">KMAT</Label>
-                <p className="text-sm text-gray-900">
-                  {applicationData.educationDetails.entranceExams.kmat.selected ? 'Selected' : 'Not Selected'}
-                </p>
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">CMAT</Label>
-                <p className="text-sm text-gray-900">
-                  {applicationData.educationDetails.entranceExams.cmat.selected ? 'Selected' : 'Not Selected'}
-                </p>
-              </div>
-              <div>
-                <Label className="text-sm font-medium text-gray-700">CAT</Label>
-                <p className="text-sm text-gray-900">
-                  {applicationData.educationDetails.entranceExams.cat.selected ? 'Selected' : 'Not Selected'}
-                </p>
-              </div>
-            </div>
+        <CardContent className="space-y-3 sm:space-y-4 px-3 sm:px-4 pb-4">
+          {/* Header Info */}
+          <div className="bg-gradient-to-r from-secondary/10 to-secondary/5 p-3 border rounded-lg">
+            <h3 className="text-xs sm:text-sm font-semibold text-gray-800 mb-1 uppercase tracking-wide">Education Qualifications</h3>
+            <p className="text-xs text-gray-600">
+              Academic qualifications for {applicationData.educationDetails?.programDetails?.programName || 'this program'} admission.
+            </p>
           </div>
 
-          {/* Education Data */}
-          <div>
-            <h3 className="font-medium text-gray-900 mb-3">Education History</h3>
-            <div className="space-y-4">
-              {applicationData.educationDetails.educationData.map((education) => (
-                <div key={education._id} className="border rounded-lg p-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label className="text-sm font-medium text-gray-700">Examination</Label>
-                      <p className="text-sm text-gray-900">{education.examination}</p>
+          {/* Education Cards */}
+          <div className="space-y-3">
+            {applicationData.educationDetails?.educationData?.map((education, index) => (
+              <Card key={education._id || index} className={`transition-all duration-200 ${
+                education.examination === 'SSLC/THSLC/CBSE' || education.examination === '+2/VHSE' || education.examination === 'Degree' 
+                  ? 'ring-2 ring-red-100 border-red-200 bg-red-50/30' 
+                  : 'border-gray-200'
+              }`}>
+                <CardHeader className="pb-2 px-3 pt-3 sm:px-4 sm:pt-4">
+                  <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 gap-2">
+                    <CardTitle className="text-xs sm:text-sm font-semibold flex flex-wrap items-center gap-2">
+                      <span className="bg-secondary/10 text-secondary px-2 py-1 rounded-full text-xs font-medium flex-shrink-0">
+                        {index + 1}
+                      </span>
+                      <span className="break-words text-xs sm:text-sm">{education.examination}</span>
+                      {(education.examination === 'SSLC/THSLC/CBSE' || education.examination === '+2/VHSE' || education.examination === 'Degree') && (
+                        <Badge variant="destructive" className="text-xs flex-shrink-0 px-1.5 py-0.5">
+                          Required
+                        </Badge>
+                      )}
+                    </CardTitle>
+                    
+                    {/* Status Badge */}
+                    <div className="flex justify-start sm:justify-end">
+                      <Badge variant="default" className={`text-xs px-2 py-1 ${
+                        education.passedFailed === 'Passed' 
+                          ? "bg-green-100 text-green-800 hover:bg-green-100"
+                          : "bg-red-100 text-red-800 hover:bg-red-100"
+                      }`}>
+                        {education.passedFailed === 'Passed' ? '✓' : '✗'} {education.passedFailed}
+                      </Badge>
                     </div>
-                    <div>
-                      <Label className="text-sm font-medium text-gray-700">Status</Label>
-                      <p className="text-sm text-gray-900 capitalize">{education.passedFailed}</p>
-                    </div>
-                    {education.yearOfPass && (
-                      <div>
-                        <Label className="text-sm font-medium text-gray-700">Year of Pass</Label>
-                        <p className="text-sm text-gray-900">{education.yearOfPass}</p>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="space-y-2 px-3 pb-3 sm:px-4 sm:pb-4">
+                  {/* Form Grid - Responsive */}
+                  <div className="grid gap-3 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
+                    
+                    {/* Group/Subject - Not for SSLC */}
+                    {education.examination !== "SSLC/THSLC/CBSE" && education.groupTrade && (
+                      <div className="bg-gray-50 p-2 rounded">
+                        <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">
+                          {education.examination === "Degree" ? "Subject" : "Group"}
+                        </Label>
+                        <p className="text-xs sm:text-sm font-semibold text-gray-900 mt-1">{education.groupTrade}</p>
                       </div>
                     )}
+
+                    {/* Year of Pass */}
+                    {education.yearOfPass && (
+                      <div className="bg-gray-50 p-2 rounded">
+                        <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Year</Label>
+                        <p className="text-xs sm:text-sm font-semibold text-gray-900 mt-1">{education.yearOfPass}</p>
+                      </div>
+                    )}
+
+                    {/* Percentage */}
                     {education.percentageMarks && (
-                      <div>
-                        <Label className="text-sm font-medium text-gray-700">Percentage</Label>
-                        <p className="text-sm text-gray-900">{education.percentageMarks}%</p>
+                      <div className="bg-gray-50 p-2 rounded">
+                        <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Percentage</Label>
+                        <p className="text-xs sm:text-sm font-semibold text-gray-900 mt-1">{education.percentageMarks}%</p>
+                      </div>
+                    )}
+
+                    {/* Registration Number */}
+                    <div className="bg-gray-50 p-2 rounded">
+                      <Label className="text-xs font-medium text-gray-600 uppercase tracking-wide">Reg. No.</Label>
+                      <p className="text-xs sm:text-sm font-semibold text-gray-900 mt-1 break-all">{education.registrationNumber || 'N/A'}</p>
+                    </div>
+
+                    {/* Subject Marks for specific examinations */}
+                    {(education.english || education.physics || education.chemistry || education.maths) && (
+                      <div className="col-span-full">
+                        <Label className="text-xs font-medium text-gray-700">Subject Marks</Label>
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-2">
+                          {education.english && (
+                            <div className="text-center p-2 bg-gray-50 rounded">
+                              <Label className="text-xs text-gray-600">English</Label>
+                              <p className="text-sm font-medium">{education.english}</p>
+                            </div>
+                          )}
+                          {education.physics && (
+                            <div className="text-center p-2 bg-gray-50 rounded">
+                              <Label className="text-xs text-gray-600">Physics</Label>
+                              <p className="text-sm font-medium">{education.physics}</p>
+                            </div>
+                          )}
+                          {education.chemistry && (
+                            <div className="text-center p-2 bg-gray-50 rounded">
+                              <Label className="text-xs text-gray-600">Chemistry</Label>
+                              <p className="text-sm font-medium">{education.chemistry}</p>
+                            </div>
+                          )}
+                          {education.maths && (
+                            <div className="text-center p-2 bg-gray-50 rounded">
+                              <Label className="text-xs text-gray-600">Maths</Label>
+                              <p className="text-sm font-medium">{education.maths}</p>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
-                </div>
-              ))}
-            </div>
+
+                  {/* Completion Status Indicator */}
+                  <div className="pt-2">
+                    <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 text-xs text-gray-500">
+                      <span className="font-medium">Completion Status:</span>
+                      <div className="flex flex-wrap items-center gap-3 sm:gap-2">
+                        {[
+                          { field: 'yearOfPass', label: 'Year', value: education.yearOfPass },
+                          { field: 'percentageMarks', label: '%', value: education.percentageMarks },
+                          { field: 'registrationNumber', label: 'Reg', value: education.registrationNumber }
+                        ].map(({ field, label, value }) => (
+                          <div key={field} className="flex items-center gap-1">
+                            <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                              value ? 'bg-green-500' : 'bg-gray-300'
+                            }`} />
+                            <span className={`text-xs ${value ? 'text-green-600' : 'text-gray-400'}`}>
+                              {label}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )) || (
+              <div className="text-center py-8 text-gray-500">
+                <p>No education details available</p>
+              </div>
+            )}
           </div>
+
+          {/* Entrance Exams Section - Only for MBA programs */}
+          {applicationData.educationDetails?.entranceExams && 
+           applicationData.educationDetails?.programDetails?.programLevel?.toLowerCase() === 'mba' && (
+            <Card className="border-purple-200 bg-purple-50/30">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold text-purple-800">
+                  Entrance Examination Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {/* KMAT */}
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${
+                        applicationData.educationDetails.entranceExams.kmat?.selected ? 'bg-purple-600' : 'bg-gray-300'
+                      }`} />
+                      <Label className="text-sm font-medium text-purple-800">KMAT</Label>
+                    </div>
+                    {applicationData.educationDetails.entranceExams.kmat?.selected && applicationData.educationDetails.entranceExams.kmat?.score && (
+                      <div className="ml-5">
+                        <Label className="text-xs text-gray-600">Score</Label>
+                        <p className="text-sm font-medium">{applicationData.educationDetails.entranceExams.kmat.score}</p>
+                      </div>
+                    )}
+                    {!applicationData.educationDetails.entranceExams.kmat?.selected && (
+                      <p className="text-xs text-gray-500 ml-5">Not attempted</p>
+                    )}
+                  </div>
+
+                  {/* CMAT */}
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${
+                        applicationData.educationDetails.entranceExams.cmat?.selected ? 'bg-purple-600' : 'bg-gray-300'
+                      }`} />
+                      <Label className="text-sm font-medium text-purple-800">CMAT</Label>
+                    </div>
+                    {applicationData.educationDetails.entranceExams.cmat?.selected && applicationData.educationDetails.entranceExams.cmat?.score && (
+                      <div className="ml-5">
+                        <Label className="text-xs text-gray-600">Score</Label>
+                        <p className="text-sm font-medium">{applicationData.educationDetails.entranceExams.cmat.score}</p>
+                      </div>
+                    )}
+                    {!applicationData.educationDetails.entranceExams.cmat?.selected && (
+                      <p className="text-xs text-gray-500 ml-5">Not attempted</p>
+                    )}
+                  </div>
+
+                  {/* CAT */}
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${
+                        applicationData.educationDetails.entranceExams.cat?.selected ? 'bg-purple-600' : 'bg-gray-300'
+                      }`} />
+                      <Label className="text-sm font-medium text-purple-800">CAT</Label>
+                    </div>
+                    {applicationData.educationDetails.entranceExams.cat?.selected && applicationData.educationDetails.entranceExams.cat?.score && (
+                      <div className="ml-5">
+                        <Label className="text-xs text-gray-600">Score</Label>
+                        <p className="text-sm font-medium">{applicationData.educationDetails.entranceExams.cat.score}</p>
+                      </div>
+                    )}
+                    {!applicationData.educationDetails.entranceExams.cat?.selected && (
+                      <p className="text-xs text-gray-500 ml-5">Not attempted</p>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </CardContent>
       </Card>
 

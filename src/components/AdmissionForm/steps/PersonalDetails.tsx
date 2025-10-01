@@ -25,6 +25,7 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [emailError, setEmailError] = useState("")
 
   useEffect(() => {
     const fetchExistingData = async () => {
@@ -69,11 +70,24 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
   }, [applicationId]);
 
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
+
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }))
+
+    if (field === "email" && typeof value === "string") {
+      if (value && !validateEmail(value)) {
+        setEmailError("Please enter a valid email address")
+      } else {
+        setEmailError("")
+      }
+    }
   }
 
   const handleDateChange = (date: Date | null) => {
@@ -96,6 +110,15 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
 
   const handleContinue = async () => {
     if (!dob) return;
+
+    if (!validateEmail(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
 
     setIsSubmitting(true);
     try {
@@ -246,9 +269,12 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
                 placeholder="Enter your email address"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="w-full rounded-none"
+                className={`w-full rounded-none ${emailError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                 disabled={isSubmitting}
               />
+              {emailError && (
+                <p className="text-sm text-red-600">{emailError}</p>
+              )}
             </div>
 
             {/* Terms and Conditions */}
@@ -286,6 +312,7 @@ const PersonalDetails = ({ handleStep, applicationId }: PersonalDetailsProps) =>
                 !formData.gender ||
                 !formData.religion ||
                 !formData.email ||
+                !validateEmail(formData.email) ||
                 !formData.agreeToTerms ||
                 isSubmitting
               }
