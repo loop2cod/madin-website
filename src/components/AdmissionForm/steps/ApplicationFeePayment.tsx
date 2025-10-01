@@ -20,7 +20,9 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
   const [isLoading, setIsLoading] = useState(false);
   const [isInitiating, setIsInitiating] = useState(false);
   const [applicationData, setApplicationData] = useState<any>(null);
-  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'processing' | 'success' | 'failed'>('pending');
+  const [paymentStatus, setPaymentStatus] = useState<'pending' | 'processing' | 'success' | 'failed' | 'expired'>('pending');
+  const [paymentAttempts, setPaymentAttempts] = useState(0);
+  const [lastPaymentError, setLastPaymentError] = useState<string | null>(null);
 
   // Fetch application data
   useEffect(() => {
@@ -36,11 +38,19 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
         if (response?.data?.success && response.data.data) {
           setApplicationData(response.data.data);
           
-          // Check if payment is already done
-          if (response.data.data.paymentDetails && response.data.data.paymentDetails?.application_fee?.status === 'completed') {
+          // Check payment status and attempt count
+          const paymentDetails = response.data.data.paymentDetails?.application_fee;
+          
+          if (paymentDetails?.status === 'completed' || 
+              paymentDetails?.status === 'success') {
             setPaymentStatus('success');
-          }else{
-            setPaymentStatus(response?.data?.data?.paymentDetails?.application_fee?.status || 'pending');
+          } else {
+            const currentStatus = paymentDetails?.status || 'pending';
+            // Map 'completed' to 'success' for display
+            const displayStatus = currentStatus === 'completed' ? 'success' : currentStatus;
+            setPaymentStatus(displayStatus);
+            setPaymentAttempts(paymentDetails?.attempts || 0);
+            setLastPaymentError(paymentDetails?.lastError || null);
           }
         }
       } catch (error: any) {
@@ -61,7 +71,11 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
   const initiatePayment = async () => {
     if (!applicationId) return;
     
+    // Increment payment attempt counter
+    setPaymentAttempts(prev => prev + 1);
+    setLastPaymentError(null);
     setIsInitiating(true);
+    
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_ADMISSION_API_URL}/api/v1/admission/create-payment`,
@@ -108,6 +122,8 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
           modal: {
             ondismiss: function () {
               setIsInitiating(false);
+              setPaymentStatus('failed');
+              setLastPaymentError('Payment cancelled by user');
               toast({
                 title: "Payment Cancelled",
                 description: "You have cancelled the payment process",
@@ -128,12 +144,27 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
       }
     } catch (error: any) {
       console.error("Error initiating payment:", error);
+      setPaymentStatus('failed');
+      const errorMessage = error?.response?.data?.message || error?.message || "Payment initiation failed";
+      setLastPaymentError(errorMessage);
+      
+      // Provide specific guidance for stage-related errors
+      let userMessage = errorMessage;
+      if (errorMessage.includes('stage')) {
+        userMessage = "Payment can be completed at any time. Please try again.";
+      }
+      
       toast({
-        title: "Error",
-        description: error?.response?.data?.message || error?.message || "Something went wrong",
+        title: "Payment Error",
+        description: userMessage,
         variant: "destructive",
       });
       setIsInitiating(false);
+      
+      // Refresh application data to get latest payment status
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
   };
 
@@ -187,6 +218,7 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
       }
     } catch (error: any) {
       setPaymentStatus('failed');
+      setLastPaymentError(error?.response?.data?.message || error?.message || "Payment verification failed");
       console.error("Error verifying payment:", error);
       toast({
         title: "Error",
@@ -244,31 +276,101 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
             </div>
             <div>
               <p className="text-sm font-medium text-gray-500">Payment Status</p>
-              <p className={`text-base font-medium ${
-                paymentStatus === 'success' ? 'text-green-600' : 
-                paymentStatus === 'failed' ? 'text-red-600' : 
-                paymentStatus === 'processing' ? 'text-amber-600' : 'text-gray-600'
-              }`}>
-                {paymentStatus === 'success' ? 'Paid' : 
-                 paymentStatus === 'failed' ? 'Failed' : 
-                 paymentStatus === 'processing' ? 'Processing' : 'Pending'}
-              </p>
+              <div className="flex flex-col">
+                <p className={`text-base font-medium ${
+                  paymentStatus === 'success' ? 'text-green-600' : 
+                  paymentStatus === 'failed' ? 'text-red-600' : 
+                  paymentStatus === 'processing' ? 'text-amber-600' : 
+                  paymentStatus === 'expired' ? 'text-orange-600' : 'text-gray-600'
+                }`}>
+                  {paymentStatus === 'success' ? 'Paid' : 
+                   paymentStatus === 'failed' ? 'Failed' : 
+                   paymentStatus === 'processing' ? 'Processing' : 
+                   paymentStatus === 'expired' ? 'Expired' : 'Pending'}
+                </p>
+                {paymentAttempts > 0 && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    Attempts: {paymentAttempts}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
           {paymentStatus === 'failed' && (
-            <div className="bg-red-50 p-3 rounded-md">
-              <p className="text-red-700 text-sm">
-                Your payment could not be processed. Please try again.
-              </p>
+            <div className="bg-red-50 p-3 rounded-md border border-red-200">
+              <div className="flex items-start gap-2">
+                <div className="w-5 h-5 rounded-full bg-red-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-red-600 text-xs">!</span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-red-700 text-sm font-medium">
+                    Payment Failed
+                  </p>
+                  <p className="text-red-600 text-sm mt-1">
+                    {lastPaymentError || "Your payment could not be processed. Please try again."}
+                  </p>
+                  {paymentAttempts >= 3 && (
+                    <p className="text-red-500 text-xs mt-2">
+                      Multiple attempts detected. If issue persists, please contact support.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {paymentStatus === 'expired' && (
+            <div className="bg-orange-50 p-3 rounded-md border border-orange-200">
+              <div className="flex items-start gap-2">
+                <div className="w-5 h-5 rounded-full bg-orange-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-orange-600 text-xs">⏰</span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-orange-700 text-sm font-medium">
+                    Payment Session Expired
+                  </p>
+                  <p className="text-orange-600 text-sm mt-1">
+                    Your payment session has expired. Please initiate a new payment.
+                  </p>
+                </div>
+              </div>
             </div>
           )}
 
           {paymentStatus === 'success' && (
-            <div className="bg-green-50 p-3 rounded-md">
-              <p className="text-green-700 text-sm">
-                Your payment has been successfully processed. You can now proceed to the next step.
-              </p>
+            <div className="bg-green-50 p-3 rounded-md border border-green-200">
+              <div className="flex items-start gap-2">
+                <div className="w-5 h-5 rounded-full bg-green-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-green-600 text-xs">✓</span>
+                </div>
+                <div className="flex-1">
+                  <p className="text-green-700 text-sm font-medium">
+                    Payment Successful
+                  </p>
+                  <p className="text-green-600 text-sm mt-1">
+                    Your payment has been successfully processed. You can now proceed to the next step.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {paymentStatus === 'processing' && (
+            <div className="bg-amber-50 p-3 rounded-md border border-amber-200">
+              <div className="flex items-start gap-2">
+                <div className="w-5 h-5 rounded-full bg-amber-200 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-3 h-3 border-2 border-amber-600 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-amber-700 text-sm font-medium">
+                    Processing Payment
+                  </p>
+                  <p className="text-amber-600 text-sm mt-1">
+                    Your payment is being processed. Please wait...
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </CardContent>
@@ -285,7 +387,7 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
           {paymentStatus !== 'success' && (
             <Button
               onClick={initiatePayment}
-              disabled={isInitiating || paymentStatus === 'processing'}
+              disabled={isInitiating || paymentStatus === 'processing' || (paymentAttempts >= 5)}
               className="bg-secondary hover:bg-secondary/80 text-white rounded-none"
             >
               {isInitiating || paymentStatus === 'processing' ? (
@@ -293,6 +395,10 @@ const ApplicationFeePayment = ({ handleStep, applicationId }: ApplicationFeePaym
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Processing...
                 </>
+              ) : paymentAttempts >= 5 ? (
+                'Max Attempts Reached'
+              ) : paymentStatus === 'failed' || paymentStatus === 'expired' ? (
+                `Retry Payment ${paymentAttempts > 0 ? `(${paymentAttempts})` : ''}`
               ) : (
                 'Pay Now'
               )}
