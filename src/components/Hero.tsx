@@ -20,7 +20,7 @@ const Hero = () => {
     <div className="relative w-full">
       {/* Video Hero Section */}
       <div className="relative w-full h-[80vh] min-h-[500px] bg-black">
-        <video
+        {/* <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
           poster="/ban.png"
@@ -29,10 +29,10 @@ const Hero = () => {
           autoPlay
           loop
         >
-          {/* Replace this source with your working video URL when available */}
           <source src="/ban.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
+        <img className="absolute inset-0 w-full h-full object-cover" src="/poly.jpg" alt="collage image" />
 
         {/* Overlay gradient for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
