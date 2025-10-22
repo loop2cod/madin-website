@@ -30,6 +30,7 @@ interface ApplicationListProps {
   applications: Application[]
   handleViewApplication: (applicationId: string) => void
   handleContinueApplication: (applicationId: string, currentStage: string) => void
+  handleEditRejectedApplication: (applicationId: string) => void
   handleStartNewApplication: () => void
 }
 
@@ -37,11 +38,16 @@ const ApplicationList = ({
   applications,
   handleViewApplication,
   handleContinueApplication,
+  handleEditRejectedApplication,
   handleStartNewApplication
 }: ApplicationListProps) => {
 
   const isSubmitted = (stage: string): boolean => {
     return stage === 'submitted';
+  };
+
+  const isRejected = (status: string): boolean => {
+    return status === 'rejected';
   };
 
   return (
@@ -110,23 +116,30 @@ const ApplicationList = ({
                 </div>
               </div>
               <div className="space-x-2">
-                {isSubmitted(app.currentStage) ? (
-                  <Button
-                    variant="outline"
-                    className="text-sm rounded-none border border-secondary"
-                    onClick={() => handleViewApplication(app.applicationId)}
-                  >
-                    View
-                  </Button>
-                ) : (
-                  <Button
-                    className="bg-secondary hover:bg-secondary/80 text-white text-sm rounded-none"
-                    onClick={() => handleContinueApplication(app.applicationId, app.currentStage)}
-                  >
-                    Continue
-                  </Button>
-                )}
-              </div>
+                 {isRejected(app.status) ? (
+                   <Button
+                     className="bg-orange-600 hover:bg-orange-700 text-white text-sm rounded-none"
+                     onClick={() => handleEditRejectedApplication(app.applicationId)}
+                   >
+                     Edit & Resubmit
+                   </Button>
+                 ) : isSubmitted(app.currentStage) ? (
+                   <Button
+                     variant="outline"
+                     className="text-sm rounded-none border border-secondary"
+                     onClick={() => handleViewApplication(app.applicationId)}
+                   >
+                     View
+                   </Button>
+                 ) : (
+                   <Button
+                     className="bg-secondary hover:bg-secondary/80 text-white text-sm rounded-none"
+                     onClick={() => handleContinueApplication(app.applicationId, app.currentStage)}
+                   >
+                     Continue
+                   </Button>
+                 )}
+               </div>
             </div>
           </div>
         ))}

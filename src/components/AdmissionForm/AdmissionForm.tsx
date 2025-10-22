@@ -253,6 +253,45 @@ export const AdmissionForm = () => {
     setShowApplicationList(false);
   };
 
+  const handleEditRejectedApplication = async (applicationId: string) => {
+    try {
+      // Call backend to reset the rejected application status to pending
+      const response = await axios.post(
+        `${import.meta.env.VITE_ADMISSION_API_URL}/api/v1/admission/edit-rejected-application`,
+        { applicationId }
+      );
+
+      if (response.data.success) {
+        // Set the application ID
+        setApplicationId(applicationId);
+
+        // Hide the application list and move to step 2 (personal details)
+        setShowApplicationList(false);
+
+        // Start from personal details (step 2) for editing
+        handleStep(2);
+
+        toast({
+          title: "Application Ready for Editing",
+          description: "You can now edit and resubmit your application.",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: response.data.message || "Failed to prepare application for editing.",
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      console.error('Error preparing rejected application for editing:', error);
+      toast({
+        title: "Error",
+        description: error?.response?.data?.message || "Failed to prepare application for editing. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleStartNewApplication = async () => {
     try {
       const response = await axios.post(
@@ -308,6 +347,7 @@ export const AdmissionForm = () => {
           applications={existingApplications}
           handleViewApplication={handleViewApplication}
           handleContinueApplication={handleContinueApplication}
+          handleEditRejectedApplication={handleEditRejectedApplication}
           handleStartNewApplication={handleStartNewApplication}
         />
       );
