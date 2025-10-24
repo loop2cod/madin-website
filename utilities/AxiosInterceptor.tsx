@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 
-const API_URL =  "https://madin-server.onrender.com";
+const API_URL =  "https://madin-server.vercel.app";
 // const API_URL =  "http://localhost:8000";
 
 const axiosApi = axios.create({
