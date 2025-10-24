@@ -1,21 +1,21 @@
-import { Pause, Play } from "lucide-react"
-import { useRef, useState } from "react"
+// import { Pause, Play } from "lucide-react"
+// import { useRef, useState } from "react"
 
 
 const Hero = () => {
-    const [isPlaying, setIsPlaying] = useState(true)
-    const videoRef = useRef<HTMLVideoElement>(null)
+    // const [isPlaying, setIsPlaying] = useState(true)
+    // const videoRef = useRef<HTMLVideoElement>(null)
   
-    const togglePlayPause = () => {
-      if (videoRef.current) {
-        if (isPlaying) {
-          videoRef.current.pause()
-        } else {
-          videoRef.current.play()
-        }
-        setIsPlaying(!isPlaying)
-      }
-    }
+    // const togglePlayPause = () => {
+    //   if (videoRef.current) {
+    //     if (isPlaying) {
+    //       videoRef.current.pause()
+    //     } else {
+    //       videoRef.current.play()
+    //     }
+    //     setIsPlaying(!isPlaying)
+    //   }
+    // }
   return (
     <div className="relative w-full">
       {/* Video Hero Section */}
