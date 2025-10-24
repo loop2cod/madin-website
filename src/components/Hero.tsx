@@ -37,8 +37,8 @@ const Hero = () => {
         {/* Overlay gradient for better text visibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-        {/* Content overlay */}
-        <div className="absolute bottom-0 left-0 p-6 md:p-12 w-full">
+
+        {/* <div className="absolute bottom-0 left-0 p-6 md:p-12 w-full">
           <div className="max-w-4xl">
             <div className="mb-4">
               <span className="text-xs md:text-sm uppercase tracking-widest text-white font-medium">
@@ -50,19 +50,18 @@ const Hero = () => {
               Madin salutes graduates at University's 2nd Commencement
             </h1>
 
-            {/* Decorative line */}
             <div className="w-24 h-1 bg-white/40 mb-8" />
           </div>
-        </div>
+        </div> */}
 
         {/* Play/Pause button */}
-        <button
+        {/* <button
           className="absolute bottom-6 right-6 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-colors cursor-pointer"
           aria-label={isPlaying ? "Pause video" : "Play video"}
           onClick={togglePlayPause}
         >
           {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-        </button>
+        </button> */}
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-secondary">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-6  text-secondary-foreground">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <div>
           <Link className="lg:flex items-center" to="/">
             <img src="/logo.avif" alt="Logo" className="h-16 md:h-24 p-3" />
@@ -27,6 +27,28 @@ const Footer = () => {
                 <span className="sr-only">Instagram</span>
               </Link>
             </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-3xl mb-6 font-serif"><span className="font-bold">Quick</span> Links</h3>
+            <ul className="space-y-4 text-secondary-foreground font-semibold">
+              <li className="text-xs">
+                <Link to="/about" className="hover:text-primary transition-colors">About Us</Link>
+              </li>
+              <li className="text-xs">
+                <Link to="/admission" className="hover:text-primary transition-colors">Admission</Link>
+              </li>
+              <li className="text-xs">
+                <Link to="/facilities" className="hover:text-primary transition-colors">Facilities</Link>
+              </li>
+              <li className="text-xs">
+                <Link to="/policies" className="hover:text-primary transition-colors">Policies</Link>
+              </li>
+              <li className="text-xs">
+                <Link to="/contact" className="hover:text-primary transition-colors">Contact</Link>
+              </li>
+            </ul>
           </div>
 
           {/* Contact Info */}

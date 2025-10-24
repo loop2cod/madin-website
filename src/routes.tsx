@@ -6,6 +6,7 @@ import Facilities from "./Pages/Facilities";
 import Gallery from "./Pages/Gallery";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
+import Policies from "./Pages/Policies";
 import ProgramDetails from "./Pages/ProgramDetails";
 import StudentCorner from "./Pages/StudentCorner";
 
@@ -17,6 +18,7 @@ const publicRoutes = [
   { path: "/", component: <Home /> },
   { path: "/about", component: <About /> },
   { path: "/admission", component: <AdmissionPage /> },
+  { path: "/policies", component: <Policies /> },
   { path: "/program/:id", component: <ProgramDetails /> },
   { path: "/departments/:id", component: <DepartmentDetails/>},
   { path: "/facilities", component: <Facilities />},
