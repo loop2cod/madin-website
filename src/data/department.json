@@ -34,7 +34,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
-        "profile_pic": "/teacher.jpg"
+        "profile_pic": ""
       },
       {
         "id": "Mechanical-Engineering",
@@ -70,7 +70,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
- "profile_pic": "/teacher.jpg"
+ "profile_pic": ""
       },
       {
         "id": "Electrical-and-Electronics-Engineering",
@@ -106,7 +106,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
-        "profile_pic": "/teacher.jpg"
+        "profile_pic": ""
       },
       {
         "id": "Computer-Engineering",
@@ -143,7 +143,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
-         "profile_pic": "/teacher.jpg"
+         "profile_pic": ""
       },
       {
         "id": "Automobile-Engineering",
@@ -179,7 +179,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
-         "profile_pic": "/teacher.jpg"
+         "profile_pic": ""
       },
       {
         "id": "Architecture",
@@ -215,7 +215,7 @@
         "HOD": "Asif C",
         "contact": "+91 9847654321",
         "email": "asifc@madin.ac.in",
-         "profile_pic": "/teacher.jpg"
+         "profile_pic": ""
       }
     ]
   }

@@ -140,7 +140,7 @@ const DepartmentDetails = () => {
       <div className="grid lg:grid-cols-3 gap-8 mb-4">
   {/* Vision Card */}
   <div className="lg:col-span-2">
-    <Card className="relative border-0 shadow-sm  overflow-hidden h-full rounded-none border ssborder-secondary gap-2 py-2 md:gap-0 md:py-0">
+    <Card className="relative shadow-sm  overflow-hidden h-full rounded-none border ssborder-secondary gap-2 py-2 md:gap-0 md:py-0">
       <div className="absolute top-0 right-0 w-60 h-60  blur-3xl pointer-events-none" />
       <CardHeader className="p-2 md:p-6  relative z-10">
         <div className="flex items-center gap-4">
